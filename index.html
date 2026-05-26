@@ -136,8 +136,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .mi.locked{pointer-events:none}
 .mi-preview{background:#fff;border-radius:6px;padding:7px 10px;width:100%;font-size:13px}
 .mi-tag{font-family:'JetBrains Mono','Fira Code',monospace;font-size:.8rem;color:var(--accent2);text-align:center;line-height:1.4;padding:2px}
-.match-done-msg{text-align:center;padding:14px;background:rgba(181,237,24,.08);border:1px solid rgba(181,237,24,.3);border-radius:12px;margin-top:14px;font-size:.88rem;color:var(--hi);font-weight:700;display:none}
-.match-done-msg.show{display:block;animation:fu .3s ease}
+.match-done-msg{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:13px 16px;background:rgba(181,237,24,.08);border:1px solid rgba(181,237,24,.3);border-radius:12px;margin-top:14px;font-size:.86rem;color:var(--hi);font-weight:700;display:none}
+.match-done-msg.show{display:flex;animation:fu .3s ease}
+.next-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:var(--hi);color:var(--hi-fg);border:none;border-radius:9px;font-size:.82rem;font-weight:800;cursor:pointer;white-space:nowrap;transition:transform .15s,box-shadow .15s;flex-shrink:0}
+.next-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(181,237,24,.45)}
+.goto-prompts-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:var(--hi);color:var(--hi-fg);border:none;border-radius:9px;font-size:.82rem;font-weight:800;cursor:pointer;white-space:nowrap;transition:transform .15s,box-shadow .15s;margin-top:8px}
+.goto-prompts-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(181,237,24,.45)}
 
 /* Code editor */
 .code-area{flex:1;display:flex;flex-direction:column;overflow:hidden}
@@ -1080,7 +1084,7 @@ function buildMatchHTML(l){
       </div>
     </div>
     <div class="match-done-msg ${isDone?'show':''}" id="matchDoneMsg">
-      🎉 Отлично, ${escHtml(studentName)}! Всё верно! Переходи во вкладку <strong>📋 Промпты</strong> →
+      ${isDone?`<span>🎉 Отлично, ${escHtml(studentName)}! Тест пройден!</span><button class="next-btn" onclick="showCodeTask()">Далее — Допиши код →</button>`:''}
     </div>
   </div>`;
 }
@@ -1128,12 +1132,12 @@ function checkMatchComplete(){
     quizComplete=true;
     if(badge){badge.className='match-score-badge done';badge.textContent='🏆 Всё верно!';}
     const msg=document.getElementById('matchDoneMsg');
-    if(msg) msg.classList.add('show');
-    // Show prompts tab
-    const ptab=document.getElementById('pt-prompts');
-    if(ptab) ptab.classList.add('visible');
+    if(msg){
+      msg.innerHTML=`<span>🎉 Отлично, ${escHtml(studentName)}! Тест пройден!</span><button class="next-btn" onclick="showCodeTask()">Далее — Допиши код →</button>`;
+      msg.classList.add('show');
+    }
     markDone(activeLsn);
-    // Inject code task
+    // Inject code task hidden — shown only after clicking Далее
     const mw=document.querySelector('.match-wrap');
     const ct=l.codeTask;
     if(mw&&ct){
@@ -1141,7 +1145,7 @@ function checkMatchComplete(){
       tmp.innerHTML=buildCodeTask(l);
       if(tmp.firstElementChild) mw.parentNode.insertBefore(tmp.firstElementChild,mw.nextSibling);
     }
-    setTimeout(()=>switchTab('prompts'), 900);
+    // Prompts tab revealed only after code task is answered correctly (in checkCodeTask)
   }
 }
 
@@ -1417,7 +1421,7 @@ function toast(msg){
 function buildCodeTask(l){
   const ct=l.codeTask;
   if(!ct||!quizComplete) return '';
-  return `<div class="ctask-wrap" id="ctaskWrap">
+  return `<div class="ctask-wrap" id="ctaskWrap" style="display:none">
     <div class="ctask-title">💻 Задание: допиши код</div>
     <div class="ctask-code">${escHtml(ct.before)}<span style="background:rgba(104,91,199,.2);border-bottom:2px solid #685BC7;border-radius:3px;padding:1px 10px;color:#9CDCFE">___</span>${escHtml(ct.after)}</div>
     <div style="font-size:.83rem;color:var(--text2);margin-bottom:8px">${escHtml(ct.desc)}</div>
@@ -1438,8 +1442,37 @@ function checkCodeTask(){
   const ok=val.toLowerCase()===ans.toLowerCase();
   inp.classList.remove('ok','bad');fb.classList.remove('ok','bad');
   void inp.offsetWidth;
-  if(ok){inp.classList.add('ok');fb.className='ctask-fb ok';fb.textContent='✅ Правильно! Отлично, '+studentName+'!';inp.disabled=true;}
-  else{inp.classList.add('bad');fb.className='ctask-fb bad';fb.textContent='❌ Неверно! Попробуй ещё раз. Подсказка: '+l.codeTask.hint;}
+  if(ok){
+    inp.classList.add('ok');inp.disabled=true;
+    fb.className='ctask-fb ok';
+    fb.innerHTML=`✅ Правильно! Отлично, ${escHtml(studentName)}!<br><button class="goto-prompts-btn" onclick="goToPrompts()">📋 Перейти к Промптам →</button>`;
+    // Now unlock the prompts tab
+    const ptab=document.getElementById('pt-prompts');
+    if(ptab) ptab.classList.add('visible');
+  } else {
+    inp.classList.add('bad');
+    fb.className='ctask-fb bad';
+    fb.textContent='❌ Неверно! Попробуй ещё раз. Подсказка: '+l.codeTask.hint;
+  }
+}
+
+function showCodeTask(){
+  const ct=document.getElementById('ctaskWrap');
+  if(ct){
+    ct.style.display='block';
+    // Animate in
+    ct.style.opacity='0';ct.style.transform='translateY(8px)';
+    requestAnimationFrame(()=>{
+      ct.style.transition='opacity .3s,transform .3s';
+      ct.style.opacity='1';ct.style.transform='translateY(0)';
+    });
+    setTimeout(()=>ct.scrollIntoView({behavior:'smooth',block:'nearest'}),80);
+    // Focus input
+    setTimeout(()=>document.getElementById('ctaskInp')?.focus(),300);
+  }
+}
+function goToPrompts(){
+  switchTab('prompts');
 }
 
 // ══════════════════════════════════════════════
