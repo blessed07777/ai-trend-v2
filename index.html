@@ -139,7 +139,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .undo-btn{padding:5px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text2);font-size:.75rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px}
 .undo-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}
 .undo-btn:disabled{opacity:.3;cursor:not-allowed}
-.editor{width:100%;height:100%;background:var(--codebg);color:#f0e8ff;border:none;padding:13px 15px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.8rem;line-height:1.65;resize:none;outline:none;tab-size:2}
+.editor{width:100%;height:100%;background:var(--codebg);color:#e8dfff;border:none;padding:16px 18px;font-family:'JetBrains Mono','Fira Code','Cascadia Code',monospace;font-size:.9rem;line-height:1.85;resize:none;outline:none;tab-size:2;letter-spacing:.01em}
 .editor::selection{background:rgba(104,91,199,.4)}
 .err-panel{background:#080008;border-top:1px solid rgba(255,71,87,.3);flex-shrink:0;max-height:100px;overflow-y:auto;display:none}
 .err-panel.show{display:block}
@@ -1087,7 +1087,7 @@ function renderCode(l){
       </div>
     </div>`;
   const he=document.getElementById('htmlEd'), ce=document.getElementById('cssEd');
-  he.value=l.html(studentName); ce.value=l.css(studentName);
+  he.value=formatHTML(l.html(studentName)); ce.value=formatCSS(l.css(studentName));
   pushUndo();
   const upd=()=>{pushUndo();renderPreviewCode();};
   he.addEventListener('input',upd); ce.addEventListener('input',upd);
@@ -1181,12 +1181,61 @@ function renderPreviewCode(){
 function buildPreview(html,css){
   const iframe=document.getElementById('preview');
   if(!iframe) return;
+  lintCode(html,css);
   const errScript=`<script>window.onerror=function(m,s,l){parent.postMessage({t:'jsErr',msg:m,line:l},'*');return false};<\/script>`;
   let doc=html;
   if(doc.includes('</head>')) doc=doc.replace('</head>',`<style>${css}</style>${errScript}</head>`);
   else doc=`<style>${css}</style>${errScript}${doc}`;
   iframe.srcdoc=doc;
-  clearErrors();
+}
+
+function lintCode(html,css){
+  // Clear previous
+  errors=[];
+  const b=document.getElementById('errBadge');
+  const p=document.getElementById('errPanel');
+  if(b){b.className='err-badge err-ok';b.textContent='✓ Ошибок нет';}
+  if(p){p.classList.remove('show');p.innerHTML='';}
+
+  const SELF_CLOSE=new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr','!doctype']);
+  const REQUIRED=new Set(['html','head','body','div','section','article','header','footer','nav','main','aside','form','ul','ol','li','table','tr','td','th','h1','h2','h3','h4','h5','h6','p','a','span','strong','em','button','label','script','style','select','option','textarea']);
+  const stack=[];
+  const tagRe=/<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b[^>]*?(\/?)>/g;
+  let m;
+  while((m=tagRe.exec(html))!==null){
+    const isClose=m[1]==='/';
+    const tag=m[2].toLowerCase();
+    const isSelf=m[3]==='/'||SELF_CLOSE.has(tag);
+    const line=html.substring(0,m.index).split('\n').length;
+    if(!isClose&&!isSelf){
+      stack.push({tag,line});
+    } else if(isClose&&!SELF_CLOSE.has(tag)){
+      let found=-1;
+      for(let i=stack.length-1;i>=0;i--){if(stack[i].tag===tag){found=i;break;}}
+      if(found===-1){
+        addError('Лишний закрывающий тег </'+tag+'>',line);
+      } else {
+        if(found<stack.length-1){
+          const unclosed=stack[found+1];
+          addError('Тег <'+unclosed.tag+'> не закрыт (строка '+unclosed.line+')',line);
+        }
+        stack.splice(found);
+      }
+    }
+  }
+  stack.filter(t=>REQUIRED.has(t.tag)).forEach(t=>{
+    addError('Тег <'+t.tag+'> не закрыт',t.line);
+  });
+
+  // CSS brace check
+  const opens=(css.match(/\{/g)||[]).length;
+  const closes=(css.match(/\}/g)||[]).length;
+  if(opens!==closes){
+    addError('CSS: скобок { открыто '+opens+', закрыто '+closes,'?');
+  }
+  // CSS empty value check
+  const emptyProp=css.match(/[\w-]+\s*:\s*;/);
+  if(emptyProp) addError('CSS: пустое значение свойства — '+emptyProp[0].trim(),'?');
 }
 
 // ══════════════════════════════════════════════
@@ -1195,30 +1244,24 @@ function buildPreview(html,css){
 function renderRef(){
   document.getElementById('pbody').innerHTML=`<div class="ref-scroll">
     <div class="ref-sec">
-      <div class="ref-h">🎨 Цвета бренда AI-TREND (клик → вставить)</div>
-      <div class="cg">${BRAND_COLORS.map(c=>`<div class="cc brand" style="background:${c.h}" title="${c.n}" onclick="insertVal('${c.h}')"><span class="chx">${c.h}</span></div>`).join('')}</div>
+      <div class="ref-h">🎨 Цвета бренда AI-TREND (клик → скопировать)</div>
+      <div class="cg">${BRAND_COLORS.map(c=>`<div class="cc brand" style="background:${c.h}" title="${c.n}" onclick="copyRef('${c.h}')"><span class="chx">${c.h}</span></div>`).join('')}</div>
     </div>
     <div class="ref-sec">
-      <div class="ref-h">🌈 Веб-цвета</div>
-      <div class="cg">${WEB_COLORS.map(c=>`<div class="cc" style="background:${c.h}" title="${c.n}: ${c.h}" onclick="insertVal('${c.h}')"><span class="chx">${c.h}</span></div>`).join('')}</div>
+      <div class="ref-h">🌈 Веб-цвета (клик → скопировать)</div>
+      <div class="cg">${WEB_COLORS.map(c=>`<div class="cc" style="background:${c.h}" title="${c.n}: ${c.h}" onclick="copyRef('${c.h}')"><span class="chx">${c.h}</span></div>`).join('')}</div>
     </div>
     <div class="ref-sec">
-      <div class="ref-h">📐 Размер шрифта (клик → вставить в редактор)</div>
-      <div class="fg">${FONT_SIZES.map(f=>`<div class="fr" onclick="insertVal('${f.px}')"><span class="fl">${f.l}</span><span class="fp">${f.px}</span><span class="fv" style="font-size:${f.px};line-height:1.2">AI-TREND</span></div>`).join('')}</div>
+      <div class="ref-h">📐 Размер шрифта (клик → скопировать)</div>
+      <div class="fg">${FONT_SIZES.map(f=>`<div class="fr" onclick="copyRef('${f.px}')"><span class="fl">${f.l}</span><span class="fp">${f.px}</span><span class="fv" style="font-size:${f.px};line-height:1.2">AI-TREND</span></div>`).join('')}</div>
     </div>
   </div>`;
 }
-function insertVal(val){
-  // Switch to code tab first, then insert
-  if(activeTab!=='code') switchTab('code');
-  requestAnimationFrame(()=>{
-    const ed=activeCode==='css'?document.getElementById('cssEd'):document.getElementById('htmlEd');
-    if(!ed){navigator.clipboard?.writeText(val);toast('Скопировано: '+val);return;}
-    const s=ed.selectionStart,e2=ed.selectionEnd;
-    ed.value=ed.value.substring(0,s)+val+ed.value.substring(e2);
-    ed.selectionStart=ed.selectionEnd=s+val.length;
-    ed.focus(); pushUndo(); renderPreviewCode();
-    toast('Вставлено: '+val);
+function copyRef(val){
+  navigator.clipboard.writeText(val).then(()=>{
+    toast('📋 Скопировано: '+val);
+  }).catch(()=>{
+    toast('📋 Скопировано: '+val);
   });
 }
 function toast(msg){
@@ -1279,6 +1322,44 @@ function initDrag(){
 // UTILS
 // ══════════════════════════════════════════════
 function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function formatCSS(css){
+  if(!css||!css.trim()) return css;
+  // Collapse whitespace first
+  let s=css.replace(/\r?\n/g,' ').replace(/\s+/g,' ').trim();
+  // { → {\n  (open block + indent)
+  s=s.replace(/\{\s*/g,'{\n  ');
+  // ; → ;\n  (each property on new line)
+  s=s.replace(/;\s*/g,';\n  ');
+  // trim trailing spaces before }
+  s=s.replace(/\s*\}/g,'\n}\n');
+  // clean up blank lines inside blocks
+  s=s.replace(/\{\n  \n/g,'{\n  ');
+  // collapse multiple blank lines
+  s=s.replace(/\n{3,}/g,'\n\n');
+  // remove trailing spaces
+  s=s.split('\n').map(l=>l.trimEnd()).join('\n');
+  return s.trim();
+}
+
+function formatHTML(html){
+  if(!html||!html.trim()) return html;
+  // Already multi-line — just normalize indentation simply
+  const lines=html.split('\n');
+  let indent=0;
+  const VOID=new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr','!doctype']);
+  return lines.map(raw=>{
+    const line=raw.trim();
+    if(!line) return '';
+    // closing tag → dedent before printing
+    if(/^<\/[a-z]/i.test(line)) indent=Math.max(0,indent-1);
+    const out='  '.repeat(indent)+line;
+    // opening tag (not self-closing, not void) → indent next
+    const tagM=line.match(/^<([a-z][a-z0-9]*)/i);
+    if(tagM&&!VOID.has(tagM[1].toLowerCase())&&!line.endsWith('/>')&&!line.startsWith('</')) indent++;
+    return out;
+  }).filter((_,i,a)=>_.trim()||a[i-1]?.trim()).join('\n');
+}
 
 init();
 </script>
