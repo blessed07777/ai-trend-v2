@@ -149,8 +149,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .undo-btn{padding:5px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text2);font-size:.75rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px}
 .undo-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}
 .undo-btn:disabled{opacity:.3;cursor:not-allowed}
-.editor{width:100%;height:100%;background:var(--codebg);color:#e8dfff;border:none;padding:16px 18px;font-family:'JetBrains Mono','Fira Code','Cascadia Code',monospace;font-size:.9rem;line-height:1.85;resize:none;outline:none;tab-size:2;letter-spacing:.01em}
-.editor::selection{background:rgba(104,91,199,.4)}
+.ed-wrap{position:relative;flex:1;overflow:hidden;background:var(--codebg);display:flex}
+.ed-hl{position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px 18px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.9rem;line-height:1.85;white-space:pre;overflow:hidden;pointer-events:none;z-index:0;background:transparent;tab-size:2;letter-spacing:.01em;color:#D4D4D4}
+.editor{position:absolute;top:0;left:0;right:0;bottom:0;background:transparent!important;color:transparent!important;caret-color:#aeafad;z-index:1;white-space:pre;overflow:auto;resize:none;outline:none;border:none;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.9rem;line-height:1.85;padding:16px 18px;tab-size:2;letter-spacing:.01em}
+.editor::selection{background:rgba(104,91,199,.35)}
 .err-panel{background:#080008;border-top:1px solid rgba(255,71,87,.3);flex-shrink:0;max-height:100px;overflow-y:auto;display:none}
 .err-panel.show{display:block}
 .err-row{padding:5px 12px;color:var(--err);display:flex;align-items:flex-start;gap:8px;border-bottom:1px solid rgba(255,71,87,.08);font-family:monospace;font-size:.73rem}
@@ -205,6 +207,25 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+/* Context jump bar */
+.ctx-bar{background:var(--bg3);border-top:1px solid var(--border);padding:4px 10px;display:flex;align-items:center;gap:6px;flex-shrink:0;min-height:26px;flex-wrap:wrap}
+.ctx-chip{background:var(--glow);border:1px solid var(--accent);border-radius:6px;padding:1px 8px;font-size:.68rem;font-family:monospace;color:var(--accent2);cursor:pointer;transition:all .15s;white-space:nowrap}
+.ctx-chip:hover{background:var(--accent);color:#fff}
+/* Code task quiz */
+.ctask-wrap{border-top:2px dashed var(--border);margin-top:20px;padding-top:18px}
+.ctask-title{font-size:.88rem;font-weight:800;color:var(--text);margin-bottom:10px}
+.ctask-code{background:var(--codebg);border:1px solid var(--border);border-radius:10px;padding:13px 15px;font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.8;color:#e0d8ff;margin-bottom:12px;overflow-x:auto;white-space:pre}
+.ctask-row{display:flex;gap:8px;margin-bottom:8px}
+.ctask-inp{flex:1;padding:8px 12px;background:var(--card);border:2px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.85rem;outline:none;transition:border-color .2s}
+.ctask-inp:focus{border-color:var(--accent)}
+.ctask-inp.ok{border-color:var(--hi)!important;background:rgba(181,237,24,.07)}
+.ctask-inp.bad{border-color:var(--err)!important;background:rgba(255,71,87,.07);animation:shake .35s}
+.ctask-chk{padding:8px 16px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:.8rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .15s}
+.ctask-chk:hover{background:var(--accent2)}
+.ctask-hint{font-size:.75rem;color:var(--text3);margin-top:4px}
+.ctask-fb{font-size:.82rem;font-weight:700;margin-top:6px;display:none}
+.ctask-fb.ok{color:var(--hi);display:block}
+.ctask-fb.bad{color:var(--err);display:block}
 </style>
 </head>
 <body>
@@ -232,14 +253,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
     </div>
     <div class="top-space"></div>
     <div class="prog-wrap">
-      <span id="progTxt">0 / 8</span>
+      <span id="progTxt">0 / 9</span>
       <div class="prog-outer"><div class="prog-inner" id="progBar" style="width:0%"></div></div>
     </div>
     <div class="student-btn" onclick="changeName()" id="studentBtn">👤 Ученик</div>
     <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
   </header>
   <aside class="sidebar" id="sidebar">
-    <div class="sb-head">8 уроков</div>
+    <div class="sb-head">9 уроков</div>
     <div id="lessonList" class="sb-list"></div>
     <div class="sb-footer">
       <button class="reset-btn" onclick="showResetConfirm()">🔄 Сбросить прогресс</button>
@@ -372,6 +393,7 @@ const LESSONS=[
 {
   emoji:'🏗️',title:'Что такое HTML?',subtitle:'Строим скелет любого сайта',tag:'Основы',
   promptKeys:['full'],
+  codeTask:{desc:'Напиши открывающий тег заголовка первого уровня',before:'<body>\n  ',ans:'<h1>',after:'Мой заголовок</h1>\n</body>',hint:'Используй тег h1 в угловых скобках'},
   matchPairs:[
     {id:'h1',preview:'<h1 style="font-size:22px;color:#685BC7;margin:0;font-family:sans-serif;font-weight:900">Большой заголовок</h1>',tag:'&lt;h1&gt;'},
     {id:'p',preview:'<p style="font-size:14px;color:#555;margin:0;font-family:sans-serif;line-height:1.5">Это абзац обычного текста на странице</p>',tag:'&lt;p&gt;'},
@@ -416,6 +438,7 @@ em{color:#B5ED18;font-style:normal;font-weight:bold}`
 {
   emoji:'🎩',title:'Шапка сайта (Header)',subtitle:'Первое что видит посетитель',tag:'Структура',
   promptKeys:['header'],
+  codeTask:{desc:'Напиши CSS чтобы элементы выстроились в ряд (Flexbox)',before:'header{\n  ',ans:'display: flex;',after:'\n  align-items: center;\n}',hint:'Это Flexbox — свойство display: flex'},
   matchPairs:[
     {id:'header',preview:'<header style="background:#685BC7;color:#fff;padding:9px 14px;font-family:sans-serif;font-size:13px;font-weight:bold;border-radius:6px;display:flex;align-items:center;gap:8px">🏠 Шапка сайта</header>',tag:'&lt;header&gt;'},
     {id:'nav',preview:'<nav style="background:#1a1636;padding:7px 12px;border-radius:6px;font-family:sans-serif;font-size:12px;color:#B5ED18;display:inline-block">📌 Навигация</nav>',tag:'&lt;nav&gt;'},
@@ -470,6 +493,7 @@ nav a:hover{background:rgba(104,91,199,.2);color:#8075D9}
 {
   emoji:'🦸',title:'Главный экран (Hero)',subtitle:'Лицо сайта — первое впечатление',tag:'Структура',
   promptKeys:['hero'],
+  codeTask:{desc:'Напиши CSS чтобы Hero занял весь экран по высоте',before:'.hero{\n  ',ans:'min-height: 100vh;',after:'\n  display: flex;\n}',hint:'100vh = 100% высоты экрана'},
   matchPairs:[
     {id:'section',preview:'<section style="background:linear-gradient(135deg,#1a1636,#685BC7);border-radius:8px;padding:12px;text-align:center;color:#fff;font-family:sans-serif;font-size:13px;font-weight:bold">Hero Section</section>',tag:'&lt;section&gt;'},
     {id:'vh',preview:'<div style="background:#f0ecff;border-radius:8px;padding:8px;text-align:center;font-family:sans-serif"><span style="font-size:22px;font-weight:900;color:#685BC7">100vh</span><br><span style="font-size:11px;color:#888">высота экрана</span></div>',tag:'min-height: 100vh'},
@@ -534,6 +558,7 @@ nav a:hover{color:#B5ED18}
 {
   emoji:'🃏',title:'Карточки и контент',subtitle:'Показываем информацию красиво',tag:'Контент',
   promptKeys:['cards'],
+  codeTask:{desc:'Напиши CSS для сетки из 3 одинаковых колонок',before:'.cards{\n  display: grid;\n  ',ans:'grid-template-columns: repeat(3, 1fr);',after:'\n}',hint:'repeat(3, 1fr) — три равные колонки'},
   matchPairs:[
     {id:'grid',preview:'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><div style="background:#685BC7;height:32px;border-radius:5px"></div><div style="background:#8075D9;height:32px;border-radius:5px"></div><div style="background:#B5ED18;height:32px;border-radius:5px"></div></div>',tag:'display: grid'},
     {id:'1fr',preview:'<div style="background:#f0ecff;border-radius:8px;padding:8px;text-align:center;font-family:sans-serif"><span style="font-size:20px;font-weight:900;color:#685BC7">1fr</span><br><span style="font-size:11px;color:#888">равная доля</span></div>',tag:'repeat(3, 1fr)'},
@@ -606,6 +631,7 @@ h2{font-size:40px;color:#1a1636;margin:16px 0 10px}
 {
   emoji:'📊',title:'Таблицы (Table)',subtitle:'Показываем данные структурированно',tag:'Данные',
   promptKeys:['table'],
+  codeTask:{desc:'Напиши открывающий тег строки таблицы',before:'<tbody>\n  ',ans:'<tr>',after:'<td>HTML</td><td>5⭐</td></tr>\n</tbody>',hint:'tr = table row (строка таблицы)'},
   matchPairs:[
     {id:'table',preview:'<table style="border-collapse:collapse;font-family:sans-serif;font-size:12px;width:100%"><tr><th style="background:#685BC7;color:#fff;padding:6px 10px;text-align:left">Предмет</th><th style="background:#685BC7;color:#fff;padding:6px 10px;text-align:left">Оценка</th></tr><tr><td style="padding:5px 10px;border:1px solid #eee">HTML</td><td style="padding:5px 10px;border:1px solid #eee">5 ⭐</td></tr></table>',tag:'&lt;table&gt;'},
     {id:'thead',preview:'<div style="background:linear-gradient(135deg,#685BC7,#8075D9);color:#fff;padding:8px 12px;border-radius:6px;font-family:sans-serif;font-size:12px;font-weight:bold;text-align:center">thead — Шапка таблицы</div>',tag:'&lt;thead&gt;'},
@@ -657,6 +683,7 @@ tr:hover td{background:#f8f5ff}`
 {
   emoji:'📬',title:'Формы (прием заявок)',subtitle:'Принимаем данные от пользователей',tag:'Интерактив',
   promptKeys:['form','telegram'],
+  codeTask:{desc:'Напиши input для ввода email',before:'<form>\n  ',ans:'<input type="email">',after:'\n</form>',hint:'У input есть атрибут type="email"'},
   matchPairs:[
     {id:'input',preview:'<input type="text" placeholder="Введи текст..." style="padding:8px 12px;border:2px solid #685BC7;border-radius:8px;font-size:13px;font-family:sans-serif;width:160px;outline:none">',tag:'&lt;input type="text"&gt;'},
     {id:'email',preview:'<input type="email" placeholder="email@mail.com" style="padding:8px 12px;border:2px solid #8075D9;border-radius:8px;font-size:13px;font-family:sans-serif;width:160px;outline:none">',tag:'&lt;input type="email"&gt;'},
@@ -717,6 +744,7 @@ button:hover{transform:translateY(-2px)}`
 {
   emoji:'🦶',title:'Подвал сайта (Footer)',subtitle:'Финальный блок — контакты и ссылки',tag:'Структура',
   promptKeys:['footer'],
+  codeTask:{desc:'Напиши CSS для 4 равных колонок Grid',before:'.fc{\n  display: grid;\n  ',ans:'grid-template-columns: repeat(4, 1fr);',after:'\n  gap: 40px;\n}',hint:'repeat(4, 1fr) — четыре равные колонки'},
   matchPairs:[
     {id:'footer',preview:'<footer style="background:#09080f;color:#B5ED18;padding:10px 16px;border-radius:8px;font-family:sans-serif;font-size:13px;font-weight:bold">🦶 Подвал сайта</footer>',tag:'&lt;footer&gt;'},
     {id:'grid2fr',preview:'<div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px"><div style="background:#685BC7;height:28px;border-radius:4px"></div><div style="background:#8075D9;height:28px;border-radius:4px"></div><div style="background:#B5ED18;height:28px;border-radius:4px"></div></div>',tag:'grid-columns: 2fr 1fr 1fr'},
@@ -768,8 +796,66 @@ footer{background:#09080f;color:#fff;padding:60px 50px 30px}
 .fb{border-top:1px solid #1e1e3a;padding-top:24px;display:flex;justify-content:space-between;color:#444;font-size:12px}`
 },
 {
+  emoji:'🔗',title:'Ссылки и картинки',subtitle:'href, img, src — навигация и медиа',tag:'Медиа',
+  promptKeys:['full'],
+  codeTask:{desc:'Напиши тег картинки с любым src',before:'<body>\n  ',ans:'<img src="https://picsum.photos/300/200">',after:'\n</body>',hint:'Тег img — одиночный, без закрытия. src — адрес картинки'},
+  matchPairs:[
+    {id:'img',preview:'<img src="https://picsum.photos/seed/cat/180/90" style="border-radius:6px;width:100%;height:60px;object-fit:cover" alt="фото">',tag:'&lt;img src="..."&gt;'},
+    {id:'ahref',preview:'<a href="https://google.com" target="_blank" style="color:#685BC7;font-family:sans-serif;font-size:13px;text-decoration:underline">🔗 Открыть ссылку</a>',tag:'&lt;a href="..." target="_blank"&gt;'},
+    {id:'objfit',preview:'<div style="width:100%;height:60px;background:linear-gradient(135deg,#685BC7,#B5ED18);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:sans-serif;font-size:12px;font-weight:bold">object-fit: cover</div>',tag:'object-fit: cover'},
+    {id:'alt',preview:'<div style="background:#f0ecff;border:2px dashed #685BC7;border-radius:8px;padding:10px;font-family:sans-serif;font-size:12px;color:#685BC7;text-align:center">🖼️ Фото котика<br><span style="font-size:10px;color:#888">alt — текст если картинка не загрузилась</span></div>',tag:'alt="описание"'},
+  ],
+  theory:n=>`
+<div class="ti"><strong>${n},</strong> сайт без ссылок и картинок скучный! Сегодня научимся вставлять изображения и делать навигацию.</div>
+<div class="tc"><div class="tch">🖼️ Тег img — картинка</div><div class="tcb"><span class="ic">&lt;img&gt;</span> — одиночный тег (без закрытия!)<br><span class="ic">src</span> — адрес картинки · <span class="ic">alt</span> — текст если картинка не загрузилась<div class="tpre">&lt;img src="https://picsum.photos/400/300"
+     alt="красивое фото"
+     width="400"&gt;</div></div></div>
+<div class="tc"><div class="tch">🔗 Тег a — ссылка</div><div class="tcb"><span class="ic">href</span> — куда ведёт · <span class="ic">target="_blank"</span> — открыть в новой вкладке<div class="tpre">&lt;a href="https://google.com" target="_blank"&gt;
+  Перейти в Google
+&lt;/a&gt;</div></div></div>
+<div class="tc"><div class="tch">🎨 CSS для картинок</div><div class="tcb"><div class="tpre">img{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}</div></div></div>
+<div class="tip"><strong>💡 Задание ${n}:</strong> Добавь ещё одну карточку с котиком — смени seed в URL на "kitty"!</div>`,
+  html:n=>`<!DOCTYPE html>
+<html>
+<head><title>${n} — Галерея</title></head>
+<body>
+  <h1>🖼️ Галерея ${n}</h1>
+  <div class="grid">
+    <a href="https://picsum.photos/seed/cat/800/600" target="_blank" class="card">
+      <img src="https://picsum.photos/seed/cat/400/280" alt="котик">
+      <div class="info"><h3>Котик 🐱</h3><p>Нажми чтобы открыть</p></div>
+    </a>
+    <a href="https://picsum.photos/seed/dog/800/600" target="_blank" class="card">
+      <img src="https://picsum.photos/seed/dog/400/280" alt="собака">
+      <div class="info"><h3>Собака 🐶</h3><p>Нажми чтобы открыть</p></div>
+    </a>
+    <a href="https://picsum.photos/seed/nature/800/600" target="_blank" class="card">
+      <img src="https://picsum.photos/seed/nature/400/280" alt="природа">
+      <div class="info"><h3>Природа 🌿</h3><p>Нажми чтобы открыть</p></div>
+    </a>
+  </div>
+</body>
+</html>`,
+  css:()=>`*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#09080f;color:#fff;padding:30px}
+h1{text-align:center;color:#B5ED18;margin-bottom:28px;font-size:28px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto}
+.card{display:block;text-decoration:none;background:#120f20;border-radius:16px;overflow:hidden;border:1px solid #201d35;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(104,91,199,.3)}
+.card img{width:100%;height:180px;object-fit:cover;display:block}
+.info{padding:16px}
+.info h3{color:#fff;font-size:16px;margin-bottom:4px}
+.info p{color:#685BC7;font-size:13px}`
+},
+{
   emoji:'🧠',title:'Промпты для нейросетей',subtitle:'Говори с ИИ как профессионал',tag:'ИИ / Промпты',
   promptKeys:['full','improve','review'],
+  codeTask:{desc:'Допиши формулу промпта — что идёт после РОЛЬ и ЗАДАЧА?',before:'РОЛЬ → "Ты — разработчик"\nЗАДАЧА → "Напиши header"\n',ans:'КОНТЕКСТ → "Тёмная тема, фиолетовый цвет"',after:'\nФОРМАТ → "Код с комментариями"',hint:'Третий элемент формулы: КОНТЕКСТ'},
   matchPairs:[
     {id:'role',preview:'<div style="background:rgba(104,91,199,.15);border:1px solid #685BC7;border-radius:8px;padding:9px;font-family:sans-serif;font-size:12px;color:#8075D9"><strong style="display:block;margin-bottom:3px">🎭 Роль</strong>«Ты — учитель математики»</div>',tag:'Роль (Role)'},
     {id:'task',preview:'<div style="background:rgba(181,237,24,.1);border:1px solid #B5ED18;border-radius:8px;padding:9px;font-family:sans-serif;font-size:12px;color:#5a8a00"><strong style="display:block;margin-bottom:3px">✅ Задача</strong>«Объясни что такое дроби»</div>',tag:'Задача (Task)'},
@@ -1047,6 +1133,14 @@ function checkMatchComplete(){
     const ptab=document.getElementById('pt-prompts');
     if(ptab) ptab.classList.add('visible');
     markDone(activeLsn);
+    // Inject code task
+    const mw=document.querySelector('.match-wrap');
+    const ct=l.codeTask;
+    if(mw&&ct){
+      const tmp=document.createElement('div');
+      tmp.innerHTML=buildCodeTask(l);
+      if(tmp.firstElementChild) mw.parentNode.insertBefore(tmp.firstElementChild,mw.nextSibling);
+    }
     setTimeout(()=>switchTab('prompts'), 900);
   }
 }
@@ -1093,10 +1187,17 @@ function renderCode(l){
         <div class="ctab-space"></div>
         <button class="undo-btn" id="undoBtn" onclick="doUndo()" disabled>↩ Отменить</button>
       </div>
-      <div style="flex:1;position:relative;overflow:hidden">
-        <textarea class="editor" id="htmlEd" spellcheck="false"></textarea>
-        <textarea class="editor" id="cssEd"  spellcheck="false" style="display:none"></textarea>
+      <div style="flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column">
+        <div class="ed-wrap" id="htmlWrap">
+          <pre class="ed-hl" id="htmlHL" aria-hidden="true"></pre>
+          <textarea class="editor" id="htmlEd" spellcheck="false"></textarea>
+        </div>
+        <div class="ed-wrap" id="cssWrap" style="display:none">
+          <pre class="ed-hl" id="cssHL" aria-hidden="true"></pre>
+          <textarea class="editor" id="cssEd" spellcheck="false"></textarea>
+        </div>
       </div>
+      <div class="ctx-bar" id="ctxBar"></div>
       <div class="err-panel" id="errPanel"></div>
       <div class="err-bar">
         <div class="err-badge err-ok" id="errBadge" onclick="toggleErr()">✓ Ошибок нет</div>
@@ -1105,12 +1206,17 @@ function renderCode(l){
     </div>`;
   const he=document.getElementById('htmlEd'), ce=document.getElementById('cssEd');
   he.value=formatHTML(l.html(studentName)); ce.value=formatCSS(l.css(studentName));
+  syncHL('htmlEd','htmlHL','html');syncHL('cssEd','cssHL','css');
   pushUndo();
-  const upd=()=>{pushUndo();renderPreviewCode();};
-  he.addEventListener('input',upd); ce.addEventListener('input',upd);
+  he.addEventListener('input',()=>{pushUndo();renderPreviewCode();syncHL('htmlEd','htmlHL','html');detectEditorCtx();});
+  ce.addEventListener('input',()=>{pushUndo();renderPreviewCode();syncHL('cssEd','cssHL','css');});
+  he.addEventListener('scroll',()=>{const hl=document.getElementById('htmlHL');if(hl){hl.scrollTop=he.scrollTop;hl.scrollLeft=he.scrollLeft;}});
+  ce.addEventListener('scroll',()=>{const hl=document.getElementById('cssHL');if(hl){hl.scrollTop=ce.scrollTop;hl.scrollLeft=ce.scrollLeft;}});
+  he.addEventListener('keyup',detectEditorCtx);
+  he.addEventListener('click',detectEditorCtx);
   [he,ce].forEach(ed=>{
     ed.addEventListener('keydown',e=>{
-      if(e.key==='Tab'){e.preventDefault();const s=ed.selectionStart;ed.value=ed.value.substring(0,s)+'  '+ed.value.substring(ed.selectionEnd);ed.selectionStart=ed.selectionEnd=s+2;upd();}
+      if(e.key==='Tab'){e.preventDefault();const s=ed.selectionStart;ed.value=ed.value.substring(0,s)+'  '+ed.value.substring(ed.selectionEnd);ed.selectionStart=ed.selectionEnd=s+2;if(ed===he){pushUndo();renderPreviewCode();syncHL('htmlEd','htmlHL','html');detectEditorCtx();}else{pushUndo();renderPreviewCode();syncHL('cssEd','cssHL','css');}}
       if((e.ctrlKey||e.metaKey)&&e.key==='z'){e.preventDefault();doUndo();}
     });
   });
@@ -1121,9 +1227,8 @@ function switchCode(t){
   activeCode=t;
   document.getElementById('ct-html')?.classList.toggle('on',t==='html');
   document.getElementById('ct-css')?.classList.toggle('on',t==='css');
-  const h=document.getElementById('htmlEd'), c=document.getElementById('cssEd');
-  if(h) h.style.display=t==='html'?'block':'none';
-  if(c) c.style.display=t==='css'?'block':'none';
+  document.getElementById('htmlWrap').style.display=t==='html'?'flex':'none';
+  document.getElementById('cssWrap').style.display=t==='css'?'flex':'none';
 }
 function pushUndo(){
   const h=document.getElementById('htmlEd')?.value||'', c=document.getElementById('cssEd')?.value||'';
@@ -1143,6 +1248,7 @@ function doUndo(){
     if(ce) ce.value=s.c;
     const btn=document.getElementById('undoBtn');
     if(btn) btn.disabled=undoPtr<=0;
+    syncHL('htmlEd','htmlHL','html');syncHL('cssEd','cssHL','css');
     renderPreviewCode();
   }
 }
@@ -1161,7 +1267,7 @@ function addError(msg,line){
   const b=document.getElementById('errBadge');
   const p=document.getElementById('errPanel');
   if(b){b.className='err-badge err-has';b.textContent='⚠ '+errors.length+' ошибк'+(errors.length===1?'а':'и');}
-  if(p){p.classList.add('show');p.innerHTML=`<div style="padding:3px 12px;text-align:right;font-size:.68rem;color:var(--text3);cursor:pointer" onclick="clearErrors()">✕ очистить</div>`+errors.map(e=>`<div class="err-row"><span class="err-line">L${e.line||'?'}</span><span>${escHtml(e.msg)}</span></div>`).join('');}
+  if(p){p.classList.add('show');p.innerHTML=errors.map(e=>`<div class="err-row"><span class="err-line">L${e.line||'?'}</span><span>${escHtml(e.msg)}</span></div>`).join('');}
 }
 function clearErrors(){
   errors=[];
@@ -1199,10 +1305,11 @@ function buildPreview(html,css){
   const iframe=document.getElementById('preview');
   if(!iframe) return;
   lintCode(html,css);
+  const hlScript=`<script>window.addEventListener('message',function(e){if(e.data&&e.data.t==='hl'){document.querySelectorAll('[data-hl]').forEach(function(el){el.removeAttribute('data-hl');});if(e.data.sel){try{document.querySelectorAll(e.data.sel).forEach(function(el){el.setAttribute('data-hl','1');});}catch(x){}}}});<\/script><style>[data-hl]{outline:2px solid #685BC7!important;outline-offset:2px;border-radius:2px;}<\/style>`;
   const errScript=`<script>window.onerror=function(m,s,l){parent.postMessage({t:'jsErr',msg:m,line:l},'*');return false};<\/script>`;
   let doc=html;
-  if(doc.includes('</head>')) doc=doc.replace('</head>',`<style>${css}</style>${errScript}</head>`);
-  else doc=`<style>${css}</style>${errScript}${doc}`;
+  if(doc.includes('</head>')) doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${errScript}</head>`);
+  else doc=`<style>${css}</style>${hlScript}${errScript}${doc}`;
   iframe.srcdoc=doc;
 }
 
@@ -1272,6 +1379,22 @@ function renderRef(){
       <div class="ref-h">📐 Размер шрифта (клик → скопировать)</div>
       <div class="fg">${FONT_SIZES.map(f=>`<div class="fr" onclick="copyRef('${f.px}')"><span class="fl">${f.l}</span><span class="fp">${f.px}</span><span class="fv" style="font-size:${f.px};line-height:1.2">AI-TREND</span></div>`).join('')}</div>
     </div>
+    <div class="ref-sec">
+      <div class="ref-h">🖼️ Бесплатные картинки (клик → скопировать URL)</div>
+      <div class="fg">${[
+        {l:'Котик 🐱',url:'https://picsum.photos/seed/cat/400/280'},
+        {l:'Собака 🐶',url:'https://picsum.photos/seed/dog/400/280'},
+        {l:'Природа 🌿',url:'https://picsum.photos/seed/nature/400/280'},
+        {l:'Горы 🏔️',url:'https://picsum.photos/seed/mountain/400/280'},
+        {l:'Космос 🚀',url:'https://picsum.photos/seed/space/400/280'},
+        {l:'Город 🌆',url:'https://picsum.photos/seed/city/400/280'},
+        {l:'300×200',url:'https://picsum.photos/300/200'},
+        {l:'400×300',url:'https://picsum.photos/400/300'},
+      ].map(p=>`<div class="fr" onclick="copyRef('${p.url}')">
+        <span style="font-size:.75rem;min-width:80px;color:var(--text)">${p.l}</span>
+        <span style="font-size:.65rem;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${p.url}</span>
+      </div>`).join('')}</div>
+    </div>
   </div>`;
 }
 function copyRef(val){
@@ -1286,6 +1409,79 @@ function toast(msg){
   el.className='toast';el.textContent=msg;
   document.body.appendChild(el);
   setTimeout(()=>el.remove(),1800);
+}
+
+// ══════════════════════════════════════════════
+// CODE TASK QUIZ
+// ══════════════════════════════════════════════
+function buildCodeTask(l){
+  const ct=l.codeTask;
+  if(!ct||!quizComplete) return '';
+  return `<div class="ctask-wrap" id="ctaskWrap">
+    <div class="ctask-title">💻 Задание: допиши код</div>
+    <div class="ctask-code">${escHtml(ct.before)}<span style="background:rgba(104,91,199,.2);border-bottom:2px solid #685BC7;border-radius:3px;padding:1px 10px;color:#9CDCFE">___</span>${escHtml(ct.after)}</div>
+    <div style="font-size:.83rem;color:var(--text2);margin-bottom:8px">${escHtml(ct.desc)}</div>
+    <div class="ctask-row">
+      <input class="ctask-inp" id="ctaskInp" placeholder="Введи ответ..." spellcheck="false" onkeydown="if(event.key==='Enter')checkCodeTask()"/>
+      <button class="ctask-chk" onclick="checkCodeTask()">Проверить →</button>
+    </div>
+    <div class="ctask-hint">💡 ${escHtml(ct.hint)}</div>
+    <div class="ctask-fb" id="ctaskFb"></div>
+  </div>`;
+}
+
+function checkCodeTask(){
+  const l=LESSONS[activeLsn];
+  const inp=document.getElementById('ctaskInp'),fb=document.getElementById('ctaskFb');
+  if(!inp||!fb||!l?.codeTask) return;
+  const val=inp.value.trim(),ans=l.codeTask.ans.trim();
+  const ok=val.toLowerCase()===ans.toLowerCase();
+  inp.classList.remove('ok','bad');fb.classList.remove('ok','bad');
+  void inp.offsetWidth;
+  if(ok){inp.classList.add('ok');fb.className='ctask-fb ok';fb.textContent='✅ Правильно! Отлично, '+studentName+'!';inp.disabled=true;}
+  else{inp.classList.add('bad');fb.className='ctask-fb bad';fb.textContent='❌ Неверно! Попробуй ещё раз. Подсказка: '+l.codeTask.hint;}
+}
+
+// ══════════════════════════════════════════════
+// CONTEXT JUMP BAR
+// ══════════════════════════════════════════════
+function detectEditorCtx(){
+  if(activeCode!=='html') return;
+  const ed=document.getElementById('htmlEd'),bar=document.getElementById('ctxBar');
+  if(!ed||!bar) return;
+  const pos=ed.selectionStart,text=ed.value;
+  let ts=-1;
+  for(let i=pos;i>=0;i--){if(text[i]==='<'&&text[i+1]!='/'){ts=i;break;}if(text[i]==='>') break;}
+  if(ts===-1){bar.innerHTML='';return;}
+  const te=text.indexOf('>',ts);
+  const chunk=te===-1?text.slice(ts):text.slice(ts,te+1);
+  const tagM=chunk.match(/^<([a-zA-Z][a-zA-Z0-9]*)/);
+  const classM=chunk.match(/class="([^"]+)"/);
+  const idM=chunk.match(/id="([^"]+)"/);
+  const css=document.getElementById('cssEd')?.value||'';
+  const jumps=[];
+  if(tagM){const t=tagM[1];const idx=css.search(new RegExp(t+'[\\s{,:]'));if(idx!==-1)jumps.push({label:`<${t}>`,idx});}
+  if(classM){classM[1].trim().split(/\s+/).forEach(cls=>{const idx=css.indexOf('.'+cls);if(idx!==-1)jumps.push({label:'.'+cls,idx});});}
+  if(idM){const idx=css.indexOf('#'+idM[1]);if(idx!==-1)jumps.push({label:'#'+idM[1],idx});}
+  bar.innerHTML=jumps.length?'<span style="font-size:.65rem;color:var(--text3);margin-right:4px">→ CSS:</span>'+jumps.map(j=>`<span class="ctx-chip" onclick="jumpToCSS(${j.idx})">${escHtml(j.label)}</span>`).join(''):'';
+  // Highlight in preview
+  const iframe=document.getElementById('preview');
+  if(iframe&&jumps.length){
+    const best=jumps.find(j=>j.label.startsWith('#'))||jumps.find(j=>j.label.startsWith('.'))||jumps[0];
+    try{iframe.contentWindow?.postMessage({t:'hl',sel:best?.label.replace(/^<|>$/g,'')},'*');}catch(e){}
+  }
+}
+
+function jumpToCSS(idx){
+  switchCode('css');
+  requestAnimationFrame(()=>{
+    const ed=document.getElementById('cssEd');if(!ed) return;
+    ed.focus();ed.setSelectionRange(idx,idx);
+    const lh=parseFloat(getComputedStyle(ed).lineHeight)||28;
+    const lineN=ed.value.substring(0,idx).split('\n').length-1;
+    ed.scrollTop=Math.max(0,lineN*lh-60);
+    syncHL('cssEd','cssHL','css');
+  });
 }
 
 // ══════════════════════════════════════════════
@@ -1333,6 +1529,66 @@ function initDrag(){
     document.body.classList.remove('dragging');
     if(rafId){cancelAnimationFrame(rafId);rafId=null;}
   });
+}
+
+// ══════════════════════════════════════════════
+// SYNTAX HIGHLIGHTING
+// ══════════════════════════════════════════════
+function hlHTML(src){
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  let out='',i=0;
+  while(i<src.length){
+    if(src.startsWith('<!--',i)){
+      const e=src.indexOf('-->',i+4);const chunk=e===-1?src.slice(i):src.slice(i,e+3);
+      out+=`<span style="color:#6A9955">${esc(chunk)}</span>`;i+=chunk.length;
+    } else if(src.startsWith('</',i)){
+      const e=src.indexOf('>',i);if(e===-1){out+=esc(src.slice(i));break;}
+      const seg=src.slice(i,e+1);const m=seg.match(/^<\/([a-zA-Z][a-zA-Z0-9]*)/);
+      if(m)out+=`<span style="color:#808080">&lt;/</span><span style="color:#4EC9B0">${esc(m[1])}</span><span style="color:#808080">&gt;</span>`;
+      else out+=esc(seg);i=e+1;
+    } else if(src[i]==='<'){
+      const e=src.indexOf('>',i);if(e===-1){out+=esc(src.slice(i));break;}
+      const seg=src.slice(i,e+1);
+      const m=seg.match(/^<(!DOCTYPE|[a-zA-Z][a-zA-Z0-9]*)([\s\S]*?)(\/?>)$/i);
+      if(!m){out+=esc(seg);i=e+1;continue;}
+      const[,name,attrs,close]=m;
+      const isDoc=name.toUpperCase()==='!DOCTYPE';
+      const aHL=attrs.replace(/([a-zA-Z:_-][a-zA-Z0-9:_.-]*)(\s*=\s*)("([^"]*)")/g,
+        (_,an,eq,av)=>`<span style="color:#9CDCFE">${esc(an)}</span><span style="color:#D4D4D4">${esc(eq)}</span><span style="color:#CE9178">${esc(av)}</span>`);
+      out+=`<span style="color:#808080">&lt;</span><span style="color:${isDoc?'#808080':'#4EC9B0'}">${esc(name)}</span>${aHL}<span style="color:#808080">${esc(close)}</span>`;
+      i=e+1;
+    } else {
+      const nx=src.indexOf('<',i);const chunk=nx===-1?src.slice(i):src.slice(i,nx);
+      out+=`<span style="color:#D4D4D4">${esc(chunk)}</span>`;i+=chunk.length;
+    }
+  }
+  return out;
+}
+
+function hlCSS(src){
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  let out='',i=0;
+  while(i<src.length){
+    if(src.startsWith('/*',i)){
+      const e=src.indexOf('*/',i+2);const chunk=src.slice(i,e===-1?src.length:e+2);
+      out+=`<span style="color:#6A9955">${esc(chunk)}</span>`;i+=chunk.length;continue;
+    }
+    const bo=src.indexOf('{',i);if(bo===-1){out+=`<span style="color:#D7BA7D">${esc(src.slice(i))}</span>`;break;}
+    out+=`<span style="color:#D7BA7D">${esc(src.slice(i,bo))}</span><span style="color:#D4D4D4">{</span>`;
+    i=bo+1;
+    const bc=src.indexOf('}',i);const props=bc===-1?src.slice(i):src.slice(i,bc);
+    out+=props.replace(/([a-zA-Z-]+)(\s*:\s*)([^;}\n]+)(;?)/g,
+      (_,p,c,v,s)=>`<span style="color:#9CDCFE">${esc(p)}</span><span style="color:#D4D4D4">${esc(c)}</span><span style="color:#CE9178">${esc(v)}</span><span style="color:#D4D4D4">${esc(s)}</span>`);
+    if(bc!==-1){out+=`<span style="color:#D4D4D4">}</span>`;i=bc+1;}else break;
+  }
+  return out;
+}
+
+function syncHL(edId,hlId,mode){
+  const ed=document.getElementById(edId),hl=document.getElementById(hlId);
+  if(!ed||!hl) return;
+  hl.innerHTML=mode==='css'?hlCSS(ed.value):hlHTML(ed.value);
+  hl.scrollTop=ed.scrollTop;hl.scrollLeft=ed.scrollLeft;
 }
 
 // ══════════════════════════════════════════════
