@@ -230,6 +230,54 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .ctask-fb{font-size:.82rem;font-weight:700;margin-top:6px;display:none}
 .ctask-fb.ok{color:var(--hi);display:block}
 .ctask-fb.bad{color:var(--err);display:block}
+
+/* ─── PRACTICE MODAL ─── */
+.pm-overlay{position:fixed;inset:0;background:rgba(4,3,12,.96);z-index:5000;display:none;flex-direction:column;animation:fu .22s ease}
+.pm-overlay.open{display:flex}
+.pm-head{display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0}
+.pm-icon{font-size:1.3rem}
+.pm-htitle{font-size:.95rem;font-weight:800;flex:1;color:var(--text)}
+.pm-close{background:transparent;border:1px solid var(--border);border-radius:8px;padding:5px 13px;cursor:pointer;color:var(--text3);font-size:.8rem;font-weight:600;transition:all .18s}
+.pm-close:hover{border-color:var(--err);color:var(--err);background:rgba(255,71,87,.07)}
+.pm-body{display:grid;grid-template-columns:280px 1fr 1fr;flex:1;overflow:hidden;min-height:0}
+.pm-left{display:flex;flex-direction:column;border-right:1px solid var(--border);overflow:hidden}
+.pm-left-scroll{flex:1;overflow-y:auto;padding:16px}
+.pm-ltag{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:2px 10px;border-radius:10px;font-size:.68rem;font-weight:700;margin-bottom:10px}
+.pm-lname{font-size:.92rem;font-weight:800;color:var(--text);margin-bottom:10px;line-height:1.3}
+.pm-ldesc{font-size:.81rem;color:var(--text2);line-height:1.75;white-space:pre-line;margin-bottom:16px}
+.pm-req-h{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px}
+.pm-req-item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;font-size:.79rem;color:var(--text2);border-bottom:1px solid var(--border)}
+.pm-req-item:last-child{border-bottom:none}
+.pm-req-icon{font-size:.85rem;flex-shrink:0;margin-top:1px}
+.pm-req-item.pass{color:var(--hi)}
+.pm-req-item.fail{color:var(--err)}
+.pm-req-item.pending{color:var(--text3)}
+.pm-score-wrap{padding:12px 16px;border-top:1px solid var(--border);flex-shrink:0}
+.pm-score-bar-outer{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.pm-score-bar-inner{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--hi));transition:width .4s ease}
+.pm-score-txt{font-size:.75rem;color:var(--text3);text-align:right}
+.pm-mid{display:flex;flex-direction:column;border-right:1px solid var(--border);overflow:hidden}
+.pm-etabs{display:flex;background:var(--codebg);border-bottom:1px solid var(--border);flex-shrink:0}
+.pm-etab{padding:7px 14px;font-size:.77rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;color:var(--text3);transition:all .17s}
+.pm-etab.on{color:#f0e8ff;border-bottom-color:var(--accent2)}
+.pm-etab:hover:not(.on){color:var(--text2)}
+.pm-ed-area{flex:1;position:relative;overflow:hidden;background:var(--codebg)}
+.pm-ed-hl{position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:14px 16px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.85rem;line-height:1.8;white-space:pre;overflow:hidden;pointer-events:none;z-index:0;background:transparent;tab-size:2;color:#D4D4D4}
+.pm-editor{position:absolute;top:0;left:0;right:0;bottom:0;background:transparent!important;color:transparent!important;caret-color:#aeafad;z-index:1;white-space:pre;overflow:auto;resize:none;outline:none;border:none;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.85rem;line-height:1.8;padding:14px 16px;tab-size:2}
+.pm-editor::selection{background:rgba(104,91,199,.35)}
+.pm-check-bar{padding:8px 12px;background:var(--bg2);border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.pm-check-btn{padding:7px 20px;background:var(--hi);color:var(--hi-fg);border:none;border-radius:8px;font-size:.8rem;font-weight:800;cursor:pointer;transition:all .18s}
+.pm-check-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(181,237,24,.35)}
+.pm-hint-btn{padding:7px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;font-size:.78rem;color:var(--text2);cursor:pointer;transition:all .18s}
+.pm-hint-btn:hover{border-color:var(--accent);color:var(--accent2)}
+.pm-right{display:flex;flex-direction:column;overflow:hidden}
+.pm-prev-bar{padding:7px 12px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.pm-prev-label{font-size:.73rem;color:var(--text3);flex:1;text-align:center}
+.pm-iframe{flex:1;border:none;background:#fff}
+.pm-hint-box{padding:10px 14px;background:rgba(255,165,2,.07);border-top:1px solid rgba(255,165,2,.2);font-size:.79rem;color:var(--warn);line-height:1.6;display:none;flex-shrink:0;max-height:90px;overflow-y:auto}
+.pm-hint-box.show{display:block}
+.practice-btn{padding:5px 13px;background:transparent;border:1px solid var(--accent);border-radius:8px;font-size:.76rem;font-weight:700;color:var(--accent2);cursor:pointer;transition:all .18s;margin-left:6px}
+.practice-btn:hover{background:var(--accent);color:#fff}
 </style>
 </head>
 <body>
@@ -277,6 +325,60 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
   <main class="main" id="main">
     <div class="empty"><div style="font-size:3rem">👈</div><p style="font-size:1rem;font-weight:600;color:var(--text2)">Выбери урок слева</p></div>
   </main>
+</div>
+
+<!-- Practice Modal -->
+<div class="pm-overlay" id="pmOverlay">
+  <div class="pm-head">
+    <span class="pm-icon">🎯</span>
+    <span class="pm-htitle" id="pmTitle">Практика</span>
+    <button class="pm-close" onclick="closePractice()">✕ Закрыть</button>
+  </div>
+  <div class="pm-body">
+    <!-- Left: task + tests -->
+    <div class="pm-left">
+      <div class="pm-left-scroll">
+        <div class="pm-ltag" id="pmTag">Урок 1</div>
+        <div class="pm-lname" id="pmLname"></div>
+        <div class="pm-ldesc" id="pmDesc"></div>
+        <div class="pm-req-h">✅ Требования</div>
+        <div id="pmTests"></div>
+      </div>
+      <div class="pm-score-wrap">
+        <div class="pm-score-bar-outer"><div class="pm-score-bar-inner" id="pmScoreBar" style="width:0%"></div></div>
+        <div class="pm-score-txt" id="pmScoreTxt">Нажми «Проверить» чтобы начать</div>
+      </div>
+    </div>
+    <!-- Middle: editor -->
+    <div class="pm-mid">
+      <div class="pm-etabs">
+        <div class="pm-etab on" id="pmet-html" onclick="pmSwitchCode('html')">HTML</div>
+        <div class="pm-etab" id="pmet-css" onclick="pmSwitchCode('css')">CSS</div>
+      </div>
+      <div class="pm-ed-area" id="pmEdArea" style="display:flex">
+        <pre class="pm-ed-hl" id="pmHtmlHL" aria-hidden="true"></pre>
+        <textarea class="pm-editor" id="pmHtmlEd" spellcheck="false"></textarea>
+      </div>
+      <div class="pm-ed-area" id="pmCssArea" style="display:none">
+        <pre class="pm-ed-hl" id="pmCssHL" aria-hidden="true"></pre>
+        <textarea class="pm-editor" id="pmCssEd" spellcheck="false"></textarea>
+      </div>
+      <div class="pm-hint-box" id="pmHintBox"></div>
+      <div class="pm-check-bar">
+        <button class="pm-check-btn" onclick="runPracticeCheck()">Проверить ✓</button>
+        <button class="pm-hint-btn" onclick="togglePmHint()">💡 Подсказка</button>
+        <button class="pm-hint-btn" onclick="resetPractice()">↺ Сброс</button>
+      </div>
+    </div>
+    <!-- Right: preview -->
+    <div class="pm-right">
+      <div class="pm-prev-bar">
+        <div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+        <div class="pm-prev-label">🌐 Предпросмотр</div>
+      </div>
+      <iframe class="pm-iframe" id="pmFrame" sandbox="allow-scripts allow-same-origin"></iframe>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -437,7 +539,22 @@ h1{color:#685BC7;font-size:42px;margin-bottom:10px}
 h2{color:#8075D9;font-size:24px;margin-bottom:20px}
 p{color:#555;font-size:18px;line-height:1.8;margin-bottom:14px}
 strong{color:#685BC7}
-em{color:#B5ED18;font-style:normal;font-weight:bold}`
+em{color:#B5ED18;font-style:normal;font-weight:bold}`,
+  practiceTask:{
+    name:'Страница «Обо мне»',
+    desc:'Создай HTML-страницу о себе.\nОна должна содержать:\n• Заголовок <h1> с твоим именем\n• Подзаголовок <h2>\n• Минимум 2 абзаца <p>\n• Жирный текст <strong> хотя бы один раз\n• Курсив <em> хотя бы один раз',
+    hint:'Начни с h1 и h2, потом добавь два тега p. Внутри одного из p используй <strong>текст</strong>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head>\n  <title>Обо мне</title>\n</head>\n<body>\n  <!-- Напиши здесь свою страницу -->\n\n</body>\n</html>`,
+    starterCss:`body {\n  font-family: Arial, sans-serif;\n  padding: 40px;\n  background: #f5f0ff;\n  max-width: 600px;\n  margin: 0 auto;\n}\nh1 { color: #685BC7; }\nh2 { color: #8075D9; }`,
+    tests:[
+      {desc:'Есть заголовок <h1>',check:d=>!!d.querySelector('h1')},
+      {desc:'<h1> не пустой',check:d=>d.querySelector('h1')?.textContent.trim().length>0},
+      {desc:'Есть подзаголовок <h2>',check:d=>!!d.querySelector('h2')},
+      {desc:'Минимум 2 абзаца <p>',check:d=>d.querySelectorAll('p').length>=2},
+      {desc:'Есть жирный текст <strong>',check:d=>!!d.querySelector('strong')},
+      {desc:'Есть курсив <em>',check:d=>!!d.querySelector('em')},
+    ]
+  }
 },
 {
   emoji:'🎩',title:'Шапка сайта (Header)',subtitle:'Первое что видит посетитель',tag:'Структура',
@@ -492,7 +609,21 @@ nav a{color:#ccc;text-decoration:none;padding:8px 14px;border-radius:8px;font-si
 nav a:hover{background:rgba(104,91,199,.2);color:#8075D9}
 .cta{background:linear-gradient(135deg,#685BC7,#8075D9);color:#fff;border:none;padding:10px 22px;border-radius:10px;font-size:14px;font-weight:bold;cursor:pointer;transition:transform .2s}
 .cta:hover{transform:translateY(-2px)}
-.hint{text-align:center;padding:60px 20px;color:#888;font-size:18px}`
+.hint{text-align:center;padding:60px 20px;color:#888;font-size:18px}`,
+  practiceTask:{
+    name:'Шапка сайта с Flexbox',
+    desc:'Создай header-шапку сайта.\nТребования:\n• Тег <header>\n• Логотип внутри (любой div или span)\n• Навигация <nav> с минимум 3 ссылками <a>\n• Кнопка <button>\n• CSS: header использует display: flex',
+    hint:'В CSS для header напиши: display: flex; align-items: center; justify-content: space-between;',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Header</title></head>\n<body>\n  <!-- Создай header здесь -->\n\n</body>\n</html>`,
+    starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial, sans-serif; }\n/* Стилизуй header */`,
+    tests:[
+      {desc:'Есть тег <header>',check:d=>!!d.querySelector('header')},
+      {desc:'Есть навигация <nav>',check:d=>!!d.querySelector('nav')},
+      {desc:'В nav минимум 3 ссылки',check:d=>d.querySelectorAll('nav a').length>=3},
+      {desc:'Есть кнопка <button>',check:d=>!!d.querySelector('button')},
+      {desc:'Header использует flexbox',check:d=>{const h=d.querySelector('header');return h&&getComputedStyle(h).display==='flex';}},
+    ]
+  }
 },
 {
   emoji:'🦸',title:'Главный экран (Hero)',subtitle:'Лицо сайта — первое впечатление',tag:'Структура',
@@ -557,7 +688,22 @@ nav a:hover{color:#B5ED18}
 .bp{background:linear-gradient(135deg,#685BC7,#8075D9);color:#fff;border:none;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 8px 30px rgba(104,91,199,.4);transition:transform .2s}
 .bp:hover{transform:translateY(-3px)}
 .bs{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3);padding:16px 36px;border-radius:14px;font-size:16px;font-weight:bold;cursor:pointer;transition:all .2s}
-.bs:hover{border-color:#B5ED18;color:#B5ED18}`
+.bs:hover{border-color:#B5ED18;color:#B5ED18}`,
+  practiceTask:{
+    name:'Hero-секция на весь экран',
+    desc:'Создай главный экран (Hero).\nТребования:\n• Тег <section> с классом hero\n• Заголовок h1 внутри\n• Кнопка-призыв (CTA)\n• CSS: min-height: 100vh\n• CSS: display flex + по центру\n• Градиентный фон (linear-gradient)',
+    hint:'Для .hero: min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; background: linear-gradient(135deg, #09080f, #685BC7);',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero</title></head>\n<body>\n  <section class="hero">\n    <!-- Добавь h1, p и button -->\n\n  </section>\n</body>\n</html>`,
+    starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial, sans-serif; }\n.hero {\n  /* Добавь стили здесь */\n  text-align: center;\n  color: white;\n  padding: 40px;\n}`,
+    tests:[
+      {desc:'Есть тег <section>',check:d=>!!d.querySelector('section')},
+      {desc:'В section есть <h1>',check:d=>!!d.querySelector('section h1')},
+      {desc:'Есть кнопка <button>',check:d=>!!d.querySelector('button')},
+      {desc:'min-height: 100vh задан',check:d=>{const s=d.querySelector('.hero');if(!s)return false;const h=getComputedStyle(s).minHeight;return h&&h!=='0px'&&h!=='auto';}},
+      {desc:'display: flex задан',check:d=>{const s=d.querySelector('.hero');return s&&getComputedStyle(s).display==='flex';}},
+      {desc:'Градиентный фон',check:d=>{const s=d.querySelector('.hero');return s&&getComputedStyle(s).backgroundImage.includes('gradient');}},
+    ]
+  }
 },
 {
   emoji:'🃏',title:'Карточки и контент',subtitle:'Показываем информацию красиво',tag:'Контент',
@@ -630,7 +776,22 @@ h2{font-size:40px;color:#1a1636;margin:16px 0 10px}
 .card h3{font-size:20px;color:#1a1636;margin-bottom:10px}
 .card p{color:#777;font-size:14px;line-height:1.6;margin-bottom:22px}
 .card button{background:linear-gradient(135deg,#685BC7,#8075D9);color:#fff;border:none;padding:11px 26px;border-radius:10px;font-size:14px;font-weight:bold;cursor:pointer;transition:transform .2s}
-.card button:hover{transform:scale(1.05)}`
+.card button:hover{transform:scale(1.05)}`,
+  practiceTask:{
+    name:'Три карточки на CSS Grid',
+    desc:'Создай секцию с 3 карточками.\nТребования:\n• Контейнер .cards\n• Минимум 3 тега <article> внутри\n• В каждой карточке: заголовок h3 и текст p\n• CSS Grid: grid-template-columns: repeat(3, 1fr)\n• Карточки с border-radius и box-shadow\n• Hover-эффект (transform)',
+    hint:'Для .cards: display:grid; grid-template-columns:repeat(3,1fr); gap:24px;\nДля .card:hover: transform:translateY(-6px);',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Карточки</title></head>\n<body>\n  <div class="cards">\n    <article class="card">\n      <!-- h3 и p -->\n    </article>\n    <!-- Добавь ещё 2 карточки -->\n  </div>\n</body>\n</html>`,
+    starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial, sans-serif; background: #f5f0ff; padding: 40px; }\n.cards {\n  /* display: grid здесь */\n}\n.card {\n  background: white;\n  padding: 24px;\n  /* border-radius и box-shadow */\n  transition: transform 0.25s;\n}\n.card:hover {\n  /* transform */\n}`,
+    tests:[
+      {desc:'Минимум 3 тега <article>',check:d=>d.querySelectorAll('article').length>=3},
+      {desc:'В каждой карточке есть h3',check:d=>d.querySelectorAll('article h3').length>=3},
+      {desc:'В каждой карточке есть p',check:d=>d.querySelectorAll('article p').length>=3},
+      {desc:'Контейнер использует Grid',check:d=>{const c=d.querySelector('.cards');return c&&getComputedStyle(c).display==='grid';}},
+      {desc:'Grid: 3 колонки',check:d=>{const c=d.querySelector('.cards');return c&&getComputedStyle(c).gridTemplateColumns.split(' ').length===3;}},
+      {desc:'Карточки с border-radius',check:d=>{const c=d.querySelector('.card');return c&&getComputedStyle(c).borderRadius!=='0px';}},
+    ]
+  }
 },
 {
   emoji:'📊',title:'Таблицы (Table)',subtitle:'Показываем данные структурированно',tag:'Данные',
@@ -682,7 +843,22 @@ thead{background:linear-gradient(135deg,#685BC7,#8075D9);color:#fff}
 th{padding:15px 20px;text-align:left;font-size:14px;font-weight:700}
 td{padding:14px 20px;font-size:14px;color:#333;border-bottom:1px solid #f0ebff}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:#f8f5ff}`
+tr:hover td{background:#f8f5ff}`,
+  practiceTask:{
+    name:'Таблица расписания',
+    desc:'Создай таблицу расписания.\nТребования:\n• Тег <table>\n• Шапка <thead> с заголовками <th>\n• Тело <tbody> с минимум 3 строками <tr>\n• В каждой строке минимум 3 ячейки <td>\n• CSS: border-collapse: collapse\n• Hover на строки (tr:hover)',
+    hint:'table { border-collapse: collapse; width: 100%; }\nth, td { padding: 12px; border: 1px solid #ddd; }\ntr:hover td { background: #f5f0ff; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Расписание</title></head>\n<body>\n  <table>\n    <thead>\n      <tr>\n        <th>День</th>\n        <!-- Добавь ещё th -->\n      </tr>\n    </thead>\n    <tbody>\n      <!-- Добавь строки tr с td -->\n    </tbody>\n  </table>\n</body>\n</html>`,
+    starterCss:`body { font-family: Arial, sans-serif; padding: 30px; background: #f5f0ff; }\ntable {\n  /* border-collapse */\n  width: 100%;\n}\nth { background: #685BC7; color: white; padding: 12px; }\ntd { padding: 12px; border: 1px solid #ddd; }`,
+    tests:[
+      {desc:'Есть тег <table>',check:d=>!!d.querySelector('table')},
+      {desc:'Есть <thead> с <th>',check:d=>d.querySelectorAll('thead th').length>=2},
+      {desc:'Есть <tbody>',check:d=>!!d.querySelector('tbody')},
+      {desc:'Минимум 3 строки <tr>',check:d=>d.querySelectorAll('tbody tr').length>=3},
+      {desc:'В строках минимум 3 <td>',check:d=>d.querySelectorAll('tbody tr:first-child td').length>=3},
+      {desc:'border-collapse: collapse',check:d=>{const t=d.querySelector('table');return t&&getComputedStyle(t).borderCollapse==='collapse';}},
+    ]
+  }
 },
 {
   emoji:'📬',title:'Формы (прием заявок)',subtitle:'Принимаем данные от пользователей',tag:'Интерактив',
@@ -743,7 +919,23 @@ input,select,textarea{width:100%;padding:12px 16px;border:2px solid #eee;border-
 input:focus,select:focus,textarea:focus{border-color:#685BC7;box-shadow:0 0 0 4px rgba(104,91,199,.1)}
 textarea{min-height:100px;resize:vertical}
 button{width:100%;padding:15px;background:linear-gradient(135deg,#685BC7,#8075D9);color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 8px 24px rgba(104,91,199,.3);transition:transform .2s}
-button:hover{transform:translateY(-2px)}`
+button:hover{transform:translateY(-2px)}`,
+  practiceTask:{
+    name:'Форма записи на курс',
+    desc:'Создай форму записи.\nТребования:\n• Тег <form>\n• Поле для имени (input type="text")\n• Поле для email (input type="email")\n• Textarea для сообщения\n• Выпадающий список <select> с минимум 2 <option>\n• Кнопка отправки (button type="submit")\n• Атрибут placeholder у полей',
+    hint:'Для красивого фокуса: input:focus { border-color: #685BC7; outline: none; box-shadow: 0 0 0 3px rgba(104,91,199,.15); }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Форма</title></head>\n<body>\n  <form>\n    <!-- Добавь поля здесь -->\n\n  </form>\n</body>\n</html>`,
+    starterCss:`body { font-family: Arial, sans-serif; padding: 40px; background: #f5f0ff; max-width: 480px; margin: 0 auto; }\nform { background: white; padding: 32px; border-radius: 16px; }\ninput, textarea, select {\n  width: 100%; padding: 12px; margin-bottom: 16px;\n  border: 2px solid #eee; border-radius: 8px;\n  font-family: inherit; font-size: 14px; outline: none;\n}\nbutton { width: 100%; padding: 14px; background: #685BC7; color: white; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; }`,
+    tests:[
+      {desc:'Есть тег <form>',check:d=>!!d.querySelector('form')},
+      {desc:'Поле type="text"',check:d=>!!d.querySelector('input[type="text"]')},
+      {desc:'Поле type="email"',check:d=>!!d.querySelector('input[type="email"]')},
+      {desc:'Есть <textarea>',check:d=>!!d.querySelector('textarea')},
+      {desc:'Есть <select> с вариантами',check:d=>d.querySelectorAll('select option').length>=2},
+      {desc:'Кнопка <button type="submit">',check:d=>!!d.querySelector('button[type="submit"]')},
+      {desc:'Поля имеют placeholder',check:d=>!!d.querySelector('[placeholder]')},
+    ]
+  }
 },
 {
   emoji:'🦶',title:'Подвал сайта (Footer)',subtitle:'Финальный блок — контакты и ссылки',tag:'Структура',
@@ -797,7 +989,22 @@ footer{background:#09080f;color:#fff;padding:60px 50px 30px}
 .col h4{color:#fff;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px}
 .col a{display:block;color:#888;text-decoration:none;font-size:13px;margin-bottom:11px;transition:color .2s}
 .col a:hover{color:#B5ED18}
-.fb{border-top:1px solid #1e1e3a;padding-top:24px;display:flex;justify-content:space-between;color:#444;font-size:12px}`
+.fb{border-top:1px solid #1e1e3a;padding-top:24px;display:flex;justify-content:space-between;color:#444;font-size:12px}`,
+  practiceTask:{
+    name:'Подвал сайта с Grid',
+    desc:'Создай footer с несколькими колонками.\nТребования:\n• Тег <footer>\n• Внутри div.fc с Grid на 3–4 колонки\n• Минимум 3 колонки с контентом\n• Ссылки <a> в колонках\n• Строка копирайта © внизу\n• Тёмный фон (#09080f или похожий)',
+    hint:'footer { background: #09080f; color: white; padding: 60px 40px; }\n.fc { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer</title></head>\n<body>\n  <div class="stub">Прокрути вниз 👇</div>\n  <footer>\n    <div class="fc">\n      <!-- Добавь колонки -->\n    </div>\n    <div class="copy"><!-- Копирайт --></div>\n  </footer>\n</body>\n</html>`,
+    starterCss:`body { margin: 0; font-family: Arial, sans-serif; }\n.stub { height: 40vh; display: flex; align-items: center; justify-content: center; background: #f0ecff; color: #685BC7; font-size: 18px; }\nfooter { /* тёмный фон */ padding: 60px 40px 30px; }\n.fc { /* grid */ }\n.copy { border-top: 1px solid #333; padding-top: 20px; margin-top: 40px; color: #555; font-size: 13px; }`,
+    tests:[
+      {desc:'Есть тег <footer>',check:d=>!!d.querySelector('footer')},
+      {desc:'Внутри footer есть Grid',check:d=>{const fc=d.querySelector('footer .fc')||d.querySelector('footer div');return fc&&getComputedStyle(fc).display==='grid';}},
+      {desc:'Минимум 3 колонки',check:d=>{const fc=d.querySelector('footer .fc')||d.querySelector('footer div');if(!fc)return false;const cols=getComputedStyle(fc).gridTemplateColumns;return cols.split(' ').length>=3;}},
+      {desc:'Ссылки <a> в footer',check:d=>d.querySelectorAll('footer a').length>=2},
+      {desc:'Есть строка копирайта',check:d=>d.querySelector('footer')?.textContent.includes('©')},
+      {desc:'Тёмный фон footer',check:d=>{const f=d.querySelector('footer');if(!f)return false;const bg=getComputedStyle(f).backgroundColor;const m=bg.match(/\d+/g);return m&&parseInt(m[0])<60&&parseInt(m[1])<60&&parseInt(m[2])<60;}},
+    ]
+  }
 },
 {
   emoji:'🔗',title:'Ссылки и картинки',subtitle:'href, img, src — навигация и медиа',tag:'Медиа',
@@ -854,7 +1061,22 @@ h1{text-align:center;color:#B5ED18;margin-bottom:28px;font-size:28px}
 .card img{width:100%;height:180px;object-fit:cover;display:block}
 .info{padding:16px}
 .info h3{color:#fff;font-size:16px;margin-bottom:4px}
-.info p{color:#685BC7;font-size:13px}`
+.info p{color:#685BC7;font-size:13px}`,
+  practiceTask:{
+    name:'Фотогалерея с ссылками',
+    desc:'Создай галерею изображений.\nТребования:\n• Минимум 3 тега <img> с атрибутом src\n• Каждый img обёрнут в ссылку <a href="...">\n• Атрибут alt у каждой картинки\n• CSS: object-fit: cover у img\n• Grid-сетка для карточек\n• Hover-эффект на карточках',
+    hint:'Используй картинки: https://picsum.photos/seed/cat/400/300\nДля img: width:100%; height:200px; object-fit:cover;',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Галерея</title></head>\n<body>\n  <h1>Моя галерея</h1>\n  <div class="gallery">\n    <!-- Добавь 3 карточки с a и img -->\n\n  </div>\n</body>\n</html>`,
+    starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial, sans-serif; background: #09080f; color: white; padding: 30px; }\nh1 { color: #B5ED18; margin-bottom: 24px; text-align: center; }\n.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }\n.gallery a { display: block; border-radius: 12px; overflow: hidden; text-decoration: none; transition: transform 0.2s; }\n.gallery a:hover { transform: translateY(-6px); }\n.gallery img { /* object-fit */ }`,
+    tests:[
+      {desc:'Минимум 3 тега <img>',check:d=>d.querySelectorAll('img').length>=3},
+      {desc:'У img есть атрибут src',check:d=>d.querySelectorAll('img[src]').length>=3},
+      {desc:'У img есть атрибут alt',check:d=>d.querySelectorAll('img[alt]').length>=3},
+      {desc:'img обёрнуты в <a>',check:d=>d.querySelectorAll('a img').length>=3},
+      {desc:'object-fit: cover задан',check:d=>{const img=d.querySelector('img');return img&&getComputedStyle(img).objectFit==='cover';}},
+      {desc:'Grid-сетка для галереи',check:d=>{const g=d.querySelector('.gallery');return g&&getComputedStyle(g).display==='grid';}},
+    ]
+  }
 },
 {
   emoji:'🧠',title:'Промпты для нейросетей',subtitle:'Говори с ИИ как профессионал',tag:'ИИ / Промпты',
@@ -919,7 +1141,21 @@ h1{text-align:center;color:#B5ED18;margin-bottom:28px;font-size:28px}
 ✅ Указывай роль ИИ
 ✅ Будь конкретным
 ✅ Давай контекст
-✅ Указывай формат`
+✅ Указывай формат`,
+  practiceTask:{
+    name:'Напиши промпт по формуле',
+    desc:'Напиши промпт для ChatGPT по формуле:\nРОЛЬ + ЗАДАЧА + КОНТЕКСТ + ФОРМАТ\n\nТребования:\n• Укажи роль (Ты — ...)\n• Опиши задачу (Создай / Напиши / Объясни ...)\n• Добавь контекст (для кого, в каком стиле)\n• Укажи формат ответа (список / код / таблица)\n• Длина промпта: минимум 5 строк\n\nПиши промпт прямо в HTML-редакторе как текст!',
+    hint:'Пример: "Ты — опытный веб-разработчик. Создай лендинг для школы. Стиль: тёмная тема, цвет #685BC7. Формат: чистый HTML+CSS с комментариями."',
+    starterHtml:`Ты — [укажи роль]\n\nЗадача: [опиши что нужно сделать]\n\nКонтекст:\n- [для кого / в каком стиле]\n- [особые требования]\n\nФормат ответа: [список / код / таблица / абзацы]`,
+    starterCss:`/* Это урок по промптам — CSS не нужен */`,
+    tests:[
+      {desc:'Промпт содержит "Ты —" (роль)',check:d=>{const t=d.body?.textContent||'';return t.includes('Ты —')||t.includes('Ты-')||t.toLowerCase().includes('ты ');}},
+      {desc:'Есть описание задачи',check:d=>{const t=d.body?.textContent||'';return t.toLowerCase().includes('задача')||t.toLowerCase().includes('создай')||t.toLowerCase().includes('напиши')||t.toLowerCase().includes('объясни');}},
+      {desc:'Есть контекст (для кого / стиль)',check:d=>{const t=d.body?.textContent||'';return t.toLowerCase().includes('контекст')||t.toLowerCase().includes('стиль')||t.toLowerCase().includes('для ');}},
+      {desc:'Указан формат ответа',check:d=>{const t=d.body?.textContent||'';return t.toLowerCase().includes('формат')||t.toLowerCase().includes('код')||t.toLowerCase().includes('список')||t.toLowerCase().includes('таблица');}},
+      {desc:'Промпт достаточно подробный (5+ строк)',check:d=>{const t=d.body?.textContent||'';return t.split('\n').filter(l=>l.trim()).length>=5;}},
+    ]
+  }
 },
 ]; // end LESSONS
 
@@ -1206,6 +1442,7 @@ function renderCode(l){
       <div class="err-bar">
         <div class="err-badge err-ok" id="errBadge" onclick="toggleErr()">✓ Ошибок нет</div>
         <button class="complete-btn" onclick="completeLesson()">✅ Завершить урок</button>
+        <button class="practice-btn" onclick="openPractice()">🎯 Практика</button>
       </div>
     </div>`;
   const he=document.getElementById('htmlEd'), ce=document.getElementById('cssEd');
@@ -1680,7 +1917,124 @@ function doReset(){
   location.reload();
 }
 
+// ══════════════════════════════════════════════
+// PRACTICE MODAL
+// ══════════════════════════════════════════════
+let pmActiveCode='html';
+
+function openPractice(){
+  const l=LESSONS[activeLsn];
+  if(!l||!l.practiceTask) return;
+  const pt=l.practiceTask;
+  document.getElementById('pmTitle').textContent='🎯 Практика: '+l.title;
+  document.getElementById('pmTag').textContent=l.tag;
+  document.getElementById('pmLname').textContent=pt.name;
+  document.getElementById('pmDesc').textContent=pt.desc;
+  document.getElementById('pmHintBox').textContent=pt.hint;
+  document.getElementById('pmHintBox').classList.remove('show');
+  // Render pending tests
+  document.getElementById('pmTests').innerHTML=pt.tests.map((t,i)=>`<div class="pm-req-item pending" id="pmT${i}"><span class="pm-req-icon">⬜</span><span>${t.desc}</span></div>`).join('');
+  // Score reset
+  document.getElementById('pmScoreBar').style.width='0%';
+  document.getElementById('pmScoreTxt').textContent='Нажми «Проверить» чтобы начать';
+  // Load code
+  const he=document.getElementById('pmHtmlEd'), ce=document.getElementById('pmCssEd');
+  he.value=pt.starterHtml; ce.value=pt.starterCss;
+  pmSyncHL('html'); pmSyncHL('css');
+  // Setup listeners
+  he.oninput=()=>{pmSyncHL('html');pmUpdatePreview();};
+  ce.oninput=()=>{pmSyncHL('css');pmUpdatePreview();};
+  he.onscroll=()=>{const hl=document.getElementById('pmHtmlHL');if(hl){hl.scrollTop=he.scrollTop;hl.scrollLeft=he.scrollLeft;}};
+  ce.onscroll=()=>{const hl=document.getElementById('pmCssHL');if(hl){hl.scrollTop=ce.scrollTop;hl.scrollLeft=ce.scrollLeft;}};
+  // Tab default html
+  pmSwitchCode('html');
+  pmUpdatePreview();
+  // Open
+  document.getElementById('pmOverlay').classList.add('open');
+}
+
+function closePractice(){
+  document.getElementById('pmOverlay').classList.remove('open');
+}
+
+function pmSwitchCode(t){
+  pmActiveCode=t;
+  document.getElementById('pmet-html').classList.toggle('on',t==='html');
+  document.getElementById('pmet-css').classList.toggle('on',t==='css');
+  document.getElementById('pmEdArea').style.display=t==='html'?'flex':'none';
+  document.getElementById('pmCssArea').style.display=t==='css'?'flex':'none';
+}
+
+function pmSyncHL(mode){
+  const edId=mode==='css'?'pmCssEd':'pmHtmlEd';
+  const hlId=mode==='css'?'pmCssHL':'pmHtmlHL';
+  const ed=document.getElementById(edId),hl=document.getElementById(hlId);
+  if(!ed||!hl) return;
+  hl.innerHTML=mode==='css'?hlCSS(ed.value):hlHTML(ed.value);
+}
+
+function pmUpdatePreview(){
+  const iframe=document.getElementById('pmFrame');
+  if(!iframe) return;
+  const html=document.getElementById('pmHtmlEd')?.value||'';
+  const css=document.getElementById('pmCssEd')?.value||'';
+  let doc=html;
+  if(doc.includes('</head>')) doc=doc.replace('</head>',`<style>${css}</style></head>`);
+  else doc=`<style>${css}</style>${doc}`;
+  iframe.srcdoc=doc;
+}
+
+function runPracticeCheck(){
+  const l=LESSONS[activeLsn];
+  if(!l?.practiceTask) return;
+  const iframe=document.getElementById('pmFrame');
+  if(!iframe) return;
+  // Wait a tick for srcdoc to settle
+  pmUpdatePreview();
+  setTimeout(()=>{
+    const doc=iframe.contentDocument;
+    if(!doc){console.warn('No contentDocument');return;}
+    const tests=l.practiceTask.tests;
+    let passed=0;
+    tests.forEach((t,i)=>{
+      let ok=false;
+      try{ok=!!t.check(doc);}catch(e){ok=false;}
+      const row=document.getElementById('pmT'+i);
+      if(row){
+        row.className='pm-req-item '+(ok?'pass':'fail');
+        row.querySelector('.pm-req-icon').textContent=ok?'✅':'❌';
+      }
+      if(ok) passed++;
+    });
+    const pct=Math.round(passed/tests.length*100);
+    document.getElementById('pmScoreBar').style.width=pct+'%';
+    document.getElementById('pmScoreTxt').textContent=`${passed} из ${tests.length} — ${pct}%${pct===100?' 🏆 Отлично!':pct>=60?' 👍 Хорошо!':' 💪 Ещё немного!'}`;
+  },200);
+}
+
+function togglePmHint(){
+  document.getElementById('pmHintBox').classList.toggle('show');
+}
+
+function resetPractice(){
+  const l=LESSONS[activeLsn];
+  if(!l?.practiceTask) return;
+  const pt=l.practiceTask;
+  document.getElementById('pmHtmlEd').value=pt.starterHtml;
+  document.getElementById('pmCssEd').value=pt.starterCss;
+  pmSyncHL('html');pmSyncHL('css');
+  pmUpdatePreview();
+  // Reset test icons
+  pt.tests.forEach((_,i)=>{
+    const row=document.getElementById('pmT'+i);
+    if(row){row.className='pm-req-item pending';row.querySelector('.pm-req-icon').textContent='⬜';}
+  });
+  document.getElementById('pmScoreBar').style.width='0%';
+  document.getElementById('pmScoreTxt').textContent='Нажми «Проверить» чтобы начать';
+}
+
 init();
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closePractice();});
 </script>
 </body>
 </html>
