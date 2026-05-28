@@ -348,95 +348,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .comp-btn-primary:hover{transform:translateY(-2px)}
 .comp-btn-sec{padding:13px 28px;background:transparent;color:var(--text2);border:1px solid var(--border);border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s}
 .comp-btn-sec:hover{border-color:var(--accent);color:var(--accent2)}
-
-@media (max-width:900px){
-  html,body{overflow:hidden}
-  .app{grid-template-columns:1fr;grid-template-rows:54px 104px 1fr;height:100dvh}
-  .topbar{padding:0 10px;gap:8px;min-width:0}
-  .logo{font-size:1rem;gap:7px;min-width:0}
-  .logo-box{width:28px;height:28px;border-radius:7px;font-size:14px}
-  .prog-wrap{gap:7px;font-size:.7rem}
-  .prog-outer{width:72px}
-  .student-btn{max-width:112px;overflow:hidden;text-overflow:ellipsis;padding:5px 10px;font-size:.73rem}
-  .theme-btn{padding:5px 9px}
-  .sidebar{grid-row:2;border-right:none;border-bottom:1px solid var(--border);padding:7px 6px;overflow:hidden;flex-direction:row;gap:7px;align-items:stretch}
-  .sb-head{display:none}
-  .sb-list{display:flex;gap:6px;overflow-x:auto;overflow-y:hidden;flex:1;padding-bottom:4px}
-  .lb{min-width:152px;border-left:none;border-bottom:3px solid transparent;border-radius:10px;margin:0;padding:8px 10px}
-  .lb:hover{border-left-color:transparent;border-bottom-color:var(--accent2)}
-  .lb.active{border-left-color:transparent;border-bottom-color:var(--accent)}
-  .lnum{width:24px;height:24px;font-size:.68rem}
-  .ltit{font-size:.76rem}
-  .ltag{font-size:.6rem}
-  .sb-footer{width:118px;padding:0;flex-shrink:0;border-top:none;margin:0;display:flex;flex-direction:column;justify-content:center}
-  .reset-btn{height:100%;padding:8px;font-size:.68rem;line-height:1.25;flex-direction:column}
-  .reset-confirm.show{position:absolute;right:8px;top:98px;z-index:50;width:190px;background:var(--sidebar);border:1px solid var(--border);border-radius:10px;padding:6px;box-shadow:0 10px 28px rgba(0,0,0,.35)}
-  .main{min-width:0}
-  .ltop{padding:9px 12px 8px}
-  .lh{font-size:1.04rem}
-  .ls{font-size:.76rem}
-  .lmeta{margin-bottom:4px}
-  .split{flex-direction:column}
-  .lpanel{width:100%!important;min-width:0;flex:1 1 58%;min-height:280px}
-  .dvd{display:none}
-  .rpanel{min-width:0;min-height:190px;flex:0 0 38%}
-  .ptab{padding:8px 12px;font-size:.72rem}
-  .tscroll,.prompts-scroll,.ref-scroll{padding:12px}
-  .match-cols{grid-template-columns:1fr;gap:12px}
-  .ctabs{overflow-x:auto;padding-right:6px}
-  .ctab{padding:8px 12px}
-  .err-bar{gap:6px;flex-wrap:wrap}
-  .practice-btn{margin-left:0}
-  .ed-hl,.editor{font-size:.8rem;padding:12px 14px}
-  .ln-gut{width:38px;font-size:.78rem;padding-top:12px}
-  .pbar{min-height:30px;padding:5px 10px}
-  .plabel{font-size:.64rem}
-}
-
-@media (max-width:600px){
-  .app{grid-template-rows:52px 96px 1fr}
-  .topbar{gap:6px}
-  .logo span{display:none}
-  .prog-outer{width:52px}
-  .student-btn{max-width:96px}
-  .sidebar{padding:6px}
-  .lb{min-width:132px;padding:7px 8px}
-  .sb-footer{width:94px}
-  .reset-btn{font-size:.62rem}
-  .lpanel{min-height:260px}
-  .rpanel{min-height:170px;flex-basis:34%}
-  .ctask-row{flex-direction:column}
-  .ctask-chk{width:100%}
-  .cg{grid-template-columns:repeat(4,1fr)}
-  .comp-h{font-size:1.8rem}
-  .comp-skills{grid-template-columns:repeat(2,1fr)}
-}
-
-@media (max-width:900px){
-  .pm-head{height:auto;min-height:50px;padding:8px 12px;gap:9px}
-  .pm-htitle{font-size:.86rem}
-  .pm-close{padding:5px 10px;font-size:.72rem}
-  .pm-levels{overflow-x:auto;padding:8px 10px}
-  .pm-lvl{padding:5px 12px;font-size:.72rem}
-  .pm-body{display:flex;flex-direction:column;overflow-y:auto;min-height:0}
-  .pm-left{border-right:none;border-bottom:1px solid var(--border);max-height:30vh;flex:0 0 auto}
-  .pm-left-scroll{padding:12px}
-  .pm-mid{border-right:none;border-bottom:1px solid var(--border);min-height:390px;flex:0 0 390px}
-  .pm-right{min-height:240px;flex:0 0 240px}
-  .pm-check-bar{flex-wrap:wrap;padding:8px 10px}
-  .pm-check-btn{flex:1;min-width:136px}
-  .pm-hint-btn{flex:1;min-width:96px}
-  .pm-editor,.pm-ed-hl{font-size:.78rem;padding:12px}
-}
-
-@media (max-width:600px){
-  .pm-levels-label{display:none}
-  .pm-left{max-height:28vh}
-  .pm-mid{min-height:350px;flex-basis:350px}
-  .pm-right{min-height:210px;flex-basis:210px}
-  .pm-score-wrap{padding:9px 12px}
-  .pm-ldesc{font-size:.75rem}
-}
 </style>
 </head>
 <body>
@@ -1882,6 +1793,7 @@ function checkMatchComplete(){
       msg.innerHTML=`<span>🎉 Отлично, ${escHtml(studentName)}! Тест пройден!</span><button class="next-btn" onclick="showCodeTask()">Далее — Допиши код →</button>`;
       msg.classList.add('show');
     }
+    markDone(activeLsn);
     // Inject code task hidden — shown only after clicking Далее
     const mw=document.querySelector('.match-wrap');
     const ct=l.codeTask;
@@ -1890,7 +1802,7 @@ function checkMatchComplete(){
       tmp.innerHTML=buildCodeTask(l);
       if(tmp.firstElementChild) mw.parentNode.insertBefore(tmp.firstElementChild,mw.nextSibling);
     }
-    // Lesson completion and prompts unlock after code task is answered correctly.
+    // Prompts tab revealed only after code task is answered correctly (in checkCodeTask)
   }
 }
 
@@ -1978,6 +1890,7 @@ function renderCode(l){
       <div class="err-panel" id="errPanel"></div>
       <div class="err-bar">
         <div class="err-badge err-ok" id="errBadge" onclick="toggleErr()">✓ Ошибок нет</div>
+        <button class="complete-btn" onclick="completeLesson()">✅ Завершить урок</button>
         <button class="practice-btn" onclick="openPractice()">🎯 Практика</button>
       </div>
     </div>`;
@@ -2064,6 +1977,13 @@ function doUndo(){
     renderPreviewCode();
   }
 }
+function completeLesson(){
+  markDone(activeLsn);
+  const ptab=document.getElementById('pt-prompts');
+  if(ptab) ptab.classList.add('visible');
+  switchTab('prompts');
+}
+
 // ══════════════════════════════════════════════
 // ERRORS
 // ══════════════════════════════════════════════
@@ -2264,7 +2184,6 @@ function checkCodeTask(){
     inp.classList.add('ok');inp.disabled=true;
     fb.className='ctask-fb ok';
     fb.innerHTML=`✅ Правильно! Отлично, ${escHtml(studentName)}!<br><button class="goto-prompts-btn" onclick="goToPrompts()">📋 Перейти к Промптам →</button>`;
-    markDone(activeLsn);
     // Now unlock the prompts tab
     const ptab=document.getElementById('pt-prompts');
     if(ptab) ptab.classList.add('visible');
@@ -2688,64 +2607,25 @@ function pmUpdatePreview(){
   iframe.srcdoc=doc;
 }
 
-function buildPracticeCheckDoc(html,css){
-  const safeCss=String(css||'').replace(/<\/style/gi,'<\\/style');
-  const styleBlock=`<base target="_blank"><style>${safeCss}</style>`;
-  let doc=String(html||'');
-  if(/<head\b[^>]*>/i.test(doc)){
-    return doc.replace(/<head\b[^>]*>/i,m=>m+styleBlock);
-  }
-  if(/<html\b[^>]*>/i.test(doc)){
-    return doc.replace(/<html\b[^>]*>/i,m=>m+`<head>${styleBlock}</head>`);
-  }
-  return `<!DOCTYPE html><html><head>${styleBlock}</head><body>${doc}</body></html>`;
-}
-
-function createPracticeCheckFrame(html,css){
-  return new Promise(resolve=>{
-    const frame=document.createElement('iframe');
-    frame.setAttribute('sandbox','allow-same-origin');
-    frame.style.cssText='position:absolute;left:-10000px;top:0;width:1200px;height:900px;border:0;opacity:0;pointer-events:none;';
-    let done=false;
-    const finish=()=>{
-      if(done) return;
-      done=true;
-      resolve({
-        doc:frame.contentDocument,
-        cleanup:()=>frame.remove()
-      });
-    };
-    frame.onload=finish;
-    frame.srcdoc=buildPracticeCheckDoc(html,css);
-    document.body.appendChild(frame);
-    setTimeout(finish,500);
-  });
-}
-
-async function runPracticeCheck(){
+function runPracticeCheck(){
   const l=LESSONS[activeLsn];
   if(!l?.practiceLevels) return;
   const pt=l.practiceLevels[pmActiveLevel];
   if(!pt) return;
   pmUpdatePreview(); // refresh visual preview
+  // Parse HTML string directly — iframe.contentDocument is null due to sandbox
   const html=document.getElementById('pmHtmlEd')?.value||'';
-  const css=document.getElementById('pmCssEd')?.value||'';
-  const checkFrame=await createPracticeCheckFrame(html,css);
-  const doc=checkFrame.doc||(new DOMParser()).parseFromString(html,'text/html');
+  const doc=(new DOMParser()).parseFromString(html,'text/html');
   let passed=0;
-  try{
-    pt.tests.forEach((t,i)=>{
-      let ok=false;
-      try{ok=!!t.check(doc);}catch(e){ok=false;}
-      const row=document.getElementById('pmT'+i);
-      const why=document.getElementById('pmTW'+i);
-      if(row){row.className='pm-req-item '+(ok?'pass':'fail');row.querySelector('.pm-req-icon').textContent=ok?'✅':'❌';}
-      if(why){why.textContent=ok?'✓ Условие выполнено':'✗ Не найдено — проверь код';}
-      if(ok) passed++;
-    });
-  } finally {
-    checkFrame.cleanup();
-  }
+  pt.tests.forEach((t,i)=>{
+    let ok=false;
+    try{ok=!!t.check(doc);}catch(e){ok=false;}
+    const row=document.getElementById('pmT'+i);
+    const why=document.getElementById('pmTW'+i);
+    if(row){row.className='pm-req-item '+(ok?'pass':'fail');row.querySelector('.pm-req-icon').textContent=ok?'✅':'❌';}
+    if(why){why.textContent=ok?'✓ Условие выполнено':'✗ Не найдено — проверь код';}
+    if(ok) passed++;
+  });
   const pct=Math.round(passed/pt.tests.length*100);
   document.getElementById('pmScoreBar').style.width=pct+'%';
   const failed=pt.tests.length-passed;
