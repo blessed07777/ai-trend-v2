@@ -276,7 +276,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .pm-left-scroll{flex:1;overflow-y:auto;padding:18px 16px}
 .pm-ltag{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:3px 11px;border-radius:20px;font-size:.67rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
 .pm-lname{font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:10px;line-height:1.3;display:flex;align-items:center;gap:7px}
-.pm-ldesc{font-size:.83rem;color:var(--text);line-height:1.9;white-space:pre-line;margin-bottom:18px;padding:14px 16px;background:linear-gradient(135deg,rgba(104,91,199,.1),rgba(181,237,24,.03));border:1px solid rgba(104,91,199,.25);border-left:4px solid var(--accent2);border-radius:10px;box-shadow:0 2px 12px rgba(104,91,199,.08)}
+.pm-ldesc{margin-bottom:18px;padding:14px 16px;background:linear-gradient(135deg,rgba(104,91,199,.1),rgba(181,237,24,.03));border:1px solid rgba(104,91,199,.25);border-left:4px solid var(--accent2);border-radius:10px;box-shadow:0 2px 12px rgba(104,91,199,.08)}
+.pm-task-title{font-size:.86rem;font-weight:800;color:var(--text);line-height:1.4;margin-bottom:10px}
+.pm-task-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px}
+.pm-task-list li{font-size:.8rem;color:var(--text2);line-height:1.55;padding:5px 9px 5px 28px;background:rgba(255,255,255,.03);border-radius:7px;position:relative}
+.pm-task-list li::before{content:'▶';position:absolute;left:9px;top:6px;font-size:.55rem;color:var(--accent2);}
 .pm-req-h{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .pm-req-h::after{content:'';flex:1;height:1px;background:var(--border)}
 .pm-req-item{display:flex;align-items:flex-start;gap:9px;padding:7px 10px;margin-bottom:5px;font-size:.79rem;color:var(--text2);border-radius:8px;background:var(--card);border:1px solid var(--border);transition:all .2s}
@@ -2745,7 +2749,12 @@ function pmLoadLevel(lv){
   const pt=l.practiceLevels[lv];
   if(!pt) return;
   document.getElementById('pmLname').innerHTML='<span style="font-size:.7rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:2px 9px;border-radius:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;flex-shrink:0">📝 ЗАДАНИЕ</span> '+escHtml(pt.name);
-  document.getElementById('pmDesc').textContent=pt.desc;
+  const descLines=pt.desc.split('\n');
+  const descTitle=descLines[0];
+  const descItems=descLines.slice(1).filter(l=>l.trim());
+  document.getElementById('pmDesc').innerHTML=
+    `<div class="pm-task-title">🎯 ${escHtml(descTitle)}</div>`+
+    (descItems.length?`<ul class="pm-task-list">${descItems.map(l=>`<li>${escHtml(l.replace(/^[•\-]\s*/,''))}</li>`).join('')}</ul>`:'');
   document.getElementById('pmHintBox').textContent=pt.hint;
   document.getElementById('pmHintBox').classList.remove('show');
   document.getElementById('pmTests').innerHTML=pt.tests.map((_,i)=>`<div class="pm-req-item pending" id="pmT${i}"><span class="pm-req-icon">⬜</span><div><div class="pm-req-desc">${_.desc}</div><div class="pm-req-why" id="pmTW${i}"></div></div></div>`).join('');
