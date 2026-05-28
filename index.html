@@ -367,8 +367,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .pm-hint-btn:hover{border-color:var(--accent);color:var(--accent2);background:var(--glow)}
 
 /* Hint box */
-.pm-hint-box{padding:11px 16px;background:linear-gradient(90deg,rgba(255,165,2,.07),rgba(255,165,2,.04));border-top:1px solid rgba(255,165,2,.2);font-size:.79rem;color:#ffc53d;line-height:1.65;display:none;flex-shrink:0;max-height:90px;overflow-y:auto}
+.pm-hint-box{padding:12px 16px;background:linear-gradient(135deg,rgba(255,165,2,.08),rgba(255,165,2,.03));border-top:2px solid rgba(255,165,2,.22);font-size:.79rem;color:var(--text2);line-height:1.7;display:none;flex-shrink:0;max-height:200px;overflow-y:auto}
 .pm-hint-box.show{display:block}
+.pm-hint-label{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#ffa502;margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.pm-hint-text{color:var(--text2);line-height:1.7;font-size:.81rem}
+.pm-hint-code{background:rgba(0,0,0,.35);border:1px solid rgba(255,165,2,.18);border-radius:9px;padding:10px 13px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.78rem;color:#ffd580;white-space:pre;overflow-x:auto;margin-top:4px;line-height:1.75;tab-size:2}
+.pm-hint-ic{background:rgba(0,0,0,.3);color:#ffd580;font-family:'JetBrains Mono',monospace;font-size:.82em;padding:1px 5px;border-radius:4px;border:1px solid rgba(255,165,2,.2)}
 
 /* Error bar */
 .pm-err-bar{background:#060008;border-top:1px solid rgba(255,71,87,.3);padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:.71rem;color:#ff5c6a;flex-shrink:0;max-height:60px;overflow-y:auto;line-height:1.6}
@@ -2912,7 +2916,7 @@ function pmLoadLevel(lv){
     `<div class="pm-task-body"><div class="pm-task-title">${escHtml(descTitle)}</div>`+
     (descItems.length?`<ul class="pm-task-list">${descItems.map(l=>`<li>${escHtml(l.replace(/^[•\-]\s*/,''))}</li>`).join('')}</ul>`:'')+
     `</div>`;
-  document.getElementById('pmHintBox').textContent=pt.hint;
+  document.getElementById('pmHintBox').innerHTML=formatHint(pt.hint||'');
   document.getElementById('pmHintBox').classList.remove('show');
   document.getElementById('pmTests').innerHTML=pt.tests.map((_,i)=>`<div class="pm-req-item pending" id="pmT${i}"><span class="pm-req-icon">⬜</span><div><div class="pm-req-desc">${_.desc}</div><div class="pm-req-why" id="pmTW${i}"></div></div></div>`).join('');
   document.getElementById('pmScoreBar').style.width='0%';
@@ -3060,6 +3064,26 @@ function runPracticeCheck(){
   if(pct===100&&pmActiveLevel<2){
     setTimeout(()=>{if(confirm('🎉 Уровень пройден! Перейти к следующему?'))pmSetLevel(pmActiveLevel+1);},400);
   }
+}
+
+function formatHint(text){
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const label='<div class="pm-hint-label">💡 Подсказка</div>';
+  if(!text) return label;
+  const isBlock=text.includes('\n')||/^\s*[<.#{]/.test(text);
+  if(isBlock){
+    return label+'<pre class="pm-hint-code">'+esc(text)+'</pre>';
+  }
+  // inline: wrap <tag> and property:value fragments
+  const parts=text.split(/(<[^>]+>|[\w-]+\s*:\s*[^;,]+(?:;|(?=[,\n]|$)))/g);
+  const body=parts.map((p,i)=>{
+    if(i%2===1){
+      if(p.startsWith('<')) return '<code class="pm-hint-ic">'+esc(p)+'</code>';
+      if(/^[\w-]+\s*:/.test(p)) return '<code class="pm-hint-ic">'+esc(p.trim())+'</code>';
+    }
+    return esc(p);
+  }).join('');
+  return label+'<div class="pm-hint-text">'+body+'</div>';
 }
 
 function togglePmHint(){
