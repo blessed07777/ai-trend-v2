@@ -227,15 +227,33 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--accent)}
 /* ─── RESPONSIVE ─── */
-.mob-menu-btn{display:none;background:none;border:1px solid var(--border);border-radius:8px;padding:5px 10px;cursor:pointer;color:var(--text2);font-size:17px;line-height:1;transition:all .2s;flex-shrink:0}
-.mob-menu-btn:hover{border-color:var(--accent);color:var(--accent2)}
-.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:499;backdrop-filter:blur(2px)}
+.mob-menu-btn{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:none;border:1.5px solid var(--border);border-radius:10px;padding:0;width:40px;height:40px;cursor:pointer;color:var(--text2);transition:border-color .2s,background .2s,color .2s;flex-shrink:0}
+.mob-menu-btn span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:transform .28s cubic-bezier(.4,0,.2,1),opacity .2s,width .2s}
+.mob-menu-btn:hover{border-color:var(--accent);color:var(--accent2);background:var(--glow)}
+.mob-menu-btn.open{border-color:var(--accent);color:var(--accent2);background:var(--glow)}
+.mob-menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.mob-menu-btn.open span:nth-child(2){opacity:0;width:0}
+.mob-menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:499;backdrop-filter:blur(3px)}
+/* Sidebar mobile header */
+.sb-mob-head{display:none;align-items:center;gap:10px;padding:14px 16px 12px;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--bg2)}
+.sb-mob-logo{flex:1;font-size:1.05rem;font-weight:900;letter-spacing:.02em}
+.sb-mob-close{width:34px;height:34px;background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.2);border-radius:9px;cursor:pointer;color:rgba(255,100,120,.75);font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.sb-mob-close:hover{background:rgba(255,71,87,.2);border-color:rgba(255,71,87,.5);color:#ff4757}
 @media(max-width:960px){
-  .mob-menu-btn{display:flex;align-items:center}
+  .mob-menu-btn{display:flex}
   .app{grid-template-columns:1fr}
-  .sidebar{position:fixed;top:56px;left:-280px;height:calc(100vh - 56px);width:272px;z-index:500;transition:left .25s cubic-bezier(.4,0,.2,1);box-shadow:4px 0 32px rgba(0,0,0,.5)}
+  .sidebar{position:fixed;top:56px;left:-290px;height:calc(100vh - 56px);width:280px;z-index:500;transition:left .28s cubic-bezier(.4,0,.2,1);box-shadow:6px 0 40px rgba(0,0,0,.55);padding-top:0}
   .sidebar.open{left:0}
   .sidebar.open ~ .sidebar-overlay,.sidebar-overlay.show{display:block}
+  .sb-mob-head{display:flex}
+  .sb-head{padding:8px 16px 6px}
+  .lb{padding:11px 14px;margin:2px 6px}
+  .lnum{width:30px;height:30px;border-radius:9px}
+  .ltit{font-size:.86rem}
+  .ltag{font-size:.67rem}
+  .sb-footer{padding:12px 12px 20px}
+  .reset-btn{padding:11px 0;font-size:.78rem}
 }
 @media(max-width:700px){
   .split{flex-direction:column}
@@ -459,7 +477,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 <!-- App -->
 <div class="app" id="app" style="display:none">
   <header class="topbar">
-    <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleSidebar()">☰</button>
+    <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleSidebar()" aria-label="Меню"><span></span><span></span><span></span></button>
     <div class="logo">
       <div class="logo-box">⚡</div>
       <span><span class="logo-ai">AI-</span><span class="logo-tr">TREND</span></span>
@@ -474,6 +492,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
   </header>
   <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
   <aside class="sidebar" id="sidebar">
+    <div class="sb-mob-head">
+      <div class="sb-mob-logo"><span class="logo-ai">AI-</span><span class="logo-tr">TREND</span></div>
+      <button class="sb-mob-close" onclick="toggleSidebar()" aria-label="Закрыть">✕</button>
+    </div>
     <div class="sb-head" id="sbHead">уроков</div>
     <div id="lessonList" class="sb-list"></div>
     <div class="sb-footer">
@@ -1972,7 +1994,7 @@ function toggleSidebar(){
   const btn=document.getElementById('mobMenuBtn');
   const open=sb.classList.toggle('open');
   ov.classList.toggle('show',open);
-  if(btn) btn.textContent=open?'✕':'☰';
+  if(btn) btn.classList.toggle('open',open);
 }
 function closeSidebarIfMobile(){if(window.innerWidth<=960){const sb=document.getElementById('sidebar');if(sb?.classList.contains('open'))toggleSidebar();}}
 function updateProgress(){
