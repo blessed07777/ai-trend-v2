@@ -768,16 +768,16 @@ em{color:#B5ED18;font-style:normal;font-weight:bold}`,
   matchPairs:[
     {id:'header',preview:'<header style="background:#685BC7;color:#fff;padding:9px 14px;font-family:sans-serif;font-size:13px;font-weight:bold;border-radius:6px;display:flex;align-items:center;gap:8px">🏠 Шапка сайта</header>',tag:'&lt;header&gt;'},
     {id:'nav',preview:'<nav style="background:#1a1636;padding:7px 12px;border-radius:6px;font-family:sans-serif;font-size:12px;color:#B5ED18;display:inline-block">📌 Навигация</nav>',tag:'&lt;nav&gt;'},
-    {id:'a',preview:'<a href="#" style="color:#685BC7;font-family:sans-serif;font-size:14px;text-decoration:underline">🔗 Это ссылка</a>',tag:'&lt;a href="#"&gt;'},
+    {id:'a',preview:'<a href="https://www.instagram.com/ai_trend.school/" style="color:#685BC7;font-family:sans-serif;font-size:14px;text-decoration:underline">🔗 Это ссылка</a>',tag:'&lt;a href="https://www.instagram.com/ai_trend.school/"&gt;'},
     {id:'flex',preview:'<div style="display:flex;align-items:center;justify-content:space-between;background:#f0ecff;padding:8px 12px;border-radius:8px;font-family:sans-serif;font-size:12px"><span>Лого</span><span>Меню</span><span>Кнопка</span></div>',tag:'display: flex'},
   ],
   theory:n=>`
 <div class="ti">Открой любой сайт — Apple, YouTube — и первое что видишь сверху — это <strong>шапка (header)</strong>. Именно её ${n} видит первой при входе!</div>
 <div class="tc"><div class="tch">🎩 Что хранит Header?</div><div class="tcb">🔷 <strong>Логотип</strong> — название или эмблема<br>🔷 <strong>Навигация</strong> — ссылки по разделам<br>🔷 <strong>CTA-кнопка</strong> — «Войти», «Купить», «Связаться»</div></div>
-<div class="tc"><div class="tch">🏷️ Теги для Header</div><div class="tcb"><span class="ic">&lt;header&gt;</span> — контейнер шапки<br><span class="ic">&lt;nav&gt;</span> — навигационное меню<br><span class="ic">&lt;a href="#"&gt;</span> — ссылка<div class="tpre">&lt;header&gt;
+<div class="tc"><div class="tch">🏷️ Теги для Header</div><div class="tcb"><span class="ic">&lt;header&gt;</span> — контейнер шапки<br><span class="ic">&lt;nav&gt;</span> — навигационное меню<br><span class="ic">&lt;a href="https://www.instagram.com/ai_trend.school/"&gt;</span> — ссылка<div class="tpre">&lt;header&gt;
   &lt;div class="logo"&gt;МойСайт&lt;/div&gt;
   &lt;nav&gt;
-    &lt;a href="#"&gt;Главная&lt;/a&gt;
+    &lt;a href="https://www.instagram.com/ai_trend.school/"&gt;Главная&lt;/a&gt;
   &lt;/nav&gt;
   &lt;button&gt;Связаться&lt;/button&gt;
 &lt;/header&gt;</div></div></div>
@@ -795,10 +795,10 @@ em{color:#B5ED18;font-style:normal;font-weight:bold}`,
   <header>
     <div class="logo">⚡ ${n}.dev</div>
     <nav>
-      <a href="#">Главная</a>
-      <a href="#">Обо мне</a>
-      <a href="#">Проекты</a>
-      <a href="#">Контакты</a>
+      <a href="https://www.instagram.com/ai_trend.school/">Главная</a>
+      <a href="https://www.instagram.com/ai_trend.school/">Обо мне</a>
+      <a href="https://www.instagram.com/ai_trend.school/">Проекты</a>
+      <a href="https://www.instagram.com/ai_trend.school/">Контакты</a>
     </nav>
     <button class="cta">Связаться 👋</button>
   </header>
@@ -830,7 +830,7 @@ nav a:hover{background:rgba(104,91,199,.2);color:#8075D9}
   {
     name:'Header с навигацией',
     desc:'Создай шапку с:\n• Тегом <header>\n• Логотипом (любой div или span)\n• Тегом <nav> с 2 ссылками <a>',
-    hint:'Внутри header сначала логотип, потом nav с двумя a href="#"',
+    hint:'Внутри header сначала логотип, потом nav с двумя a href="https://www.instagram.com/ai_trend.school/"',
     starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Сайт</title></head>\n<body>\n  <header>\n    <!-- Логотип и nav -->\n  </header>\n</body>\n</html>`,
     starterCss:`body { margin: 0; font-family: Arial; }\nheader { background: #1a1636; color: white; padding: 16px 30px; display: flex; align-items: center; gap: 20px; }\nnav a { color: #ccc; text-decoration: none; margin-right: 16px; }`,
     tests:[
@@ -888,8 +888,8 @@ nav a:hover{background:rgba(104,91,199,.2);color:#8075D9}
   <header>
     <div class="logo">⚡ ${n}.ai</div>
     <nav>
-      <a href="#">Обо мне</a>
-      <a href="#">Проекты</a>
+      <a href="https://www.instagram.com/ai_trend.school/">Обо мне</a>
+      <a href="https://www.instagram.com/ai_trend.school/">Проекты</a>
     </nav>
   </header>
   <section class="hero">
@@ -1300,10 +1300,10 @@ button:hover{transform:translateY(-2px)}`,
       <div class="col">
         <div class="fl">⚡ ${n} Agency</div>
         <p>Создаём сайты и работаем с нейросетями. Для детей 12–17 лет.</p>
-        <div class="soc"><a href="#">📷</a><a href="#">💬</a><a href="#">▶️</a><a href="#">🐦</a></div>
+        <div class="soc"><a href="https://www.instagram.com/ai_trend.school/">📷</a><a href="https://www.instagram.com/ai_trend.school/">💬</a><a href="https://www.instagram.com/ai_trend.school/">▶️</a><a href="https://www.instagram.com/ai_trend.school/">🐦</a></div>
       </div>
-      <div class="col"><h4>Курсы</h4><a href="#">HTML & CSS</a><a href="#">JavaScript</a><a href="#">Нейросети</a></div>
-      <div class="col"><h4>Компания</h4><a href="#">О нас</a><a href="#">Блог</a><a href="#">Контакты</a></div>
+      <div class="col"><h4>Курсы</h4><a href="https://www.instagram.com/ai_trend.school/">HTML & CSS</a><a href="https://www.instagram.com/ai_trend.school/">JavaScript</a><a href="https://www.instagram.com/ai_trend.school/">Нейросети</a></div>
+      <div class="col"><h4>Компания</h4><a href="https://www.instagram.com/ai_trend.school/">О нас</a><a href="https://www.instagram.com/ai_trend.school/">Блог</a><a href="https://www.instagram.com/ai_trend.school/">Контакты</a></div>
       <div class="col"><h4>Контакты</h4><p>📧 info@aitrend.kz</p><p>📱 +7 (999) 123-45-67</p></div>
     </div>
     <div class="fb"><span>© 2025 ${n} Agency</span><span>Сделано с ❤️</span></div>
@@ -2032,6 +2032,7 @@ function renderPreviewCode(){
     document.getElementById('cssEd')?.value||''
   );
 }
+const SCHOOL_INSTA='https://www.instagram.com/ai_trend.school/';
 function buildPreview(html,css){
   const iframe=document.getElementById('preview');
   if(!iframe) return;
@@ -2039,10 +2040,11 @@ function buildPreview(html,css){
   const baseTag=`<base target="_blank">`;
   const hlScript=`<script>window.addEventListener('message',function(e){if(e.data&&e.data.t==='hl'){document.querySelectorAll('[data-hl]').forEach(function(el){el.removeAttribute('data-hl');});if(e.data.sel){try{document.querySelectorAll(e.data.sel).forEach(function(el){el.setAttribute('data-hl','1');});}catch(x){}}}});<\/script><style>[data-hl]{outline:2px solid #685BC7!important;outline-offset:2px;border-radius:2px;}<\/style>`;
   const errScript=`<script>window.onerror=function(m,s,l){parent.postMessage({t:'jsErr',msg:m,line:l},'*');return false};<\/script>`;
+  const brandScript=`<script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('button:not([onclick]),button:not([data-nobrand])').forEach(function(b){b.addEventListener('click',function(){window.open('${SCHOOL_INSTA}','_blank');});});});<\/script>`;
   let doc=html;
   if(doc.includes('<head>')){doc=doc.replace('<head>',`<head>${baseTag}`);}
-  if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${errScript}</head>`);}
-  else{doc=`<base target="_blank"><style>${css}</style>${hlScript}${errScript}${doc}`;}
+  if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${errScript}${brandScript}</head>`);}
+  else{doc=`<base target="_blank"><style>${css}</style>${hlScript}${errScript}${brandScript}${doc}`;}
   iframe.srcdoc=doc;
 }
 
@@ -2588,10 +2590,11 @@ function pmUpdatePreview(){
   const html=document.getElementById('pmHtmlEd')?.value||'';
   const css=document.getElementById('pmCssEd')?.value||'';
   const errScript=`<script>window.onerror=function(m,s,l,c,e){parent.postMessage({t:'pmErr',msg:m,line:l},'*');return true;};<\/script>`;
+  const brandScript=`<script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('button:not([onclick])').forEach(function(b){b.addEventListener('click',function(){window.open('${SCHOOL_INSTA}','_blank');});});});<\/script>`;
   let doc=html;
   if(doc.includes('<head>')){doc=doc.replace('<head>','<head><base target="_blank">');}
-  if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${errScript}</head>`);}
-  else{doc=`<base target="_blank"><style>${css}</style>${errScript}${doc}`;}
+  if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${errScript}${brandScript}</head>`);}
+  else{doc=`<base target="_blank"><style>${css}</style>${errScript}${brandScript}${doc}`;}
   iframe.srcdoc=doc;
 }
 
