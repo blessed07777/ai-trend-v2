@@ -459,7 +459,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         <div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
         <div class="pm-prev-label">🌐 Предпросмотр</div>
       </div>
-      <iframe class="pm-iframe" id="pmFrame" sandbox="allow-scripts allow-popups allow-forms"></iframe>
+      <iframe class="pm-iframe" id="pmFrame" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox allow-forms"></iframe>
     </div>
   </div>
 </div>
@@ -1679,7 +1679,7 @@ function loadLesson(idx){
             <div class="plabel">${isPrompt?'📝 Промпт-редактор':'🌐 Предпросмотр'}</div>
             <div class="pw-badge" id="pwBadge">🖥️ Desktop</div>
           </div>
-          <iframe class="preview-iframe" id="preview" sandbox="allow-scripts allow-popups allow-forms"></iframe>
+          <iframe class="preview-iframe" id="preview" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox allow-forms"></iframe>
         </div>
       </div>
     </div>`;
@@ -2033,6 +2033,10 @@ function renderPreviewCode(){
   );
 }
 const SCHOOL_INSTA='https://www.instagram.com/ai_trend.school/';
+// brandScript: inline, runs right before </body> — DOM is ready, no event needed
+function makeBrandScript(){
+  return `<script>(function(){document.querySelectorAll('button').forEach(function(b){if(!b.getAttribute('onclick')){b.addEventListener('click',function(){window.open('${SCHOOL_INSTA}','_blank');});}});})();<\/script>`;
+}
 function buildPreview(html,css){
   const iframe=document.getElementById('preview');
   if(!iframe) return;
@@ -2040,11 +2044,14 @@ function buildPreview(html,css){
   const baseTag=`<base target="_blank">`;
   const hlScript=`<script>window.addEventListener('message',function(e){if(e.data&&e.data.t==='hl'){document.querySelectorAll('[data-hl]').forEach(function(el){el.removeAttribute('data-hl');});if(e.data.sel){try{document.querySelectorAll(e.data.sel).forEach(function(el){el.setAttribute('data-hl','1');});}catch(x){}}}});<\/script><style>[data-hl]{outline:2px solid #685BC7!important;outline-offset:2px;border-radius:2px;}<\/style>`;
   const errScript=`<script>window.onerror=function(m,s,l){parent.postMessage({t:'jsErr',msg:m,line:l},'*');return false};<\/script>`;
-  const brandScript=`<script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('button:not([onclick]),button:not([data-nobrand])').forEach(function(b){b.addEventListener('click',function(){window.open('${SCHOOL_INSTA}','_blank');});});});<\/script>`;
+  const brandScript=makeBrandScript();
   let doc=html;
   if(doc.includes('<head>')){doc=doc.replace('<head>',`<head>${baseTag}`);}
-  if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${errScript}${brandScript}</head>`);}
-  else{doc=`<base target="_blank"><style>${css}</style>${hlScript}${errScript}${brandScript}${doc}`;}
+  if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${errScript}</head>`);}
+  else{doc=`<base target="_blank"><style>${css}</style>${hlScript}${errScript}${doc}`;}
+  // Inject brandScript right before </body> so DOM is ready
+  if(doc.includes('</body>')){doc=doc.replace('</body>',`${brandScript}</body>`);}
+  else{doc+=brandScript;}
   iframe.srcdoc=doc;
 }
 
@@ -2590,11 +2597,13 @@ function pmUpdatePreview(){
   const html=document.getElementById('pmHtmlEd')?.value||'';
   const css=document.getElementById('pmCssEd')?.value||'';
   const errScript=`<script>window.onerror=function(m,s,l,c,e){parent.postMessage({t:'pmErr',msg:m,line:l},'*');return true;};<\/script>`;
-  const brandScript=`<script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('button:not([onclick])').forEach(function(b){b.addEventListener('click',function(){window.open('${SCHOOL_INSTA}','_blank');});});});<\/script>`;
+  const brandScript=makeBrandScript();
   let doc=html;
   if(doc.includes('<head>')){doc=doc.replace('<head>','<head><base target="_blank">');}
-  if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${errScript}${brandScript}</head>`);}
-  else{doc=`<base target="_blank"><style>${css}</style>${errScript}${brandScript}${doc}`;}
+  if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${errScript}</head>`);}
+  else{doc=`<base target="_blank"><style>${css}</style>${errScript}${doc}`;}
+  if(doc.includes('</body>')){doc=doc.replace('</body>',`${brandScript}</body>`);}
+  else{doc+=brandScript;}
   iframe.srcdoc=doc;
 }
 
