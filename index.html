@@ -89,14 +89,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .ls{font-size:.82rem;color:var(--text2);margin-top:3px;line-height:1.4}
 
 /* ─── SPLIT with smooth drag ─── */
-.split{display:flex;flex:1;overflow:hidden;position:relative}
-.lpanel{display:flex;flex-direction:column;overflow:hidden;min-width:180px;flex-shrink:0;flex-grow:0}
+.split{display:grid;grid-template-columns:50% 5px 1fr;grid-template-rows:1fr;flex:1;overflow:hidden;min-height:0}
+.lpanel{display:flex;flex-direction:column;overflow:hidden;min-width:0}
 /* divider */
-.dvd{width:5px;flex-shrink:0;background:var(--border);cursor:col-resize;position:relative;transition:background .15s;z-index:10}
+.dvd{background:var(--border);cursor:col-resize;position:relative;transition:background .15s;z-index:10}
 .dvd:hover,.dvd.dragging{background:var(--accent)}
 .dvd::after{content:'⋮';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:14px;color:var(--text3);pointer-events:none;opacity:.6}
 .dvd.dragging::after{color:var(--accent2);opacity:1}
-.rpanel{display:flex;flex-direction:column;overflow:hidden;min-width:180px;flex-shrink:0;flex-grow:1}
+.rpanel{display:flex;flex-direction:column;overflow:hidden;min-width:0}
 
 /* Tabs */
 .ptabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto;min-height:37px}
@@ -2517,23 +2517,13 @@ function jumpToCSS(idx){
 function initDrag(){
   const dvd=document.getElementById('dvd');
   const split=document.getElementById('split');
-  const lpanel=document.getElementById('lpanel');
-  const rpanel=split?.querySelector('.rpanel');
-  if(!dvd||!split||!lpanel||!rpanel) return;
-  const DVW=5; // divider px width
-  let dragging=false, rafId=null, pendingX=0;
+  if(!dvd||!split) return;
+  let dragging=false,rafId=null,pendingX=0;
 
   function applyPct(pct){
-    pct=Math.max(22,Math.min(76,pct));
-    const totalW=split.getBoundingClientRect().width;
-    const lw=Math.round(totalW*pct/100);
-    const rw=totalW-lw-DVW;
-    lpanel.style.width=lw+'px';
-    lpanel.style.flexBasis=lw+'px';
-    rpanel.style.width=rw+'px';
-    rpanel.style.flexBasis=rw+'px';
-    rpanel.style.flexGrow='0';
-    // badge
+    pct=Math.max(20,Math.min(78,pct));
+    split.style.gridTemplateColumns=pct+'% 5px 1fr';
+    const rw=split.getBoundingClientRect().width*(1-pct/100)-5;
     const badge=document.getElementById('pwBadge');
     if(badge){
       if(rw<430){badge.className='pw-badge mob';badge.textContent='📱 '+Math.round(rw)+'px';}
@@ -2542,51 +2532,25 @@ function initDrag(){
     }
   }
 
-  dvd.addEventListener('mousedown',e=>{
-    dragging=true;
-    dvd.classList.add('dragging');
-    document.body.classList.add('dragging');
-    e.preventDefault();
-  });
-
-  document.addEventListener('mousemove',e=>{
-    if(!dragging) return;
-    pendingX=e.clientX;
-    if(rafId) return;
+  function startDrag(e){dragging=true;dvd.classList.add('dragging');document.body.classList.add('dragging');e.preventDefault();}
+  function stopDrag(){if(!dragging)return;dragging=false;dvd.classList.remove('dragging');document.body.classList.remove('dragging');if(rafId){cancelAnimationFrame(rafId);rafId=null;}}
+  function onMove(x){
+    if(!dragging)return;
+    pendingX=x;
+    if(rafId)return;
     rafId=requestAnimationFrame(()=>{
       rafId=null;
       const r=split.getBoundingClientRect();
       applyPct(((pendingX-r.left)/r.width)*100);
     });
-  });
+  }
 
-  document.addEventListener('mouseup',()=>{
-    if(!dragging) return;
-    dragging=false;
-    dvd.classList.remove('dragging');
-    document.body.classList.remove('dragging');
-    if(rafId){cancelAnimationFrame(rafId);rafId=null;}
-  });
-
-  // touch support
-  dvd.addEventListener('touchstart',e=>{dragging=true;dvd.classList.add('dragging');document.body.classList.add('dragging');e.preventDefault();},{passive:false});
-  document.addEventListener('touchmove',e=>{
-    if(!dragging) return;
-    pendingX=e.touches[0].clientX;
-    if(rafId) return;
-    rafId=requestAnimationFrame(()=>{
-      rafId=null;
-      const r=split.getBoundingClientRect();
-      applyPct(((pendingX-r.left)/r.width)*100);
-    });
-  },{passive:false});
-  document.addEventListener('touchend',()=>{
-    if(!dragging) return;
-    dragging=false;
-    dvd.classList.remove('dragging');
-    document.body.classList.remove('dragging');
-    if(rafId){cancelAnimationFrame(rafId);rafId=null;}
-  });
+  dvd.addEventListener('mousedown',startDrag);
+  document.addEventListener('mousemove',e=>onMove(e.clientX));
+  document.addEventListener('mouseup',stopDrag);
+  dvd.addEventListener('touchstart',startDrag,{passive:false});
+  document.addEventListener('touchmove',e=>onMove(e.touches[0].clientX),{passive:false});
+  document.addEventListener('touchend',stopDrag);
 }
 
 // ══════════════════════════════════════════════
