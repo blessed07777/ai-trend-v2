@@ -2744,7 +2744,7 @@ function pmLoadLevel(lv){
   const descTitle=descLines[0];
   const descItems=descLines.slice(1).filter(l=>l.trim());
   document.getElementById('pmDesc').innerHTML=
-    `<div class="pm-task-head"><span class="pm-task-head-label">🎯 Задание</span><span class="pm-task-head-name">${escHtml(pt.name)}</span></div>`+
+    `<div class="pm-task-head"><span class="pm-task-head-label">🎯 Задание</span></div>`+
     `<div class="pm-task-body"><div class="pm-task-title">${escHtml(descTitle)}</div>`+
     (descItems.length?`<ul class="pm-task-list">${descItems.map(l=>`<li>${escHtml(l.replace(/^[•\-]\s*/,''))}</li>`).join('')}</ul>`:'')+
     `</div>`;
