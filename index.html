@@ -237,7 +237,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
   .sidebar.open{left:0}
   .sidebar.open ~ .sidebar-overlay,.sidebar-overlay.show{display:block}
 }
-@media(max-width:786px){
+@media(max-width:700px){
   .split{flex-direction:column}
   .lpanel{width:100%!important;flex:0 0 48%;min-height:0;min-width:0}
   .dvd{width:100%;height:5px;cursor:row-resize;flex-shrink:0}
@@ -2617,7 +2617,7 @@ function initDrag(){
   const split=document.getElementById('split');
   const lpanel=document.getElementById('lpanel');
   if(!dvd||!split||!lpanel) return;
-  const MIN_LEFT=420, MIN_RIGHT=360, DVW=5;
+  const MIN_LEFT=260, MIN_RIGHT=220, DVW=5;
   let dragging=false,rafId=null,pendingX=0;
 
   function updateBadge(){
@@ -2671,7 +2671,7 @@ function setFitMode(mode){
   const split=document.getElementById('split');
   const lpanel=document.getElementById('lpanel');
   if(!split||!lpanel)return;
-  const MIN_LEFT=420,MIN_RIGHT=360,DVW=5;
+  const MIN_LEFT=260,MIN_RIGHT=220,DVW=5;
   const total=split.getBoundingClientRect().width-DVW;
   if(total<MIN_LEFT+MIN_RIGHT)return;
   const fc=document.getElementById('fitCodeBtn'),fp=document.getElementById('fitPrevBtn');
