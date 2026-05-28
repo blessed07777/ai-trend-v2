@@ -2600,32 +2600,28 @@ function runPracticeCheck(){
   if(!l?.practiceLevels) return;
   const pt=l.practiceLevels[pmActiveLevel];
   if(!pt) return;
-  const iframe=document.getElementById('pmFrame');
-  if(!iframe) return;
-  pmUpdatePreview();
-  setTimeout(()=>{
-    const doc=iframe.contentDocument;
-    if(!doc) return;
-    let passed=0;
-    pt.tests.forEach((t,i)=>{
-      let ok=false;
-      try{ok=!!t.check(doc);}catch(e){ok=false;}
-      const row=document.getElementById('pmT'+i);
-      const why=document.getElementById('pmTW'+i);
-      if(row){row.className='pm-req-item '+(ok?'pass':'fail');row.querySelector('.pm-req-icon').textContent=ok?'✅':'❌';}
-      if(why){why.textContent=ok?'✓ Условие выполнено':'✗ Не найдено — проверь код';}
-      if(ok) passed++;
-    });
-    const pct=Math.round(passed/pt.tests.length*100);
-    document.getElementById('pmScoreBar').style.width=pct+'%';
-    const failed=pt.tests.length-passed;
-    const msg=pct===100?'🏆 Всё верно! Отлично, '+studentName+'!':pct>=60?`👍 Почти! Осталось исправить: ${failed} ${failed===1?'пункт':'пункта'}`:`💪 Продолжай! Красные пункты покажут что доделать`;
-    document.getElementById('pmScoreTxt').textContent=`${passed} из ${pt.tests.length} — ${pct}% · ${msg}`;
-    // Auto-suggest next level on 100%
-    if(pct===100&&pmActiveLevel<2){
-      setTimeout(()=>{if(confirm('🎉 Уровень пройден! Перейти к следующему?'))pmSetLevel(pmActiveLevel+1);},400);
-    }
-  },200);
+  pmUpdatePreview(); // refresh visual preview
+  // Parse HTML string directly — iframe.contentDocument is null due to sandbox
+  const html=document.getElementById('pmHtmlEd')?.value||'';
+  const doc=(new DOMParser()).parseFromString(html,'text/html');
+  let passed=0;
+  pt.tests.forEach((t,i)=>{
+    let ok=false;
+    try{ok=!!t.check(doc);}catch(e){ok=false;}
+    const row=document.getElementById('pmT'+i);
+    const why=document.getElementById('pmTW'+i);
+    if(row){row.className='pm-req-item '+(ok?'pass':'fail');row.querySelector('.pm-req-icon').textContent=ok?'✅':'❌';}
+    if(why){why.textContent=ok?'✓ Условие выполнено':'✗ Не найдено — проверь код';}
+    if(ok) passed++;
+  });
+  const pct=Math.round(passed/pt.tests.length*100);
+  document.getElementById('pmScoreBar').style.width=pct+'%';
+  const failed=pt.tests.length-passed;
+  const msg=pct===100?'🏆 Всё верно! Отлично, '+studentName+'!':pct>=60?`👍 Почти! Осталось исправить: ${failed} ${failed===1?'пункт':'пункта'}`:`💪 Продолжай! Красные пункты покажут что доделать`;
+  document.getElementById('pmScoreTxt').textContent=`${passed} из ${pt.tests.length} — ${pct}% · ${msg}`;
+  if(pct===100&&pmActiveLevel<2){
+    setTimeout(()=>{if(confirm('🎉 Уровень пройден! Перейти к следующему?'))pmSetLevel(pmActiveLevel+1);},400);
+  }
 }
 
 function togglePmHint(){
