@@ -1215,13 +1215,6 @@ tr:hover td{background:#f8f5ff}`,
       </form>
     </div>
   </div>
-  <script>
-    document.querySelector('form').addEventListener('submit',function(e){
-      e.preventDefault();
-      var c=this.closest('.fc');
-      if(c)c.innerHTML='<div style="text-align:center;padding:40px 20px"><div style="font-size:56px;margin-bottom:16px">✅</div><h2 style="color:#1a1636;margin-bottom:10px;font-size:22px">Заявка отправлена!</h2><p style="color:#888;font-size:14px;line-height:1.6">Куратор свяжется с тобой<br>в ближайшее время 🚀</p></div>';
-    });
-  </script>
 </body>
 </html>`,
   css:()=>`*{margin:0;padding:0;box-sizing:border-box}
@@ -1356,13 +1349,6 @@ input[type="radio"] {
       </form>
     </div>
   </div>
-  <script>
-    document.querySelector('form').addEventListener('submit',function(e){
-      e.preventDefault();
-      var c=this.closest('.card');
-      if(c)c.innerHTML='<div style="text-align:center;padding:40px 20px"><div style="font-size:56px;margin-bottom:16px">✅</div><h2 style="color:#1a1636;margin-bottom:10px">Анкета отправлена!</h2><p style="color:#888;font-size:14px;line-height:1.7">Куратор свяжется с тобой<br>в ближайшее время 🎉</p></div>';
-    });
-  </script>
 </body>
 </html>`,
   css:()=>`*{margin:0;padding:0;box-sizing:border-box}
@@ -2311,12 +2297,13 @@ function buildPreview(html,css){
   const baseTag=`<base target="_blank">`;
   const hlScript=`<script>window.addEventListener('message',function(e){if(e.data&&e.data.t==='hl'){document.querySelectorAll('[data-hl]').forEach(function(el){el.removeAttribute('data-hl');});if(e.data.sel){try{document.querySelectorAll(e.data.sel).forEach(function(el){el.setAttribute('data-hl','1');});}catch(x){}}}});<\/script><style>[data-hl]{outline:2px solid #685BC7!important;outline-offset:2px;border-radius:2px;}<\/style>`;
   const burgerScript=`<script>(function(){var S=document.createElement('style');S.textContent='.at-burger{display:none!important;background:none;border:2px solid currentColor;cursor:pointer;font-size:18px;padding:4px 9px;border-radius:6px;color:inherit;line-height:1;margin-left:auto;flex-shrink:0}'+'@media(max-width:600px){.at-burger{display:flex!important;align-items:center;justify-content:center}.at-links{display:none!important;width:100%!important;flex-direction:column!important;background:inherit;padding:8px 0}nav{flex-wrap:wrap!important;position:relative}nav.at-open .at-links{display:flex!important}}';document.head.appendChild(S);function go(){document.querySelectorAll('nav').forEach(function(nav){if(nav.dataset.atb)return;nav.dataset.atb='1';var children=Array.from(nav.children);var links=children.filter(function(c){return c.tagName==='A'||c.tagName==='UL'||c.tagName==='OL'||((c.tagName==='DIV'||c.tagName==='SPAN')&&c.querySelectorAll('a').length>0&&!['logo','brand','logo-wrap','fl'].some(function(cl){return c.classList.contains(cl)}))});if(!links.length)return;var wrap=document.createElement('div');wrap.className='at-links';wrap.style.display='flex';wrap.style.gap='inherit';wrap.style.alignItems='inherit';links.forEach(function(c){wrap.appendChild(c)});nav.appendChild(wrap);var btn=document.createElement('button');btn.className='at-burger';btn.innerHTML='&#9776;';btn.onclick=function(){nav.classList.toggle('at-open')};nav.appendChild(btn)});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',go);}else{go();}})();<\/script>`;
+  const formScript=`<script>(function(){function attachForms(){document.querySelectorAll('form').forEach(function(f){if(f._atForm)return;f._atForm=1;f.addEventListener('submit',function(e){e.preventDefault();var c=this.closest('.card')||this.closest('.fc')||this.parentElement;var msg='<div style="text-align:center;padding:36px 20px"><div style="font-size:52px;margin-bottom:14px">✅</div><h2 style="margin-bottom:10px;font-size:20px">'+('Заявка отправлена!')+'</h2><p style="color:#888;font-size:13px;line-height:1.65">Куратор свяжется с вами 🚀</p></div>';if(c&&c!==this){c.innerHTML=msg;}});});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',attachForms);}else{attachForms();}})();<\/script>`;
   const errScript=`<script>window.onerror=function(m,s,l){parent.postMessage({t:'jsErr',msg:m,line:l},'*');return false};<\/script>`;
   let doc=html;
   if(doc.includes('</head>')){
     if(doc.includes('<head>'))doc=doc.replace('<head>',`<head>${baseTag}`);
-    doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${burgerScript}${errScript}</head>`);
-  }else{doc=`<base target="_blank"><style>${css}</style>${hlScript}${burgerScript}${errScript}${doc}`;}
+    doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${burgerScript}${formScript}${errScript}</head>`);
+  }else{doc=`<base target="_blank"><style>${css}</style>${hlScript}${burgerScript}${formScript}${errScript}${doc}`;}
   iframe.srcdoc=doc;
 }
 
@@ -2867,11 +2854,12 @@ function pmUpdatePreview(){
   const html=document.getElementById('pmHtmlEd')?.value||'';
   const css=document.getElementById('pmCssEd')?.value||'';
   const errScript=`<script>window.onerror=function(m,s,l,c,e){parent.postMessage({t:'pmErr',msg:m,line:l},'*');return true;};<\/script>`;
+  const pmFormScript=`<script>(function(){function a(){document.querySelectorAll('form').forEach(function(f){if(f._atF)return;f._atF=1;f.addEventListener('submit',function(e){e.preventDefault();var c=this.closest('.card')||this.closest('.fc')||this.parentElement;if(c&&c!==this)c.innerHTML='<div style="text-align:center;padding:32px 16px"><div style="font-size:48px;margin-bottom:12px">✅</div><h2 style="margin-bottom:8px;font-size:19px">Заявка отправлена!</h2><p style="color:#888;font-size:13px">Куратор свяжется с вами 🚀</p></div>';});});}document.readyState==='loading'?document.addEventListener('DOMContentLoaded',a):a();})();<\/script>`;
   let doc=html;
   if(doc.includes('</head>')){
     if(doc.includes('<head>'))doc=doc.replace('<head>','<head><base target="_blank">');
-    doc=doc.replace('</head>',`<style>${css}</style>${errScript}</head>`);
-  }else{doc=`<base target="_blank"><style>${css}</style>${errScript}${doc}`;}
+    doc=doc.replace('</head>',`<style>${css}</style>${pmFormScript}${errScript}</head>`);
+  }else{doc=`<base target="_blank"><style>${css}</style>${pmFormScript}${errScript}${doc}`;}
   iframe.srcdoc=doc;
 }
 
