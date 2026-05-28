@@ -161,12 +161,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .undo-btn:disabled{opacity:.25;cursor:not-allowed}
 /* Editor with line numbers */
 .ed-outer{display:flex;flex:1;min-height:0;overflow:hidden;background:var(--codebg)}
-.ln-gut{flex-shrink:0;width:44px;padding:16px 8px 16px 0;text-align:right;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.85rem;line-height:1.85;color:#3a375a;background:#040310;border-right:1px solid #1a1730;overflow:hidden;user-select:none;letter-spacing:0}
-.ln-gut div{height:calc(1.85 * .9rem)}
+.ln-gut{flex-shrink:0;width:var(--ln-w,44px);padding:16px 8px 16px 0;text-align:right;font-family:'JetBrains Mono','Fira Code',monospace;font-size:var(--ln-fs,.85rem);line-height:1.85;color:#3a375a;background:#040310;border-right:1px solid #1a1730;overflow:hidden;user-select:none;letter-spacing:0;transition:width .08s,font-size .08s}
+.ln-gut div{height:calc(1.85 * var(--ed-fs,.9rem))}
 .ed-wrap{position:relative;flex:1;overflow:hidden}
-.ed-hl{position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px 18px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.9rem;line-height:1.85;white-space:pre;overflow:hidden;pointer-events:none;z-index:0;background:transparent;tab-size:2;letter-spacing:.01em;color:#D4D4D4;scrollbar-width:none}
+.ed-hl{position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px 18px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:var(--ed-fs,.9rem);line-height:1.85;white-space:pre;overflow:hidden;pointer-events:none;z-index:0;background:transparent;tab-size:2;letter-spacing:.01em;color:#D4D4D4;scrollbar-width:none;transition:font-size .08s}
 .ed-hl::-webkit-scrollbar{display:none}
-.editor{position:absolute;top:0;left:0;right:0;bottom:0;background:transparent!important;color:transparent!important;caret-color:#aeafad;z-index:1;white-space:pre;overflow:auto;resize:none;outline:none;border:none;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.9rem;line-height:1.85;padding:16px 18px;tab-size:2;letter-spacing:.01em}
+.editor{position:absolute;top:0;left:0;right:0;bottom:0;background:transparent!important;color:transparent!important;caret-color:#aeafad;z-index:1;white-space:pre;overflow:auto;resize:none;outline:none;border:none;font-family:'JetBrains Mono','Fira Code',monospace;font-size:var(--ed-fs,.9rem);line-height:1.85;padding:16px 18px;tab-size:2;letter-spacing:.01em;transition:font-size .08s}
 .editor::selection{background:rgba(104,91,199,.35)}
 .err-panel{background:#080008;border-top:1px solid rgba(255,71,87,.3);flex-shrink:0;max-height:100px;overflow-y:auto;display:none}
 .err-panel.show{display:block}
@@ -2620,6 +2620,13 @@ function initDrag(){
   const MIN_LEFT=260, MIN_RIGHT=220, DVW=5;
   let dragging=false,rafId=null,pendingX=0;
 
+  function applyEditorScale(panelW){
+    const scale=Math.max(0.68,Math.min(1,panelW/480));
+    split.style.setProperty('--ed-fs',(0.9*scale).toFixed(3)+'rem');
+    split.style.setProperty('--ln-fs',(0.85*scale).toFixed(3)+'rem');
+    split.style.setProperty('--ln-w',Math.round(44*scale)+'px');
+  }
+
   function updateBadge(){
     const badge=document.getElementById('pwBadge');
     if(!badge)return;
@@ -2635,6 +2642,7 @@ function initDrag(){
     if(total<MIN_LEFT+MIN_RIGHT){lpanel.style.width='50%';updateBadge();return;}
     const leftW=Math.max(MIN_LEFT,Math.min(total-MIN_RIGHT,x-r.left));
     lpanel.style.width=leftW+'px';
+    applyEditorScale(leftW);
     updateBadge();
     const fc=document.getElementById('fitCodeBtn'),fp=document.getElementById('fitPrevBtn');
     if(fc)fc.classList.remove('active');
@@ -2649,6 +2657,7 @@ function initDrag(){
     const cur=lpanel.offsetWidth;
     if(cur>total-MIN_RIGHT) lpanel.style.width=Math.max(MIN_LEFT,total-MIN_RIGHT)+'px';
     if(cur<MIN_LEFT) lpanel.style.width=MIN_LEFT+'px';
+    applyEditorScale(lpanel.offsetWidth);
     updateBadge();
   }
 
