@@ -377,6 +377,62 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .comp-btn-primary:hover{transform:translateY(-2px)}
 .comp-btn-sec{padding:13px 28px;background:transparent;color:var(--text2);border:1px solid var(--border);border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s}
 .comp-btn-sec:hover{border-color:var(--accent);color:var(--accent2)}
+
+/* ─── PRACTICE MODAL RESPONSIVE ─── */
+@media(max-width:900px){
+  .pm-body{grid-template-columns:220px 1fr 1fr}
+}
+@media(max-width:768px){
+  .pm-body{grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr}
+  .pm-left{grid-column:1/-1;max-height:200px;border-right:none;border-bottom:1px solid var(--border)}
+  .pm-mid{grid-column:1;min-height:0}
+  .pm-right{grid-column:2;min-height:0}
+  .pm-head{padding:0 14px;gap:10px}
+  .pm-htitle{font-size:.84rem}
+  .pm-levels{padding:6px 14px;gap:4px;overflow-x:auto}
+  .pm-lvl{padding:4px 12px;font-size:.72rem}
+}
+@media(max-width:600px){
+  .pm-body{display:flex;flex-direction:column}
+  .pm-left{max-height:150px;flex:0 0 auto;border-right:none;border-bottom:1px solid var(--border)}
+  .pm-mid{flex:1;min-height:0;border-right:none;border-bottom:1px solid var(--border)}
+  .pm-right{flex:0 0 38%;min-height:0}
+  .pm-head{padding:0 12px;height:44px;gap:8px}
+  .pm-htitle{font-size:.78rem}
+  .pm-icon{font-size:1.1rem}
+  .pm-close{padding:4px 10px;font-size:.72rem}
+  .pm-levels{padding:5px 10px}
+  .pm-lvl{padding:3px 9px;font-size:.68rem}
+  .pm-left-scroll{padding:10px 10px}
+  .pm-lname{font-size:.88rem;margin-bottom:10px}
+  .pm-task-title{font-size:.8rem}
+  .pm-task-list li{font-size:.72rem;padding:5px 8px 5px 24px}
+  .pm-req-desc{font-size:.72rem}
+  .pm-etab{padding:6px 12px;font-size:.7rem}
+  .pm-editor{font-size:.72rem!important;line-height:1.65;padding:10px 10px}
+  .pm-ed-hl{font-size:.72rem!important;line-height:1.65;padding:10px 10px}
+  .pm-check-bar{padding:7px 10px;gap:6px}
+  .pm-check-btn{padding:7px 14px;font-size:.74rem}
+  .pm-hint-btn{padding:7px 10px;font-size:.7rem}
+  /* Main code editor (non-modal) shrink */
+  .editor{font-size:.72rem!important;line-height:1.65;padding:10px 10px}
+  .ed-hl{font-size:.72rem!important;line-height:1.65;padding:10px 10px}
+  .ln-gut{width:32px;font-size:.72rem;padding:10px 5px 10px 0}
+  .ln-gut div{height:calc(1.65 * .72rem)}
+  .ctab{padding:7px 10px;font-size:.7rem}
+  .undo-btn{font-size:.65rem;padding:4px 7px}
+}
+@media(max-width:420px){
+  .pm-head{height:40px;padding:0 10px}
+  .pm-htitle{font-size:.72rem}
+  .pm-levels{padding:4px 8px}
+  .pm-lvl{padding:3px 7px;font-size:.63rem}
+  .pm-editor{font-size:.65rem!important;padding:8px 8px}
+  .pm-ed-hl{font-size:.65rem!important;padding:8px 8px}
+  .editor{font-size:.65rem!important;padding:8px 8px}
+  .ed-hl{font-size:.65rem!important;padding:8px 8px}
+  .ln-gut{width:26px;font-size:.65rem;padding:8px 4px 8px 0}
+}
 </style>
 </head>
 <body>
