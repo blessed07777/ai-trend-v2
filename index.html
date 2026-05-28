@@ -237,16 +237,21 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
   .sidebar.open{left:0}
   .sidebar.open ~ .sidebar-overlay,.sidebar-overlay.show{display:block}
 }
-@media(max-width:700px){
+@media(max-width:786px){
   .split{flex-direction:column}
-  .lpanel{width:100%!important;flex:0 0 48%;min-height:0}
+  .lpanel{width:100%!important;flex:0 0 48%;min-height:0;min-width:0}
   .dvd{width:100%;height:5px;cursor:row-resize;flex-shrink:0}
   .dvd::after{content:'···';top:50%;left:50%;transform:translate(-50%,-50%)}
-  .rpanel{flex:1;min-height:0}
+  .rpanel{flex:1;min-height:0;min-width:0}
   .prog-wrap{display:none}
   .lh{font-size:1.1rem}
   .ptab{padding:8px 10px;font-size:.72rem}
+  .fit-btn{display:none}
 }
+/* Fit-mode toggle buttons */
+.fit-btn{padding:3px 9px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;font-size:.62rem;color:var(--text3);cursor:pointer;transition:all .15s;font-weight:700;white-space:nowrap;letter-spacing:.02em;flex-shrink:0}
+.fit-btn:hover{border-color:var(--accent);color:var(--accent2);background:var(--glow)}
+.fit-btn.active{border-color:var(--accent);color:var(--accent2);background:var(--glow)}
 /* Context jump bar */
 .ctx-bar{background:var(--bg3);border-top:1px solid var(--border);padding:4px 10px;display:flex;align-items:center;gap:6px;flex-shrink:0;min-height:26px;flex-wrap:wrap}
 .ctx-chip{background:var(--glow);border:1px solid var(--accent);border-radius:6px;padding:1px 8px;font-size:.68rem;font-family:monospace;color:var(--accent2);cursor:pointer;transition:all .15s;white-space:nowrap}
@@ -2030,6 +2035,8 @@ function loadLesson(idx){
           <div class="pbar">
             <div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
             <div class="plabel">${isPrompt?'📝 Промпт-редактор':'🌐 Предпросмотр'}</div>
+            <button class="fit-btn" id="fitCodeBtn" onclick="setFitMode('code')" title="Расширить редактор">⟨ Код</button>
+            <button class="fit-btn" id="fitPrevBtn" onclick="setFitMode('prev')" title="Расширить превью">Превью ⟩</button>
             <div class="pw-badge" id="pwBadge">🖥️ Desktop</div>
           </div>
           <iframe class="preview-iframe" id="preview" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox allow-forms"></iframe>
@@ -2610,34 +2617,78 @@ function initDrag(){
   const split=document.getElementById('split');
   const lpanel=document.getElementById('lpanel');
   if(!dvd||!split||!lpanel) return;
+  const MIN_LEFT=420, MIN_RIGHT=360, DVW=5;
   let dragging=false,rafId=null,pendingX=0;
+
+  function updateBadge(){
+    const badge=document.getElementById('pwBadge');
+    if(!badge)return;
+    const rw=split.getBoundingClientRect().width-lpanel.offsetWidth-DVW;
+    if(rw<430){badge.className='pw-badge mob';badge.textContent='📱 '+Math.round(rw)+'px';}
+    else if(rw<780){badge.className='pw-badge';badge.textContent='📱 '+Math.round(rw)+'px';}
+    else{badge.className='pw-badge';badge.textContent='🖥️ '+Math.round(rw)+'px';}
+  }
 
   function applyX(x){
     const r=split.getBoundingClientRect();
-    let pct=((x-r.left)/r.width)*100;
-    pct=Math.max(20,Math.min(78,pct));
-    lpanel.style.width=pct+'%';
-    const rw=r.width*(1-pct/100)-5;
-    const badge=document.getElementById('pwBadge');
-    if(badge){
-      if(rw<430){badge.className='pw-badge mob';badge.textContent='📱 '+Math.round(rw)+'px';}
-      else if(rw<780){badge.className='pw-badge';badge.textContent='📱 '+Math.round(rw)+'px';}
-      else{badge.className='pw-badge';badge.textContent='🖥️ '+Math.round(rw)+'px';}
-    }
+    const total=r.width-DVW;
+    if(total<MIN_LEFT+MIN_RIGHT){lpanel.style.width='50%';updateBadge();return;}
+    const leftW=Math.max(MIN_LEFT,Math.min(total-MIN_RIGHT,x-r.left));
+    lpanel.style.width=leftW+'px';
+    updateBadge();
+    const fc=document.getElementById('fitCodeBtn'),fp=document.getElementById('fitPrevBtn');
+    if(fc)fc.classList.remove('active');
+    if(fp)fp.classList.remove('active');
   }
 
-  dvd.addEventListener('mousedown',e=>{dragging=true;dvd.classList.add('dragging');document.body.classList.add('dragging');e.preventDefault();});
-  document.addEventListener('mousemove',e=>{
-    if(!dragging)return;
-    pendingX=e.clientX;
-    if(rafId)return;
-    rafId=requestAnimationFrame(()=>{rafId=null;applyX(pendingX);});
-  });
-  document.addEventListener('mouseup',()=>{
-    if(!dragging)return;
-    dragging=false;dvd.classList.remove('dragging');document.body.classList.remove('dragging');
-    if(rafId){cancelAnimationFrame(rafId);rafId=null;}
-  });
+  function clampLayout(){
+    const r=split.getBoundingClientRect();
+    if(!r.width)return;
+    const total=r.width-DVW;
+    if(total<MIN_LEFT+MIN_RIGHT){lpanel.style.width='50%';updateBadge();return;}
+    const cur=lpanel.offsetWidth;
+    if(cur>total-MIN_RIGHT) lpanel.style.width=Math.max(MIN_LEFT,total-MIN_RIGHT)+'px';
+    if(cur<MIN_LEFT) lpanel.style.width=MIN_LEFT+'px';
+    updateBadge();
+  }
+
+  const startDrag=e=>{dragging=true;dvd.classList.add('dragging');document.body.classList.add('dragging');e.preventDefault();};
+  const moveDrag=x=>{if(!dragging)return;pendingX=x;if(rafId)return;rafId=requestAnimationFrame(()=>{rafId=null;applyX(pendingX);});};
+  const stopDrag=()=>{if(!dragging)return;dragging=false;dvd.classList.remove('dragging');document.body.classList.remove('dragging');if(rafId){cancelAnimationFrame(rafId);rafId=null;}};
+
+  dvd.addEventListener('mousedown',startDrag);
+  document.addEventListener('mousemove',e=>moveDrag(e.clientX));
+  document.addEventListener('mouseup',stopDrag);
+
+  dvd.addEventListener('touchstart',startDrag,{passive:false});
+  document.addEventListener('touchmove',e=>{if(dragging)e.preventDefault();moveDrag(e.touches[0].clientX);},{passive:false});
+  document.addEventListener('touchend',stopDrag);
+
+  window.addEventListener('resize',clampLayout);
+}
+
+function setFitMode(mode){
+  const split=document.getElementById('split');
+  const lpanel=document.getElementById('lpanel');
+  if(!split||!lpanel)return;
+  const MIN_LEFT=420,MIN_RIGHT=360,DVW=5;
+  const total=split.getBoundingClientRect().width-DVW;
+  if(total<MIN_LEFT+MIN_RIGHT)return;
+  const fc=document.getElementById('fitCodeBtn'),fp=document.getElementById('fitPrevBtn');
+  if(mode==='code'){
+    lpanel.style.width=Math.min(Math.round(total*0.68),total-MIN_RIGHT)+'px';
+    if(fc)fc.classList.add('active');if(fp)fp.classList.remove('active');
+  }else{
+    lpanel.style.width=Math.max(MIN_LEFT,Math.round(total*0.32))+'px';
+    if(fp)fp.classList.add('active');if(fc)fc.classList.remove('active');
+  }
+  const badge=document.getElementById('pwBadge');
+  if(badge){
+    const rw=split.getBoundingClientRect().width-lpanel.offsetWidth-DVW;
+    if(rw<430){badge.className='pw-badge mob';badge.textContent='📱 '+Math.round(rw)+'px';}
+    else if(rw<780){badge.className='pw-badge';badge.textContent='📱 '+Math.round(rw)+'px';}
+    else{badge.className='pw-badge';badge.textContent='🖥️ '+Math.round(rw)+'px';}
+  }
 }
 
 // ══════════════════════════════════════════════
