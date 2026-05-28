@@ -1576,7 +1576,7 @@ h1{text-align:center;color:#B5ED18;margin-bottom:28px;font-size:28px}
 // ══════════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════════
-let studentName   = localStorage.getItem('at2_name')||'';
+let studentName   = (localStorage.getItem('at2_name')||'').replace(/[<>"'&]/g,'');
 let theme         = localStorage.getItem('at2_theme')||'dark';
 let activeLsn     = -1;
 let activeTab     = 'theory';
@@ -1602,7 +1602,7 @@ function init(){
 function startApp(){
   const v=document.getElementById('nameInp').value.trim();
   if(!v){document.getElementById('nameInp').style.borderColor='var(--err)';setTimeout(()=>document.getElementById('nameInp').style.borderColor='',1200);return;}
-  studentName=v;localStorage.setItem('at2_name',v);showApp();
+  studentName=v.replace(/[<>"'&]/g,'');localStorage.setItem('at2_name',studentName);showApp();
 }
 function showApp(){
   document.getElementById('welcome').style.display='none';
@@ -1707,7 +1707,7 @@ function switchTab(tab){
 // ══════════════════════════════════════════════
 function renderTheory(l){
   document.getElementById('pbody').innerHTML=`<div class="tscroll" id="tscroll">
-    ${l.theory(studentName)}
+    ${l.theory(escHtml(studentName))}
     ${buildMatchHTML(l)}
   </div>`;
   renderPreview(l);
@@ -2041,9 +2041,10 @@ function buildPreview(html,css){
   const hlScript=`<script>window.addEventListener('message',function(e){if(e.data&&e.data.t==='hl'){document.querySelectorAll('[data-hl]').forEach(function(el){el.removeAttribute('data-hl');});if(e.data.sel){try{document.querySelectorAll(e.data.sel).forEach(function(el){el.setAttribute('data-hl','1');});}catch(x){}}}});<\/script><style>[data-hl]{outline:2px solid #685BC7!important;outline-offset:2px;border-radius:2px;}<\/style>`;
   const errScript=`<script>window.onerror=function(m,s,l){parent.postMessage({t:'jsErr',msg:m,line:l},'*');return false};<\/script>`;
   let doc=html;
-  if(doc.includes('<head>')){doc=doc.replace('<head>',`<head>${baseTag}`);}
-  if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${errScript}</head>`);}
-  else{doc=`<base target="_blank"><style>${css}</style>${hlScript}${errScript}${doc}`;}
+  if(doc.includes('</head>')){
+    if(doc.includes('<head>'))doc=doc.replace('<head>',`<head>${baseTag}`);
+    doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${errScript}</head>`);
+  }else{doc=`<base target="_blank"><style>${css}</style>${hlScript}${errScript}${doc}`;}
   iframe.srcdoc=doc;
 }
 
@@ -2565,7 +2566,7 @@ function pmLintRT(){
   if(emp) errs.push(`CSS: пустое значение — ${emp[0].trim()}`);
   if(errs.length){
     bar.style.display='block';
-    bar.innerHTML=errs.map(e=>`<span>⚠ ${e}</span>`).join('<br>');
+    bar.innerHTML=errs.map(e=>`<span>⚠ ${escHtml(e)}</span>`).join('<br>');
   } else {
     bar.style.display='none';bar.textContent='';
   }
@@ -2590,9 +2591,10 @@ function pmUpdatePreview(){
   const css=document.getElementById('pmCssEd')?.value||'';
   const errScript=`<script>window.onerror=function(m,s,l,c,e){parent.postMessage({t:'pmErr',msg:m,line:l},'*');return true;};<\/script>`;
   let doc=html;
-  if(doc.includes('<head>')){doc=doc.replace('<head>','<head><base target="_blank">');}
-  if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${errScript}</head>`);}
-  else{doc=`<base target="_blank"><style>${css}</style>${errScript}${doc}`;}
+  if(doc.includes('</head>')){
+    if(doc.includes('<head>'))doc=doc.replace('<head>','<head><base target="_blank">');
+    doc=doc.replace('</head>',`<style>${css}</style>${errScript}</head>`);
+  }else{doc=`<base target="_blank"><style>${css}</style>${errScript}${doc}`;}
   iframe.srcdoc=doc;
 }
 
