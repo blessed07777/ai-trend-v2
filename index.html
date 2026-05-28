@@ -800,7 +800,7 @@ em{color:#B5ED18;font-style:normal;font-weight:bold}`,
       <a href="https://www.instagram.com/ai_trend.school/">Проекты</a>
       <a href="https://www.instagram.com/ai_trend.school/">Контакты</a>
     </nav>
-    <button class="cta">Связаться 👋</button>
+    <button class="cta" onclick="window.open('https://www.instagram.com/ai_trend.school/','_blank')">Связаться 👋</button>
   </header>
   <div class="hint">↑ Шапка сайта ${n}!</div>
 </body>
@@ -897,8 +897,8 @@ nav a:hover{background:rgba(104,91,199,.2);color:#8075D9}
     <h1>Привет! Я <span>${n}</span></h1>
     <p>Создаю сайты и работаю с нейросетями.<br>Учусь в AI-TREND School!</p>
     <div class="btns">
-      <button class="bp">Мои проекты 🚀</button>
-      <button class="bs">Обо мне</button>
+      <button class="bp" onclick="window.open('https://www.instagram.com/ai_trend.school/','_blank')">Мои проекты 🚀</button>
+      <button class="bs" onclick="window.open('https://www.instagram.com/ai_trend.school/','_blank')">Обо мне</button>
     </div>
   </section>
 </body>
@@ -1000,19 +1000,19 @@ nav a:hover{color:#B5ED18}
         <div class="ci">🌐</div>
         <h3>HTML & CSS</h3>
         <p>Создавай красивые сайты с нуля!</p>
-        <button>Начать →</button>
+        <button onclick="window.open('https://www.instagram.com/ai_trend.school/','_blank')">Начать →</button>
       </article>
       <article class="card">
         <div class="ci">🤖</div>
         <h3>Нейросети</h3>
         <p>Работай с ChatGPT и другими ИИ</p>
-        <button>Начать →</button>
+        <button onclick="window.open('https://www.instagram.com/ai_trend.school/','_blank')">Начать →</button>
       </article>
       <article class="card">
         <div class="ci">⚡</div>
         <h3>JavaScript</h3>
         <p>Добавляй интерактивность на сайты</p>
-        <button>Начать →</button>
+        <button onclick="window.open('https://www.instagram.com/ai_trend.school/','_blank')">Начать →</button>
       </article>
     </div>
   </section>
@@ -2033,10 +2033,6 @@ function renderPreviewCode(){
   );
 }
 const SCHOOL_INSTA='https://www.instagram.com/ai_trend.school/';
-// brandScript: inline, runs right before </body> — DOM is ready, no event needed
-function makeBrandScript(){
-  return `<script>(function(){document.querySelectorAll('button').forEach(function(b){if(!b.getAttribute('onclick')){b.addEventListener('click',function(){window.open('${SCHOOL_INSTA}','_blank');});}});})();<\/script>`;
-}
 function buildPreview(html,css){
   const iframe=document.getElementById('preview');
   if(!iframe) return;
@@ -2044,14 +2040,10 @@ function buildPreview(html,css){
   const baseTag=`<base target="_blank">`;
   const hlScript=`<script>window.addEventListener('message',function(e){if(e.data&&e.data.t==='hl'){document.querySelectorAll('[data-hl]').forEach(function(el){el.removeAttribute('data-hl');});if(e.data.sel){try{document.querySelectorAll(e.data.sel).forEach(function(el){el.setAttribute('data-hl','1');});}catch(x){}}}});<\/script><style>[data-hl]{outline:2px solid #685BC7!important;outline-offset:2px;border-radius:2px;}<\/style>`;
   const errScript=`<script>window.onerror=function(m,s,l){parent.postMessage({t:'jsErr',msg:m,line:l},'*');return false};<\/script>`;
-  const brandScript=makeBrandScript();
   let doc=html;
   if(doc.includes('<head>')){doc=doc.replace('<head>',`<head>${baseTag}`);}
   if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${errScript}</head>`);}
   else{doc=`<base target="_blank"><style>${css}</style>${hlScript}${errScript}${doc}`;}
-  // Inject brandScript right before </body> so DOM is ready
-  if(doc.includes('</body>')){doc=doc.replace('</body>',`${brandScript}</body>`);}
-  else{doc+=brandScript;}
   iframe.srcdoc=doc;
 }
 
@@ -2597,13 +2589,10 @@ function pmUpdatePreview(){
   const html=document.getElementById('pmHtmlEd')?.value||'';
   const css=document.getElementById('pmCssEd')?.value||'';
   const errScript=`<script>window.onerror=function(m,s,l,c,e){parent.postMessage({t:'pmErr',msg:m,line:l},'*');return true;};<\/script>`;
-  const brandScript=makeBrandScript();
   let doc=html;
   if(doc.includes('<head>')){doc=doc.replace('<head>','<head><base target="_blank">');}
   if(doc.includes('</head>')){doc=doc.replace('</head>',`<style>${css}</style>${errScript}</head>`);}
   else{doc=`<base target="_blank"><style>${css}</style>${errScript}${doc}`;}
-  if(doc.includes('</body>')){doc=doc.replace('</body>',`${brandScript}</body>`);}
-  else{doc+=brandScript;}
   iframe.srcdoc=doc;
 }
 
