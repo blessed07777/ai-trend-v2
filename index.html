@@ -203,6 +203,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .prompts-win strong{color:var(--hi)}
 .pcat{margin-bottom:18px}
 .pcat-h{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:9px}
+.prompt-lang-row{display:flex;gap:8px;margin-bottom:18px}
+.plang-btn{padding:6px 18px;border-radius:20px;border:1.5px solid var(--border);background:transparent;color:var(--text3);font-size:.77rem;font-weight:700;cursor:pointer;transition:all .18s}
+.plang-btn.on{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 2px 10px rgba(104,91,199,.35)}
+.plang-btn:hover:not(.on){border-color:var(--accent2);color:var(--accent2)}
 .pbox{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:13px;position:relative}
 .ptext{font-family:monospace;font-size:.74rem;line-height:1.65;color:var(--text2);white-space:pre-wrap;word-break:break-word;max-height:170px;overflow-y:auto}
 .pcopy{position:absolute;top:9px;right:9px;padding:4px 10px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:.7rem;font-weight:700;cursor:pointer;transition:all .15s}
@@ -280,6 +284,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .pm-req-item.pass{color:var(--hi);border-color:rgba(181,237,24,.25);background:rgba(181,237,24,.05)}
 .pm-req-item.fail{color:var(--err);border-color:rgba(255,71,87,.25);background:rgba(255,71,87,.05)}
 .pm-req-item.pending{color:var(--text3)}
+.pm-req-desc{font-size:.79rem;line-height:1.4}
+.pm-req-why{font-size:.68rem;margin-top:3px;opacity:.85;font-weight:600}
+.pm-req-item.pass .pm-req-why{color:var(--hi)}
+.pm-req-item.fail .pm-req-why{color:var(--err)}
 
 /* Score bar */
 .pm-score-wrap{padding:12px 16px;border-top:1px solid var(--border);flex-shrink:0;background:var(--bg2)}
@@ -508,7 +516,14 @@ Must include:
 - Sticky on scroll, smooth hover effects
 - Clean premium design with backdrop blur
 
-Style: rounded corners, soft shadow, modern.`},
+Style: rounded corners, soft shadow, modern.`,textRu:`Создай современную адаптивную шапку сайта.
+
+Что включить:
+- Логотип слева, навигационные ссылки, кнопка CTA
+- Прилипает при прокрутке, плавные эффекты при наведении
+- Чистый премиальный дизайн с размытием фона
+
+Стиль: скруглённые углы, мягкая тень, современно.`},
   hero:{label:'🦸 Hero Section',text:`Create a modern hero section.
 
 Must include:
@@ -517,27 +532,52 @@ Must include:
 - Visual accent: gradient glow or floating card
 - Smooth fade-in animation
 
-Make it visually impressive and responsive.`},
+Make it visually impressive and responsive.`,textRu:`Создай современный главный экран (Hero).
+
+Что включить:
+- Большой жирный заголовок + короткий подзаголовок
+- Основная кнопка «Оставить заявку» + вторичная «Смотреть проект»
+- Визуальный акцент: градиентное свечение или плавающая карточка
+- Плавная анимация появления
+
+Сделай визуально впечатляющим и адаптивным.`},
   cards:{label:'🃏 Feature Cards',text:`Create a feature cards section.
 
 Must include:
 - Section title + short description
 - 3-4 cards with icon, title, description
 - Hover lift animation + responsive grid layout
-- Rounded corners, soft shadows`},
+- Rounded corners, soft shadows`,textRu:`Создай раздел с карточками преимуществ.
+
+Что включить:
+- Заголовок раздела + короткое описание
+- 3-4 карточки с иконкой, заголовком, описанием
+- Анимация подъёма при наведении + адаптивная сетка
+- Скруглённые углы, мягкие тени`},
   table:{label:'📊 Table Section',text:`Create a modern table section.
 
 Must include:
 - Title + explanation
 - Table with columns: Stage / Action / Result
 - 4+ rows, hover highlight effect
-- Clean readable typography`},
+- Clean readable typography`,textRu:`Создай современный раздел с таблицей.
+
+Что включить:
+- Заголовок + объяснение
+- Таблица с колонками: Этап / Действие / Результат
+- 4+ строки, эффект подсветки при наведении
+- Чистая читаемая типографика`},
   form:{label:'📬 Contact Form',text:`Create a modern contact form.
 
 Must include:
 - Fields: name, Telegram/phone, message
 - Submit button with loading + success state
-- Focus effects, mobile-friendly layout`},
+- Focus effects, mobile-friendly layout`,textRu:`Создай современную контактную форму.
+
+Что включить:
+- Поля: имя, Telegram/телефон, сообщение
+- Кнопка отправки с состояниями загрузки и успеха
+- Эффекты фокуса, удобная на мобильных вёрстка`},
   telegram:{label:'✈️ Telegram Bot',text:`Connect form to Telegram Bot using fetch.
 
 On submit:
@@ -551,27 +591,57 @@ Name: [name]
 Contact: [contact]
 Message: [message]
 
-Note: direct frontend bot token is for edu projects only.`},
+Note: direct frontend bot token is for edu projects only.`,textRu:`Подключи форму к Telegram Bot через fetch.
+
+При отправке:
+- Собери и проверь поля
+- Отправь в Telegram Bot API (sendMessage)
+- Покажи загрузку → успех → очисти форму
+
+Формат сообщения:
+🚀 Новая заявка
+Имя: [имя]
+Контакт: [контакт]
+Сообщение: [сообщение]
+
+Примечание: хранить токен в коде — только для учебных проектов.`},
   footer:{label:'🦶 Footer',text:`Create a modern footer.
 
 Must include:
 - Project name, description, nav links
 - Social/Telegram links + copyright
-- Responsive multi-column layout`},
+- Responsive multi-column layout`,textRu:`Создай современный подвал сайта.
+
+Что включить:
+- Название проекта, описание, навигационные ссылки
+- Ссылки на соцсети/Telegram + копирайт
+- Адаптивная многоколоночная вёрстка`},
   animations:{label:'✨ Animations',text:`Add modern animations and microinteractions.
 
 Include:
 - Scroll reveal: fade-in + slide-up
 - Hover lift on cards, scale on buttons
 - Smooth underline on links, glow on inputs
-- Loading and success notification animations`},
+- Loading and success notification animations`,textRu:`Добавь современные анимации и микровзаимодействия.
+
+Включи:
+- Появление при прокрутке: fade-in + slide-up
+- Подъём карточек и масштаб кнопок при наведении
+- Плавное подчёркивание ссылок, свечение полей ввода
+- Анимации загрузки и успешного уведомления`},
   full:{label:'🌐 Full Website',text:`Build a complete one-page website.
 
 Sections: Header, Hero, Cards, Table, Contact Form, Telegram Bot, Footer.
 
 Style: dark theme, purple #685BC7, lime #B5ED18, rounded corners, gradient glow, reveal animations, hover effects.
 
-Keep code clean, commented, beginner-friendly.`},
+Keep code clean, commented, beginner-friendly.`,textRu:`Создай полноценный одностраничный сайт.
+
+Разделы: Шапка, Hero, Карточки, Таблица, Контактная форма, Telegram Bot, Подвал.
+
+Стиль: тёмная тема, фиолетовый #685BC7, лайм #B5ED18, скруглённые углы, градиентное свечение, анимации появления, hover-эффекты.
+
+Держи код чистым, с комментариями, понятным для начинающих.`},
   improve:{label:'⚡ Improve Website',text:`Improve this website to look more premium.
 
 Keep structure but improve:
@@ -579,14 +649,27 @@ Keep structure but improve:
 - Cards, hover effects, animations
 - Mobile responsiveness, form design
 
-Add: reveal animations, shadows, gradient glow, microinteractions.`},
+Add: reveal animations, shadows, gradient glow, microinteractions.`,textRu:`Улучши этот сайт, сделай его более премиальным.
+
+Сохрани структуру, но улучши:
+- Типографику, отступы, цвета, кнопки
+- Карточки, hover-эффекты, анимации
+- Адаптивность, оформление формы
+
+Добавь: анимации появления, тени, градиентное свечение, микровзаимодействия.`},
   review:{label:'🔍 Review Website',text:`Review as a professional web designer.
 
 Check: structure clarity, hero impact, CTA visibility,
 cards readability, table clarity, form simplicity,
 mobile responsiveness, animation smoothness.
 
-Give specific improvements + improved code.`},
+Give specific improvements + improved code.`,textRu:`Сделай обзор как профессиональный веб-дизайнер.
+
+Проверь: ясность структуры, силу hero-блока, заметность CTA,
+читаемость карточек, чёткость таблицы, простоту формы,
+адаптивность, плавность анимаций.
+
+Дай конкретные улучшения + улучшенный код.`},
 };
 
 // ══════════════════════════════════════════════
@@ -1726,26 +1809,48 @@ function checkMatchComplete(){
 // ══════════════════════════════════════════════
 // PROMPTS TAB
 // ══════════════════════════════════════════════
+let promptLang='en';
 function renderPrompts(l){
   const keys=l.promptKeys||Object.keys(PROMPTS);
   document.getElementById('pbody').innerHTML=`<div class="prompts-scroll">
     <div class="prompts-win">
       🏆 <strong>Тест пройден, ${escHtml(studentName)}!</strong><br>
-      Вот готовые промпты для ChatGPT и Claude по теме этого урока. Копируй и используй!
+      Вот готовые промпты для ChatGPT и Claude. Выбери язык — и копируй!
+    </div>
+    <div class="prompt-lang-row">
+      <button class="plang-btn on" id="plangEN" onclick="setPromptLang('en')">🇬🇧 English</button>
+      <button class="plang-btn" id="plangRU" onclick="setPromptLang('ru')">🇷🇺 Русский</button>
     </div>
     ${keys.map(k=>PROMPTS[k]?`
     <div class="pcat">
       <div class="pcat-h">${PROMPTS[k].label}</div>
       <div class="pbox">
         <button class="pcopy" id="pcopy-${k}" onclick="copyPrompt('${k}')">Копировать</button>
-        <div class="ptext">${escHtml(PROMPTS[k].text)}</div>
+        <div class="ptext ptext-en" id="pt-en-${k}">${escHtml(PROMPTS[k].text)}</div>
+        <div class="ptext ptext-ru" id="pt-ru-${k}" style="display:none">${escHtml(PROMPTS[k].textRu||PROMPTS[k].text)}</div>
       </div>
-    </div>`:''). join('')}
+    </div>`:'').join('')}
   </div>`;
+  // Apply current lang selection
+  if(promptLang==='ru'){
+    document.querySelectorAll('.ptext-en').forEach(el=>el.style.display='none');
+    document.querySelectorAll('.ptext-ru').forEach(el=>el.style.display='');
+    document.getElementById('plangEN')?.classList.remove('on');
+    document.getElementById('plangRU')?.classList.add('on');
+  }
+}
+
+function setPromptLang(lang){
+  promptLang=lang;
+  document.getElementById('plangEN')?.classList.toggle('on',lang==='en');
+  document.getElementById('plangRU')?.classList.toggle('on',lang==='ru');
+  document.querySelectorAll('.ptext-en').forEach(el=>el.style.display=lang==='en'?'':'none');
+  document.querySelectorAll('.ptext-ru').forEach(el=>el.style.display=lang==='ru'?'':'none');
 }
 
 function copyPrompt(key){
-  const text=PROMPTS[key]?.text||'';
+  const p=PROMPTS[key];if(!p) return;
+  const text=(promptLang==='ru'&&p.textRu)?p.textRu:p.text;
   navigator.clipboard?.writeText(text).then(()=>{
     const btn=document.getElementById('pcopy-'+key);
     if(btn){btn.textContent='✓ Скопировано';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Копировать';btn.classList.remove('copied')},2000);}
@@ -2373,7 +2478,7 @@ function pmLoadLevel(lv){
   document.getElementById('pmDesc').textContent=pt.desc;
   document.getElementById('pmHintBox').textContent=pt.hint;
   document.getElementById('pmHintBox').classList.remove('show');
-  document.getElementById('pmTests').innerHTML=pt.tests.map((_,i)=>`<div class="pm-req-item pending" id="pmT${i}"><span class="pm-req-icon">⬜</span><span>${_.desc}</span></div>`).join('');
+  document.getElementById('pmTests').innerHTML=pt.tests.map((_,i)=>`<div class="pm-req-item pending" id="pmT${i}"><span class="pm-req-icon">⬜</span><div><div class="pm-req-desc">${_.desc}</div><div class="pm-req-why" id="pmTW${i}"></div></div></div>`).join('');
   document.getElementById('pmScoreBar').style.width='0%';
   document.getElementById('pmScoreTxt').textContent='Нажми «Проверить» чтобы начать';
   const he=document.getElementById('pmHtmlEd'),ce=document.getElementById('pmCssEd');
@@ -2402,10 +2507,10 @@ function pmLoadLevel(lv){
         const s=newEd.selectionStart,en=newEd.selectionEnd,v=newEd.value;
         if(s===en){newEd.value=v.slice(0,s)+'  '+v.slice(en);newEd.selectionStart=newEd.selectionEnd=s+2;}
         else{const ln=v.slice(s,en).split('\n').map(l=>'  '+l).join('\n');newEd.value=v.slice(0,s)+ln+v.slice(en);newEd.selectionEnd=s+ln.length;newEd.selectionStart=s;}
-        pmSyncHL(i===0?'html':'css');pmUpdatePreview();
+        pmSyncHL(i===0?'html':'css');pmUpdatePreview();pmLintRT();
       }
     });
-    newEd.addEventListener('input',i===0?()=>{pmSyncHL('html');pmUpdatePreview();}:()=>{pmSyncHL('css');pmUpdatePreview();});
+    newEd.addEventListener('input',i===0?()=>{pmSyncHL('html');pmUpdatePreview();pmLintRT();}:()=>{pmSyncHL('css');pmUpdatePreview();pmLintRT();});
     newEd.addEventListener('scroll',i===0
       ?()=>{const hl=document.getElementById('pmHtmlHL'),gut=document.getElementById('pmHtmlLN');if(hl){hl.scrollTop=newEd.scrollTop;hl.scrollLeft=newEd.scrollLeft;}if(gut)gut.scrollTop=newEd.scrollTop;}
       :()=>{const hl=document.getElementById('pmCssHL'),gut=document.getElementById('pmCssLN');if(hl){hl.scrollTop=newEd.scrollTop;hl.scrollLeft=newEd.scrollLeft;}if(gut)gut.scrollTop=newEd.scrollTop;}
@@ -2422,6 +2527,47 @@ function pmSwitchCode(t){
   document.getElementById('pmEdArea').style.display=t==='html'?'flex':'none';
   document.getElementById('pmCssArea').style.display=t==='css'?'flex':'none';
   if(t==='html'){pmSyncHL('html');}else{pmSyncHL('css');}
+}
+
+function pmLintRT(){
+  const html=document.getElementById('pmHtmlEd')?.value||'';
+  const css=document.getElementById('pmCssEd')?.value||'';
+  const bar=document.getElementById('pmErrBar');
+  if(!bar) return;
+  const errs=[];
+  // HTML unclosed tag check
+  const SELF_CLOSE=new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr','!doctype']);
+  const REQ=new Set(['html','head','body','div','section','header','footer','nav','main','ul','ol','li','table','form','h1','h2','h3','h4','h5','h6','p','a','span','button']);
+  const stack=[];
+  const tagRe=/<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b[^>]*?(\/?)>/g;
+  let m;
+  while((m=tagRe.exec(html))!==null){
+    const isClose=m[1]==='/';const tag=m[2].toLowerCase();
+    const isSelf=m[3]==='/'||SELF_CLOSE.has(tag);
+    const line=html.substring(0,m.index).split('\n').length;
+    if(!isClose&&!isSelf){stack.push({tag,line});}
+    else if(isClose&&!SELF_CLOSE.has(tag)){
+      let found=-1;
+      for(let j=stack.length-1;j>=0;j--){if(stack[j].tag===tag){found=j;break;}}
+      if(found===-1){errs.push(`Строка ${line}: лишний тег </${tag}>`);}
+      else{
+        if(found<stack.length-1){const u=stack[found+1];errs.push(`Строка ${u.line}: тег <${u.tag}> не закрыт`);}
+        stack.splice(found);
+      }
+    }
+  }
+  stack.filter(t=>REQ.has(t.tag)).forEach(t=>errs.push(`Строка ${t.line}: тег <${t.tag}> не закрыт`));
+  // CSS brace check
+  const op=(css.match(/\{/g)||[]).length,cl=(css.match(/\}/g)||[]).length;
+  if(op!==cl) errs.push(`CSS: { открыто ${op}, закрыто ${cl}`);
+  const emp=css.match(/[\w-]+\s*:\s*;/);
+  if(emp) errs.push(`CSS: пустое значение — ${emp[0].trim()}`);
+  if(errs.length){
+    bar.style.display='block';
+    bar.innerHTML=errs.map(e=>`<span>⚠ ${e}</span>`).join('<br>');
+  } else {
+    bar.style.display='none';bar.textContent='';
+  }
 }
 
 function pmSyncHL(mode){
@@ -2465,13 +2611,16 @@ function runPracticeCheck(){
       let ok=false;
       try{ok=!!t.check(doc);}catch(e){ok=false;}
       const row=document.getElementById('pmT'+i);
+      const why=document.getElementById('pmTW'+i);
       if(row){row.className='pm-req-item '+(ok?'pass':'fail');row.querySelector('.pm-req-icon').textContent=ok?'✅':'❌';}
+      if(why){why.textContent=ok?'✓ Условие выполнено':'✗ Не найдено — проверь код';}
       if(ok) passed++;
     });
     const pct=Math.round(passed/pt.tests.length*100);
     document.getElementById('pmScoreBar').style.width=pct+'%';
-    const msg=pct===100?'🏆 Отлично! Попробуй следующий уровень!':pct>=60?'👍 Почти! Проверь красные пункты':'💪 Продолжай! Читай подсказку';
-    document.getElementById('pmScoreTxt').textContent=`${passed} из ${pt.tests.length} — ${pct}% ${msg}`;
+    const failed=pt.tests.length-passed;
+    const msg=pct===100?'🏆 Всё верно! Отлично, '+studentName+'!':pct>=60?`👍 Почти! Осталось исправить: ${failed} ${failed===1?'пункт':'пункта'}`:`💪 Продолжай! Красные пункты покажут что доделать`;
+    document.getElementById('pmScoreTxt').textContent=`${passed} из ${pt.tests.length} — ${pct}% · ${msg}`;
     // Auto-suggest next level on 100%
     if(pct===100&&pmActiveLevel<2){
       setTimeout(()=>{if(confirm('🎉 Уровень пройден! Перейти к следующему?'))pmSetLevel(pmActiveLevel+1);},400);
