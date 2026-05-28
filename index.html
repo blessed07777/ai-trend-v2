@@ -275,8 +275,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .pm-left{display:flex;flex-direction:column;border-right:1px solid var(--border);overflow:hidden;background:var(--bg)}
 .pm-left-scroll{flex:1;overflow-y:auto;padding:18px 16px}
 .pm-ltag{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:3px 11px;border-radius:20px;font-size:.67rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
-.pm-lname{font-size:1rem;font-weight:800;color:var(--text);margin-bottom:8px;line-height:1.3}
-.pm-ldesc{font-size:.8rem;color:var(--text2);line-height:1.8;white-space:pre-line;margin-bottom:18px;padding:10px 12px;background:var(--card);border-left:3px solid var(--accent);border-radius:0 8px 8px 0}
+.pm-lname{font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:10px;line-height:1.3;display:flex;align-items:center;gap:7px}
+.pm-ldesc{font-size:.83rem;color:var(--text);line-height:1.9;white-space:pre-line;margin-bottom:18px;padding:14px 16px;background:linear-gradient(135deg,rgba(104,91,199,.1),rgba(181,237,24,.03));border:1px solid rgba(104,91,199,.25);border-left:4px solid var(--accent2);border-radius:10px;box-shadow:0 2px 12px rgba(104,91,199,.08)}
 .pm-req-h{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .pm-req-h::after{content:'';flex:1;height:1px;background:var(--border)}
 .pm-req-item{display:flex;align-items:flex-start;gap:9px;padding:7px 10px;margin-bottom:5px;font-size:.79rem;color:var(--text2);border-radius:8px;background:var(--card);border:1px solid var(--border);transition:all .2s}
@@ -1211,6 +1211,13 @@ tr:hover td{background:#f8f5ff}`,
       </form>
     </div>
   </div>
+  <script>
+    document.querySelector('form').addEventListener('submit',function(e){
+      e.preventDefault();
+      var c=this.closest('.fc');
+      if(c)c.innerHTML='<div style="text-align:center;padding:40px 20px"><div style="font-size:56px;margin-bottom:16px">✅</div><h2 style="color:#1a1636;margin-bottom:10px;font-size:22px">Заявка отправлена!</h2><p style="color:#888;font-size:14px;line-height:1.6">Куратор свяжется с тобой<br>в ближайшее время 🚀</p></div>';
+    });
+  </script>
 </body>
 </html>`,
   css:()=>`*{margin:0;padding:0;box-sizing:border-box}
@@ -1267,6 +1274,151 @@ button:hover{transform:translateY(-2px)}`,
       {desc:'Есть <textarea>',check:d=>!!d.querySelector('textarea')},
       {desc:'Есть <select> с вариантами',check:d=>d.querySelectorAll('select option').length>=2},
       {desc:'Есть кнопка отправки',check:d=>!!d.querySelector('button[type="submit"]')},
+    ]
+  },
+],
+},
+{
+  emoji:'☑️',title:'Чекбоксы и Radio',subtitle:'Пол, интересы и согласие в формах',tag:'Интерактив',
+  promptKeys:['form','telegram'],
+  codeTask:{desc:'Напиши чекбокс с подписью',before:'<form>\n  ',ans:'<label><input type="checkbox"> Согласен с условиями</label>',after:'\n</form>',hint:'label оборачивает input и текст — клик по всей надписи'},
+  matchPairs:[
+    {id:'checkbox',preview:'<label style="display:flex;align-items:center;gap:8px;font-family:sans-serif;font-size:13px;color:#333;cursor:pointer"><input type="checkbox" style="width:16px;height:16px;accent-color:#685BC7"> Чекбокс</label>',tag:'&lt;input type="checkbox"&gt;'},
+    {id:'radio',preview:'<div style="display:flex;gap:12px;font-family:sans-serif;font-size:12px;color:#333"><label style="cursor:pointer;display:flex;align-items:center;gap:5px"><input type="radio" name="g" style="accent-color:#685BC7"> Муж.</label><label style="cursor:pointer;display:flex;align-items:center;gap:5px"><input type="radio" name="g" style="accent-color:#685BC7"> Жен.</label></div>',tag:'&lt;input type="radio"&gt;'},
+    {id:'label',preview:'<label style="font-family:sans-serif;font-size:13px;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1.5px solid #685BC7;border-radius:20px;cursor:pointer"><input type="checkbox" style="accent-color:#685BC7"> Пример label</label>',tag:'&lt;label&gt; — привязка'},
+    {id:'accentcolor',preview:'<div style="display:flex;gap:10px;align-items:center;font-family:sans-serif;font-size:12px;color:#333"><input type="checkbox" checked style="width:18px;height:18px;accent-color:#685BC7"><input type="radio" checked style="width:18px;height:18px;accent-color:#B5ED18"><span>accent-color</span></div>',tag:'accent-color: #цвет'},
+  ],
+  theory:n=>`
+<div class="ti"><strong>${n},</strong> не все данные — текст! Чекбоксы и radio позволяют выбирать варианты — пол, интересы, согласие с условиями.</div>
+<div class="tc"><div class="tch">☑️ Checkbox — несколько выборов</div><div class="tcb">Можно отметить <strong>несколько</strong> вариантов сразу<div class="tpre">&lt;label&gt;
+  &lt;input type="checkbox" name="hobby" value="html"&gt;
+  HTML & CSS
+&lt;/label&gt;
+&lt;label&gt;
+  &lt;input type="checkbox" name="hobby" value="ai"&gt;
+  Нейросети
+&lt;/label&gt;</div></div></div>
+<div class="tc"><div class="tch">🔘 Radio — только один выбор</div><div class="tcb">Одинаковый <span class="ic">name</span> — значит группа, только один активен!<div class="tpre">&lt;label&gt;
+  &lt;input type="radio" name="gender" value="male"&gt;
+  Мужской
+&lt;/label&gt;
+&lt;label&gt;
+  &lt;input type="radio" name="gender" value="female"&gt;
+  Женский
+&lt;/label&gt;</div></div></div>
+<div class="tc"><div class="tch">🎨 Цвет через accent-color</div><div class="tcb"><div class="tpre">input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #685BC7;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}</div></div></div>
+<div class="tip"><strong>💡 Задание ${n}:</strong> Добавь ещё один интерес «Дизайн» в список чекбоксов!</div>`,
+  html:n=>`<!DOCTYPE html>
+<html>
+<head><title>${n} — Анкета</title></head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="icon">📋</div>
+      <h2>Анкета ученика</h2>
+      <p>Заполни форму для записи в AI-TREND</p>
+      <form>
+        <div class="field">
+          <label class="field-label">Твоё имя</label>
+          <input type="text" placeholder="Введи имя..." class="inp">
+        </div>
+        <div class="field">
+          <label class="field-label">Пол</label>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="gender" value="male"> Мужской</label>
+            <label class="opt"><input type="radio" name="gender" value="female"> Женский</label>
+            <label class="opt"><input type="radio" name="gender" value="other"> Другой</label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Что хочешь изучить?</label>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="interest" value="html"> HTML & CSS</label>
+            <label class="opt"><input type="checkbox" name="interest" value="js"> JavaScript</label>
+            <label class="opt"><input type="checkbox" name="interest" value="ai"> Нейросети</label>
+            <label class="opt"><input type="checkbox" name="interest" value="all"> Всё сразу!</label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="opt agree"><input type="checkbox" required> Согласен с условиями обучения</label>
+        </div>
+        <button type="submit" class="btn">Отправить анкету 🚀</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.querySelector('form').addEventListener('submit',function(e){
+      e.preventDefault();
+      var c=this.closest('.card');
+      if(c)c.innerHTML='<div style="text-align:center;padding:40px 20px"><div style="font-size:56px;margin-bottom:16px">✅</div><h2 style="color:#1a1636;margin-bottom:10px">Анкета отправлена!</h2><p style="color:#888;font-size:14px;line-height:1.7">Куратор свяжется с тобой<br>в ближайшее время 🎉</p></div>';
+    });
+  </script>
+</body>
+</html>`,
+  css:()=>`*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#09080f,#2d1a6e);min-height:100vh;padding:40px 20px}
+.page{display:flex;justify-content:center}
+.card{background:#fff;border-radius:24px;padding:40px 36px;width:100%;max-width:480px;box-shadow:0 24px 80px rgba(0,0,0,.4)}
+.icon{font-size:40px;margin-bottom:12px}
+h2{font-size:22px;color:#1a1636;margin-bottom:6px}
+p{color:#888;font-size:13px;margin-bottom:28px}
+.field{margin-bottom:22px}
+.field-label{display:block;font-size:13px;font-weight:700;color:#555;margin-bottom:9px}
+.inp{width:100%;padding:11px 14px;border:2px solid #eee;border-radius:10px;font-size:14px;outline:none;transition:border-color .2s}
+.inp:focus{border-color:#685BC7}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{display:flex;align-items:center;gap:7px;font-size:13px;color:#444;cursor:pointer;padding:7px 14px;background:#f8f5ff;border:1.5px solid #e0d8ff;border-radius:20px;transition:all .2s}
+.opt:hover{border-color:#685BC7;background:#f0ecff}
+input[type="radio"],input[type="checkbox"]{accent-color:#685BC7;width:16px;height:16px;cursor:pointer}
+.agree{margin-top:4px}
+.btn{width:100%;padding:14px;background:linear-gradient(135deg,#685BC7,#8075D9);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:bold;cursor:pointer;box-shadow:0 8px 24px rgba(104,91,199,.3);transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}`,
+  practiceLevels:[
+  {
+    name:'Первый чекбокс',
+    desc:'Создай форму с чекбоксами:\n• Тег <form>\n• Минимум 2 чекбокса <input type="checkbox">\n• Каждый внутри <label>\n• Кнопка <button type="submit">',
+    hint:'<label>\n  <input type="checkbox"> Вариант 1\n</label>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Чекбоксы</title></head>\n<body>\n  <form>\n    <h2>Выбери интересы</h2>\n    <!-- label с input type="checkbox" -->\n\n    <button type="submit">Отправить</button>\n  </form>\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:40px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\nlabel{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:14px;cursor:pointer}\ninput{accent-color:#685BC7;width:16px;height:16px}\nbutton{margin-top:16px;padding:10px 24px;background:#685BC7;color:white;border:none;border-radius:8px;cursor:pointer}`,
+    tests:[
+      {desc:'Есть <form>',check:d=>!!d.querySelector('form')},
+      {desc:'Минимум 2 чекбокса',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=2},
+      {desc:'Чекбоксы внутри label',check:d=>d.querySelectorAll('label input[type="checkbox"]').length>=2},
+      {desc:'Есть кнопка',check:d=>!!d.querySelector('button')},
+    ]
+  },
+  {
+    name:'Radio — выбор пола',
+    desc:'Добавь radio-кнопки в форму:\n• Минимум 2 radio с name="gender"\n• Каждый в <label>\n• Также минимум 1 чекбокс\n• Кнопка submit',
+    hint:'<label><input type="radio" name="gender" value="male"> Мужской</label>\n<label><input type="radio" name="gender" value="female"> Женский</label>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Анкета</title></head>\n<body>\n  <form>\n    <h2>Анкета</h2>\n    <p><b>Пол:</b></p>\n    <!-- radio name="gender" -->\n\n    <p><b>Интересы:</b></p>\n    <!-- checkboxes -->\n\n    <button type="submit">Отправить</button>\n  </form>\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\np{font-weight:bold;color:#555;margin:12px 0 8px}\nlabel{display:inline-flex;align-items:center;gap:6px;margin-right:14px;font-size:14px;cursor:pointer}\ninput{accent-color:#685BC7}\nbutton{display:block;margin-top:16px;padding:10px 24px;background:#685BC7;color:white;border:none;border-radius:8px;cursor:pointer}`,
+    tests:[
+      {desc:'Минимум 2 radio name="gender"',check:d=>d.querySelectorAll('input[type="radio"][name="gender"]').length>=2},
+      {desc:'Radio внутри label',check:d=>d.querySelectorAll('label input[type="radio"]').length>=2},
+      {desc:'Есть хотя бы 1 чекбокс',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=1},
+      {desc:'Есть кнопка submit',check:d=>!!d.querySelector('button[type="submit"]')},
+    ]
+  },
+  {
+    name:'Полная анкета',
+    desc:'Создай полную анкету:\n• input type="text" для имени\n• Radio name="gender" (2+ варианта)\n• Минимум 3 чекбокса интересов\n• Чекбокс согласия (required)\n• Кнопка submit\n• label-карточки с border-radius',
+    hint:'label{\n  padding:8px 14px;\n  border:1.5px solid #e0d8ff;\n  border-radius:20px;\n  cursor:pointer;\n}\nlabel:hover{border-color:#685BC7}',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Анкета</title></head>\n<body>\n  <form class="form">\n    <h2>Запись в AI-TREND</h2>\n    <!-- Имя -->\n\n    <!-- Пол (radio) -->\n\n    <!-- Интересы (checkbox 3+) -->\n\n    <!-- Согласие (checkbox required) -->\n\n    <button type="submit">Записаться 🚀</button>\n  </form>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;background:linear-gradient(135deg,#09080f,#2d1a6e);min-height:100vh;padding:30px}\n.form{background:white;border-radius:20px;padding:32px;max-width:460px;margin:0 auto}\nh2{color:#1a1636;margin-bottom:24px}\ninput[type="text"]{width:100%;padding:11px;border:2px solid #eee;border-radius:10px;font-size:14px;outline:none;margin-bottom:20px}\ninput[type="radio"],input[type="checkbox"]{accent-color:#685BC7}\nlabel{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border:1.5px solid #eee;border-radius:20px;cursor:pointer;margin:4px;font-size:13px}\nlabel:hover{border-color:#685BC7}\nbutton{width:100%;padding:13px;background:linear-gradient(135deg,#685BC7,#8075D9);color:white;border:none;border-radius:12px;font-size:15px;font-weight:bold;cursor:pointer;margin-top:20px}`,
+    tests:[
+      {desc:'Поле для имени (type="text")',check:d=>!!d.querySelector('input[type="text"]')},
+      {desc:'Radio-кнопки пола (name="gender")',check:d=>d.querySelectorAll('input[type="radio"][name="gender"]').length>=2},
+      {desc:'Минимум 3 чекбокса',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=3},
+      {desc:'Чекбокс согласия (required)',check:d=>!!d.querySelector('input[type="checkbox"][required]')},
+      {desc:'Кнопка submit',check:d=>!!d.querySelector('button[type="submit"]')},
+      {desc:'label-карточки с border-radius',check:d=>{const lbl=d.querySelector('label');return lbl&&getComputedStyle(lbl).borderRadius!=='0px';}},
     ]
   },
 ],
@@ -1363,6 +1515,122 @@ footer{background:#09080f;color:#fff;padding:60px 50px 30px}
       {desc:'Минимум 3 колонки с контентом',check:d=>d.querySelectorAll('.fc .col').length>=3},
       {desc:'Ссылки <a> в footer',check:d=>d.querySelectorAll('footer a').length>=3},
       {desc:'Тёмный фон footer',check:d=>{const f=d.querySelector('footer');if(!f)return false;const m=getComputedStyle(f).backgroundColor.match(/\d+/g);return m&&parseInt(m[0])<80;}},
+    ]
+  },
+],
+},
+{
+  emoji:'📋',title:'Списки (ul, ol, li)',subtitle:'Нумерованные и маркированные списки',tag:'Контент',
+  promptKeys:['full'],
+  codeTask:{desc:'Создай маркированный список из 3 пунктов',before:'<body>\n  ',ans:'<ul>\n    <li>Пункт 1</li>\n    <li>Пункт 2</li>\n    <li>Пункт 3</li>\n  </ul>',after:'\n</body>',hint:'ul — маркированный список, li — элемент, ol — нумерованный'},
+  matchPairs:[
+    {id:'ul',preview:'<ul style="font-family:sans-serif;font-size:12px;color:#333;line-height:2;padding-left:18px;margin:0"><li>Маркер</li><li>Маркер</li><li>Маркер</li></ul>',tag:'&lt;ul&gt; — маркированный'},
+    {id:'ol',preview:'<ol style="font-family:sans-serif;font-size:12px;color:#333;line-height:2;padding-left:18px;margin:0"><li>Первый</li><li>Второй</li><li>Третий</li></ol>',tag:'&lt;ol&gt; — нумерованный'},
+    {id:'li',preview:'<div style="font-family:sans-serif;font-size:12px;color:#685BC7;font-weight:bold;padding:5px 10px;background:#f0ecff;border-radius:6px">• элемент &lt;li&gt;</div>',tag:'&lt;li&gt; — пункт'},
+    {id:'navul',preview:'<nav style="background:#09080f;padding:8px 12px;border-radius:6px;display:flex;gap:12px"><a style="color:#B5ED18;font-family:sans-serif;font-size:11px;text-decoration:none">Главная</a><a style="color:#888;font-family:sans-serif;font-size:11px;text-decoration:none">О нас</a></nav>',tag:'nav ul — меню'},
+  ],
+  theory:n=>`
+<div class="ti"><strong>${n},</strong> списки — один из самых используемых элементов! Меню навигации, перечни, инструкции — всё это HTML-списки.</div>
+<div class="tc"><div class="tch">📋 Два типа списков</div><div class="tcb"><span class="ic">&lt;ul&gt;</span> — маркированный (с точками •)<br><span class="ic">&lt;ol&gt;</span> — нумерованный (1. 2. 3.)<br><span class="ic">&lt;li&gt;</span> — элемент любого списка<div class="tpre">&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;</div></div></div>
+<div class="tc"><div class="tch">🎨 CSS — убираем маркеры, делаем flex</div><div class="tcb"><div class="tpre">ul {
+  list-style: none; /* убрать точки */
+  padding: 0;
+  display: flex;    /* меню в ряд! */
+  gap: 24px;
+}</div>Именно так делается навигация на большинстве сайтов!</div></div>
+<div class="tc"><div class="tch">💡 Списки как меню</div><div class="tcb"><div class="tpre">&lt;nav&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Главная&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;О нас&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Контакты&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</div></div></div>
+<div class="tip"><strong>💡 Задание ${n}:</strong> Добавь ещё один предмет в список «Что изучаю»!</div>`,
+  html:n=>`<!DOCTYPE html>
+<html>
+<head><title>${n} — Списки</title></head>
+<body>
+  <div class="page">
+    <h1>📋 ${n} изучает</h1>
+    <div class="cols">
+      <div class="col-block">
+        <h2>🔷 ul — маркированный</h2>
+        <ul class="cool-list">
+          <li>HTML — скелет сайта</li>
+          <li>CSS — красота и стиль</li>
+          <li>JavaScript — движение</li>
+          <li>Нейросети — будущее</li>
+        </ul>
+      </div>
+      <div class="col-block">
+        <h2>🔢 ol — нумерованный</h2>
+        <ol class="steps">
+          <li>Открыть редактор</li>
+          <li>Написать HTML</li>
+          <li>Добавить CSS</li>
+          <li>Запустить сайт</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`,
+  css:()=>`*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#09080f,#1a1040);min-height:100vh;padding:40px 20px}
+.page{max-width:680px;margin:0 auto}
+h1{font-size:26px;color:#B5ED18;margin-bottom:28px}
+h2{font-size:15px;color:#8075D9;margin-bottom:14px;font-weight:800}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.cool-list{list-style:none}
+.cool-list li{padding:12px 16px;background:rgba(104,91,199,.12);border-left:4px solid #685BC7;border-radius:0 10px 10px 0;margin-bottom:8px;color:#e0d8ff;font-size:14px;transition:transform .2s}
+.cool-list li:hover{transform:translateX(6px)}
+.steps{padding-left:22px}
+.steps li{padding:10px 0;color:#e0d8ff;font-size:14px;border-bottom:1px solid rgba(104,91,199,.2)}
+.steps li::marker{color:#B5ED18;font-weight:bold}`,
+  practiceLevels:[
+  {
+    name:'Первый список',
+    desc:'Создай маркированный список:\n• Тег <ul> как контейнер\n• Минимум 3 элемента <li>\n• Любой текст в пунктах',
+    hint:'<ul>\n  <li>Первый пункт</li>\n  <li>Второй пункт</li>\n  <li>Третий пункт</li>\n</ul>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Список</title></head>\n<body>\n  <h1>Мой список</h1>\n  <!-- Добавь ul с li -->\n\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh1{color:#685BC7;margin-bottom:16px}\nul{padding-left:24px}\nli{padding:6px 0;color:#333;font-size:15px}`,
+    tests:[
+      {desc:'Есть <ul>',check:d=>!!d.querySelector('ul')},
+      {desc:'Минимум 3 пункта <li>',check:d=>d.querySelectorAll('li').length>=3},
+      {desc:'li находятся внутри ul',check:d=>d.querySelectorAll('ul li').length>=3},
+    ]
+  },
+  {
+    name:'Оба вида списков',
+    desc:'Создай два вида списков:\n• <ul> — маркированный (3+ пункта)\n• <ol> — нумерованный (3+ пункта)\n• Заголовок <h2> у каждого',
+    hint:'<ol>\n  <li>Шаг 1</li>\n  <li>Шаг 2</li>\n  <li>Шаг 3</li>\n</ol>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Списки</title></head>\n<body>\n  <h1>Мои списки</h1>\n  <!-- ul маркированный -->\n\n  <!-- ol нумерованный -->\n\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh1{color:#685BC7;margin-bottom:20px}\nh2{color:#8075D9;margin-bottom:10px}\nul,ol{padding-left:24px;margin-bottom:20px}\nli{padding:5px 0;color:#333}`,
+    tests:[
+      {desc:'Есть <ul>',check:d=>!!d.querySelector('ul')},
+      {desc:'Есть <ol>',check:d=>!!d.querySelector('ol')},
+      {desc:'В ul минимум 3 li',check:d=>d.querySelectorAll('ul li').length>=3},
+      {desc:'В ol минимум 3 li',check:d=>d.querySelectorAll('ol li').length>=3},
+      {desc:'Есть заголовки h2',check:d=>d.querySelectorAll('h2').length>=2},
+    ]
+  },
+  {
+    name:'Меню из списка',
+    desc:'Сделай навигацию из списка:\n• <nav> > <ul class="menu">\n• Минимум 4 <li> с <a> внутри\n• CSS: list-style:none, display:flex\n• Hover-эффект на ссылках',
+    hint:'.menu{list-style:none;display:flex;gap:24px;padding:0}\n.menu a{color:white;text-decoration:none}\n.menu a:hover{color:#B5ED18}',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Меню</title></head>\n<body>\n  <nav>\n    <ul class="menu">\n      <!-- 4+ li с a -->\n    </ul>\n  </nav>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;background:#09080f}\nnav{background:#1a1040;padding:16px 32px}\n.menu{/* list-style:none; display:flex; gap:... */}\n.menu a{/* стиль ссылок */}`,
+    tests:[
+      {desc:'Есть <nav>',check:d=>!!d.querySelector('nav')},
+      {desc:'Есть <ul> внутри nav',check:d=>!!d.querySelector('nav ul')},
+      {desc:'Минимум 4 пункта li',check:d=>d.querySelectorAll('nav li').length>=4},
+      {desc:'Ссылки <a> в пунктах',check:d=>d.querySelectorAll('nav li a').length>=4},
+      {desc:'list-style: none',check:d=>{const ul=d.querySelector('nav ul');return ul&&getComputedStyle(ul).listStyleType==='none';}},
+      {desc:'Flex-раскладка меню',check:d=>{const ul=d.querySelector('nav ul');return ul&&getComputedStyle(ul).display==='flex';}},
     ]
   },
 ],
@@ -2038,12 +2306,13 @@ function buildPreview(html,css){
   lintCode(html,css);
   const baseTag=`<base target="_blank">`;
   const hlScript=`<script>window.addEventListener('message',function(e){if(e.data&&e.data.t==='hl'){document.querySelectorAll('[data-hl]').forEach(function(el){el.removeAttribute('data-hl');});if(e.data.sel){try{document.querySelectorAll(e.data.sel).forEach(function(el){el.setAttribute('data-hl','1');});}catch(x){}}}});<\/script><style>[data-hl]{outline:2px solid #685BC7!important;outline-offset:2px;border-radius:2px;}<\/style>`;
+  const burgerScript=`<script>(function(){var S=document.createElement('style');S.textContent='.at-burger{display:none!important;background:none;border:2px solid currentColor;cursor:pointer;font-size:18px;padding:4px 9px;border-radius:6px;color:inherit;line-height:1;margin-left:auto;flex-shrink:0}'+'@media(max-width:600px){.at-burger{display:flex!important;align-items:center;justify-content:center}.at-links{display:none!important;width:100%!important;flex-direction:column!important;background:inherit;padding:8px 0}nav{flex-wrap:wrap!important;position:relative}nav.at-open .at-links{display:flex!important}}';document.head.appendChild(S);function go(){document.querySelectorAll('nav').forEach(function(nav){if(nav.dataset.atb)return;nav.dataset.atb='1';var children=Array.from(nav.children);var links=children.filter(function(c){return c.tagName==='A'||c.tagName==='UL'||c.tagName==='OL'||((c.tagName==='DIV'||c.tagName==='SPAN')&&c.querySelectorAll('a').length>0&&!['logo','brand','logo-wrap','fl'].some(function(cl){return c.classList.contains(cl)}))});if(!links.length)return;var wrap=document.createElement('div');wrap.className='at-links';wrap.style.display='flex';wrap.style.gap='inherit';wrap.style.alignItems='inherit';links.forEach(function(c){wrap.appendChild(c)});nav.appendChild(wrap);var btn=document.createElement('button');btn.className='at-burger';btn.innerHTML='&#9776;';btn.onclick=function(){nav.classList.toggle('at-open')};nav.appendChild(btn)});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',go);}else{go();}})();<\/script>`;
   const errScript=`<script>window.onerror=function(m,s,l){parent.postMessage({t:'jsErr',msg:m,line:l},'*');return false};<\/script>`;
   let doc=html;
   if(doc.includes('</head>')){
     if(doc.includes('<head>'))doc=doc.replace('<head>',`<head>${baseTag}`);
-    doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${errScript}</head>`);
-  }else{doc=`<base target="_blank"><style>${css}</style>${hlScript}${errScript}${doc}`;}
+    doc=doc.replace('</head>',`<style>${css}</style>${hlScript}${burgerScript}${errScript}</head>`);
+  }else{doc=`<base target="_blank"><style>${css}</style>${hlScript}${burgerScript}${errScript}${doc}`;}
   iframe.srcdoc=doc;
 }
 
@@ -2475,7 +2744,7 @@ function pmLoadLevel(lv){
   if(!l?.practiceLevels) return;
   const pt=l.practiceLevels[lv];
   if(!pt) return;
-  document.getElementById('pmLname').textContent=pt.name;
+  document.getElementById('pmLname').innerHTML='<span style="font-size:.7rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:2px 9px;border-radius:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;flex-shrink:0">📝 ЗАДАНИЕ</span> '+escHtml(pt.name);
   document.getElementById('pmDesc').textContent=pt.desc;
   document.getElementById('pmHintBox').textContent=pt.hint;
   document.getElementById('pmHintBox').classList.remove('show');
