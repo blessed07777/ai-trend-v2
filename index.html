@@ -164,9 +164,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .ln-gut{flex-shrink:0;width:var(--ln-w,44px);padding:16px 8px 16px 0;text-align:right;font-family:'JetBrains Mono','Fira Code',monospace;font-size:var(--ln-fs,.85rem);line-height:1.85;color:#3a375a;background:#040310;border-right:1px solid #1a1730;overflow:hidden;user-select:none;letter-spacing:0;transition:width .08s,font-size .08s}
 .ln-gut div{height:calc(1.85 * var(--ed-fs,.9rem))}
 .ed-wrap{position:relative;flex:1;overflow:hidden}
-.ed-hl{position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px 18px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:var(--ed-fs,.9rem);line-height:1.85;white-space:pre;overflow:hidden;pointer-events:none;z-index:0;background:transparent;tab-size:2;letter-spacing:.01em;color:#D4D4D4;scrollbar-width:none;transition:font-size .08s}
+.ed-hl{position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px 18px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:var(--ed-fs,.9rem);line-height:1.85;white-space:pre-wrap;word-break:break-all;overflow:hidden;pointer-events:none;z-index:0;background:transparent;tab-size:2;letter-spacing:.01em;color:#D4D4D4;scrollbar-width:none;transition:font-size .08s}
 .ed-hl::-webkit-scrollbar{display:none}
-.editor{position:absolute;top:0;left:0;right:0;bottom:0;background:transparent!important;color:transparent!important;caret-color:#aeafad;z-index:1;white-space:pre;overflow:auto;resize:none;outline:none;border:none;font-family:'JetBrains Mono','Fira Code',monospace;font-size:var(--ed-fs,.9rem);line-height:1.85;padding:16px 18px;tab-size:2;letter-spacing:.01em;transition:font-size .08s}
+.editor{position:absolute;top:0;left:0;right:0;bottom:0;background:transparent!important;color:transparent!important;caret-color:#aeafad;z-index:1;white-space:pre-wrap;word-break:break-all;overflow:auto;resize:none;outline:none;border:none;font-family:'JetBrains Mono','Fira Code',monospace;font-size:var(--ed-fs,.9rem);line-height:1.85;padding:16px 18px;tab-size:2;letter-spacing:.01em;transition:font-size .08s}
 .editor::selection{background:rgba(104,91,199,.35)}
 .err-panel{background:#080008;border-top:1px solid rgba(255,71,87,.3);flex-shrink:0;max-height:100px;overflow-y:auto;display:none}
 .err-panel.show{display:block}
@@ -308,9 +308,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .pm-lvl{padding:5px 16px;border-radius:20px;border:1.5px solid var(--border);background:var(--bg);color:var(--text3);font-size:.75rem;font-weight:700;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:5px;white-space:nowrap}
 .pm-lvl:hover{border-color:var(--accent2);color:var(--accent2);background:var(--glow)}
 .pm-lvl.on{border-color:transparent!important;color:#fff!important;font-weight:800;box-shadow:0 2px 12px rgba(0,0,0,.3)}
-.pm-lvl[data-lv="0"].on{background:linear-gradient(135deg,#16a34a,#22c55e)}
-.pm-lvl[data-lv="1"].on{background:linear-gradient(135deg,#d97706,#f59e0b)}
-.pm-lvl[data-lv="2"].on{background:linear-gradient(135deg,#dc2626,#ef4444)}
+.pm-lvl.diff-easy.on{background:linear-gradient(135deg,#16a34a,#22c55e)}
+.pm-lvl.diff-medium.on{background:linear-gradient(135deg,#d97706,#f59e0b)}
+.pm-lvl.diff-hard.on{background:linear-gradient(135deg,#dc2626,#ef4444)}
 
 /* 3-column body */
 .pm-body{display:grid;grid-template-columns:290px 1fr 1fr;flex:1;overflow:hidden;min-height:0}
@@ -355,8 +355,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .pm-etab.on{color:#e8e2ff;border-bottom-color:var(--accent2)}
 .pm-etab:hover:not(.on){color:var(--text2)}
 .pm-ed-area{display:flex;flex:1;overflow:hidden;position:relative}
-.pm-ed-hl{position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:14px 16px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.85rem;line-height:1.8;white-space:pre;overflow:hidden;pointer-events:none;z-index:0;background:transparent;tab-size:2;color:#D4D4D4;scrollbar-width:none}
-.pm-editor{position:absolute;top:0;left:0;right:0;bottom:0;background:transparent!important;color:transparent!important;caret-color:#aeafad;z-index:1;white-space:pre;overflow:auto;resize:none;outline:none;border:none;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.85rem;line-height:1.8;padding:14px 16px;tab-size:2}
+.pm-ed-hl{position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:14px 16px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.85rem;line-height:1.8;white-space:pre-wrap;word-break:break-all;overflow:hidden;pointer-events:none;z-index:0;background:transparent;tab-size:2;color:#D4D4D4;scrollbar-width:none}
+.pm-editor{position:absolute;top:0;left:0;right:0;bottom:0;background:transparent!important;color:transparent!important;caret-color:#aeafad;z-index:1;white-space:pre-wrap;word-break:break-all;overflow:auto;resize:none;outline:none;border:none;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.85rem;line-height:1.8;padding:14px 16px;tab-size:2}
 .pm-editor::selection{background:rgba(104,91,199,.35)}
 
 /* Check bar */
@@ -523,10 +523,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
     <button class="pm-close" onclick="closePractice()">✕ Закрыть</button>
   </div>
   <div class="pm-levels" id="pmLevels">
-    <span class="pm-levels-label">Уровень:</span>
-    <button class="pm-lvl on" data-lv="0" onclick="pmSetLevel(0)">🟢 Легко</button>
-    <button class="pm-lvl" data-lv="1" onclick="pmSetLevel(1)">🟡 Средне</button>
-    <button class="pm-lvl" data-lv="2" onclick="pmSetLevel(2)">🔴 Сложно</button>
+    <span class="pm-levels-label">Задание:</span>
   </div>
   <div class="pm-body">
     <!-- Left: task + tests -->
@@ -839,44 +836,16 @@ p{color:#555;font-size:18px;line-height:1.8;margin-bottom:14px}
 strong{color:#685BC7}
 em{color:#B5ED18;font-style:normal;font-weight:bold}`,
   practiceLevels:[
-  {
-    name:'Мой первый тег h1',
-    desc:'Напиши один тег h1 с любым текстом.\n\nПример:\n<h1>Привет мир!</h1>',
-    hint:'В теге body напиши: <h1>Любой текст</h1>',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Урок</title></head>\n<body>\n  <!-- Напиши тег h1 здесь -->\n\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 30px; background: #f0ecff; }`,
-    tests:[
-      {desc:'Есть тег <h1>',check:d=>!!d.querySelector('h1')},
-      {desc:'<h1> содержит текст',check:d=>d.querySelector('h1')?.textContent.trim().length>0},
-    ]
-  },
-  {
-    name:'Заголовки и абзац',
-    desc:'Создай страницу с:\n• Заголовком <h1>\n• Подзаголовком <h2>\n• Одним абзацем <p>',
-    hint:'Напиши теги по порядку: сначала h1, потом h2, потом p',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Страница</title></head>\n<body>\n  <!-- Добавь h1, h2 и p -->\n\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\nh1 { color: #685BC7; }\nh2 { color: #8075D9; }`,
-    tests:[
-      {desc:'Есть заголовок <h1>',check:d=>!!d.querySelector('h1')},
-      {desc:'Есть подзаголовок <h2>',check:d=>!!d.querySelector('h2')},
-      {desc:'Есть абзац <p>',check:d=>!!d.querySelector('p')},
-      {desc:'Все теги не пустые',check:d=>d.querySelector('h1')?.textContent.trim().length>0&&d.querySelector('p')?.textContent.trim().length>0},
-    ]
-  },
-  {
-    name:'Полная страница «Обо мне»',
-    desc:'Создай страницу с:\n• <h1> с именем\n• <h2> подзаголовок\n• Минимум 2 абзаца <p>\n• Жирный текст <strong>\n• Курсив <em>',
-    hint:'Внутри одного p используй <strong>жирное</strong> и <em>курсив</em>',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Обо мне</title></head>\n<body>\n\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; max-width: 600px; margin: 0 auto; }\nh1 { color: #685BC7; }\nh2 { color: #8075D9; }`,
-    tests:[
-      {desc:'Есть <h1>',check:d=>!!d.querySelector('h1')},
-      {desc:'Есть <h2>',check:d=>!!d.querySelector('h2')},
-      {desc:'Минимум 2 тега <p>',check:d=>d.querySelectorAll('p').length>=2},
-      {desc:'Есть <strong>',check:d=>!!d.querySelector('strong')},
-      {desc:'Есть <em>',check:d=>!!d.querySelector('em')},
-    ]
-  },
+  {difficulty:'easy',name:'Мой первый тег h1',desc:'Напиши один тег h1 с любым текстом.\n• Используй тег <h1>\n• Напиши любой текст внутри',hint:'В теге body напиши: <h1>Любой текст</h1>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Урок</title></head>\n<body>\n  <!-- Напиши тег h1 здесь -->\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f0ecff; }`,tests:[{desc:'Есть тег <h1>',check:d=>!!d.querySelector('h1')},{desc:'<h1> содержит текст',check:d=>d.querySelector('h1')?.textContent.trim().length>0}]},
+  {difficulty:'easy',name:'Тег параграф',desc:'Добавь абзац текста на страницу.\n• Используй тег <p>\n• Напиши любой текст внутри',hint:'<p>Это мой первый абзац!</p>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Параграф</title></head>\n<body>\n  <h1>Привет!</h1>\n  <!-- Добавь тег p с текстом -->\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f0ecff; }\nh1 { color: #685BC7; }`,tests:[{desc:'Есть тег <p>',check:d=>!!d.querySelector('p')},{desc:'<p> содержит текст',check:d=>d.querySelector('p')?.textContent.trim().length>0}]},
+  {difficulty:'easy',name:'Жирный текст',desc:'Сделай одно слово жирным.\n• Используй тег <strong> внутри <p>\n• Например: <p>Слово <strong>жирное</strong> обычное</p>',hint:'<p>Это <strong>важное</strong> слово!</p>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Жирный</title></head>\n<body>\n  <!-- Добавь p с strong внутри -->\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f0ecff; }`,tests:[{desc:'Есть тег <strong>',check:d=>!!d.querySelector('strong')},{desc:'<strong> внутри <p>',check:d=>!!d.querySelector('p strong')},{desc:'<strong> содержит текст',check:d=>d.querySelector('strong')?.textContent.trim().length>0}]},
+  {difficulty:'easy',name:'Курсивный текст',desc:'Сделай одно слово курсивным.\n• Используй тег <em> внутри <p>\n• Например: <p>Слово <em>курсивное</em> обычное</p>',hint:'<p>Это <em>курсивное</em> слово!</p>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Курсив</title></head>\n<body>\n  <!-- Добавь p с em внутри -->\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f0ecff; }`,tests:[{desc:'Есть тег <em>',check:d=>!!d.querySelector('em')},{desc:'<em> внутри <p>',check:d=>!!d.querySelector('p em')},{desc:'<em> содержит текст',check:d=>d.querySelector('em')?.textContent.trim().length>0}]},
+  {difficulty:'medium',name:'Заголовки и абзац',desc:'Создай страницу с тремя тегами.\n• Заголовком <h1>\n• Подзаголовком <h2>\n• Одним абзацем <p>',hint:'Напиши теги по порядку: сначала h1, потом h2, потом p',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Страница</title></head>\n<body>\n  <!-- Добавь h1, h2 и p -->\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\nh1 { color: #685BC7; }\nh2 { color: #8075D9; }`,tests:[{desc:'Есть заголовок <h1>',check:d=>!!d.querySelector('h1')},{desc:'Есть подзаголовок <h2>',check:d=>!!d.querySelector('h2')},{desc:'Есть абзац <p>',check:d=>!!d.querySelector('p')},{desc:'Все теги не пустые',check:d=>d.querySelector('h1')?.textContent.trim().length>0&&d.querySelector('p')?.textContent.trim().length>0}]},
+  {difficulty:'medium',name:'Иерархия заголовков',desc:'Создай три уровня заголовков.\n• <h1> главный заголовок\n• <h2> подзаголовок\n• <h3> под-подзаголовок\n• <p> с описанием',hint:'h1 — самый большой, h3 — наименьший. Каждый тег с текстом',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Заголовки</title></head>\n<body>\n  <!-- h1, h2, h3, p -->\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\nh1 { color: #685BC7; }\nh2 { color: #8075D9; }\nh3 { color: #9088e0; }`,tests:[{desc:'Есть <h1>',check:d=>!!d.querySelector('h1')},{desc:'Есть <h2>',check:d=>!!d.querySelector('h2')},{desc:'Есть <h3>',check:d=>!!d.querySelector('h3')},{desc:'Есть <p>',check:d=>!!d.querySelector('p')}]},
+  {difficulty:'medium',name:'Жирный и курсив вместе',desc:'В одном абзаце используй оба тега.\n• <h2> с заголовком\n• <p> со словом <strong> (жирный)\n• <p> со словом <em> (курсив)\n• Один <p> содержит оба тега',hint:'<p>Текст <strong>жирный</strong> и <em>курсивный</em> вместе</p>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Форматирование</title></head>\n<body>\n  <h2>Форматирование текста</h2>\n  <!-- p с strong, p с em, p с обоими -->\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\nh2 { color: #685BC7; margin-bottom: 16px; }\np { font-size: 16px; line-height: 1.8; margin-bottom: 10px; }`,tests:[{desc:'Есть <strong>',check:d=>!!d.querySelector('strong')},{desc:'Есть <em>',check:d=>!!d.querySelector('em')},{desc:'strong и em в параграфах',check:d=>!!d.querySelector('p strong')&&!!d.querySelector('p em')},{desc:'Есть заголовок <h2>',check:d=>!!d.querySelector('h2')}]},
+  {difficulty:'hard',name:'Полная страница «Обо мне»',desc:'Создай страницу с несколькими тегами.\n• <h1> с именем\n• <h2> подзаголовок\n• Минимум 2 абзаца <p>\n• Жирный текст <strong>\n• Курсив <em>',hint:'Внутри одного p используй <strong>жирное</strong> и <em>курсив</em>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Обо мне</title></head>\n<body>\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; max-width: 600px; margin: 0 auto; }\nh1 { color: #685BC7; }\nh2 { color: #8075D9; }`,tests:[{desc:'Есть <h1>',check:d=>!!d.querySelector('h1')},{desc:'Есть <h2>',check:d=>!!d.querySelector('h2')},{desc:'Минимум 2 тега <p>',check:d=>d.querySelectorAll('p').length>=2},{desc:'Есть <strong>',check:d=>!!d.querySelector('strong')},{desc:'Есть <em>',check:d=>!!d.querySelector('em')}]},
+  {difficulty:'hard',name:'Все уровни h1-h6',desc:'Используй все шесть уровней заголовков.\n• Теги от <h1> до <h6>\n• После каждого заголовка — <p> с текстом',hint:'<h1>...</h1><p>...</p><h2>...</h2><p>...</p> ... до h6',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Заголовки h1-h6</title></head>\n<body>\n  <!-- h1 с p, h2 с p, h3 с p, h4 с p, h5 с p, h6 с p -->\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f0ecff; max-width: 600px; margin: 0 auto; }\nh1 { color: #685BC7; }\nh2 { color: #7a6ed4; }\nh3,h4,h5,h6 { color: #9088e0; }\np { color: #555; margin-bottom: 16px; }`,tests:[{desc:'Есть <h1>',check:d=>!!d.querySelector('h1')},{desc:'Есть <h2>',check:d=>!!d.querySelector('h2')},{desc:'Есть <h3>',check:d=>!!d.querySelector('h3')},{desc:'Есть <h4>',check:d=>!!d.querySelector('h4')},{desc:'Есть <h5>',check:d=>!!d.querySelector('h5')},{desc:'Есть <h6>',check:d=>!!d.querySelector('h6')},{desc:'Минимум 6 абзацев <p>',check:d=>d.querySelectorAll('p').length>=6}]},
+  {difficulty:'hard',name:'Статья с полным форматированием',desc:'Напиши настоящую статью-страницу.\n• <h1> заголовок статьи\n• Минимум 2 тега <h2>\n• Минимум 4 абзаца <p>\n• <strong> и <em> в тексте\n• <br> перенос строки в абзаце',hint:'В одном <p> используй и <strong>, и <em>. В другом — <br> для переноса',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Моя статья</title></head>\n<body>\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; max-width: 700px; margin: 0 auto; line-height: 1.8; }\nh1 { color: #685BC7; font-size: 32px; margin-bottom: 8px; }\nh2 { color: #8075D9; margin-top: 32px; margin-bottom: 12px; }\np { color: #444; margin-bottom: 16px; }`,tests:[{desc:'Есть <h1>',check:d=>!!d.querySelector('h1')},{desc:'Минимум 2 тега <h2>',check:d=>d.querySelectorAll('h2').length>=2},{desc:'Минимум 4 тега <p>',check:d=>d.querySelectorAll('p').length>=4},{desc:'Есть <strong>',check:d=>!!d.querySelector('strong')},{desc:'Есть <em>',check:d=>!!d.querySelector('em')},{desc:'Есть <br>',check:d=>!!d.querySelector('br')}]},
 ],
 },
 {
@@ -934,43 +903,16 @@ nav a:hover{background:rgba(104,91,199,.2);color:#8075D9}
 .cta:hover{transform:translateY(-2px)}
 .hint{text-align:center;padding:60px 20px;color:#888;font-size:18px}`,
   practiceLevels:[
-  {
-    name:'Создай тег header',
-    desc:'Добавь тег <header> с любым текстом или названием сайта внутри.',
-    hint:'Просто напиши: <header>МойСайт</header>',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Header</title></head>\n<body>\n  <!-- Добавь header здесь -->\n\n</body>\n</html>`,
-    starterCss:`body { margin: 0; font-family: Arial; }\nheader { background: #685BC7; color: white; padding: 16px 30px; }`,
-    tests:[
-      {desc:'Есть тег <header>',check:d=>!!d.querySelector('header')},
-      {desc:'<header> не пустой',check:d=>d.querySelector('header')?.textContent.trim().length>0},
-    ]
-  },
-  {
-    name:'Header с навигацией',
-    desc:'Создай шапку с:\n• Тегом <header>\n• Логотипом (любой div или span)\n• Тегом <nav> с 2 ссылками <a>',
-    hint:'Внутри header сначала логотип, потом nav с двумя a href="https://www.instagram.com/ai_trend.school/"',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Сайт</title></head>\n<body>\n  <header>\n    <!-- Логотип и nav -->\n  </header>\n</body>\n</html>`,
-    starterCss:`body { margin: 0; font-family: Arial; }\nheader { background: #1a1636; color: white; padding: 16px 30px; display: flex; align-items: center; gap: 20px; }\nnav a { color: #ccc; text-decoration: none; margin-right: 16px; }`,
-    tests:[
-      {desc:'Есть <header>',check:d=>!!d.querySelector('header')},
-      {desc:'Есть <nav>',check:d=>!!d.querySelector('nav')},
-      {desc:'В nav минимум 2 ссылки',check:d=>d.querySelectorAll('nav a').length>=2},
-    ]
-  },
-  {
-    name:'Профессиональный Header',
-    desc:'Создай шапку с:\n• <header> на весь экран\n• Логотип (div/span)\n• <nav> с минимум 3 ссылками <a>\n• Кнопка <button>\n• CSS: display flex, между логотипом и nav — пространство',
-    hint:'header { display: flex; align-items: center; justify-content: space-between; }',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Сайт</title></head>\n<body>\n\n</body>\n</html>`,
-    starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\nheader { background: #09080f; padding: 16px 40px; }\n.logo { color: #B5ED18; font-size: 20px; font-weight: bold; }\nnav a { color: #ccc; text-decoration: none; margin-right: 20px; }\nbutton { background: #685BC7; color: white; border: none; padding: 10px 22px; border-radius: 8px; cursor: pointer; }`,
-    tests:[
-      {desc:'Есть <header>',check:d=>!!d.querySelector('header')},
-      {desc:'Есть <nav>',check:d=>!!d.querySelector('nav')},
-      {desc:'В nav минимум 3 ссылки',check:d=>d.querySelectorAll('nav a').length>=3},
-      {desc:'Есть <button>',check:d=>!!d.querySelector('button')},
-      {desc:'Header использует flexbox',check:d=>{const h=d.querySelector('header');return h&&getComputedStyle(h).display==='flex';}},
-    ]
-  },
+  {difficulty:'easy',name:'Создай тег header',desc:'Добавь тег header с текстом.\n• Тег <header> в body\n• Любое название сайта внутри',hint:'Просто напиши: <header>МойСайт</header>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Header</title></head>\n<body>\n  <!-- Добавь header здесь -->\n\n</body>\n</html>`,starterCss:`body { margin: 0; font-family: Arial; }\nheader { background: #685BC7; color: white; padding: 16px 30px; }`,tests:[{desc:'Есть тег <header>',check:d=>!!d.querySelector('header')},{desc:'<header> не пустой',check:d=>d.querySelector('header')?.textContent.trim().length>0}]},
+  {difficulty:'easy',name:'Header с логотипом',desc:'Добавь в шапку логотип и подпись.\n• Тег <header>\n• Внутри <span class="logo"> или <div> с названием\n• Подпись <p> с описанием сайта',hint:'<header><span class="logo">⚡ МойСайт</span><p>Описание</p></header>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Сайт</title></head>\n<body>\n  <header>\n    <!-- Логотип и описание -->\n  </header>\n</body>\n</html>`,starterCss:`body { margin: 0; font-family: Arial; }\nheader { background: #1a1636; color: white; padding: 16px 30px; }\n.logo { font-size: 22px; font-weight: bold; color: #B5ED18; }`,tests:[{desc:'Есть <header>',check:d=>!!d.querySelector('header')},{desc:'Есть логотип (.logo или span)',check:d=>!!(d.querySelector('.logo')||d.querySelector('header span'))},{desc:'Есть текст в шапке',check:d=>d.querySelector('header')?.textContent.trim().length>3}]},
+  {difficulty:'easy',name:'Nav с двумя ссылками',desc:'Создай навигацию с двумя ссылками.\n• Тег <nav> внутри <header>\n• Два тега <a> с текстом\n• href можно указать как #',hint:'<nav><a href="#">Главная</a><a href="#">О нас</a></nav>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Навигация</title></head>\n<body>\n  <header>\n    <!-- nav с двумя a -->\n  </header>\n</body>\n</html>`,starterCss:`body { margin: 0; font-family: Arial; }\nheader { background: #09080f; padding: 14px 30px; }\nnav a { color: #ccc; text-decoration: none; margin-right: 20px; font-size: 15px; }\nnav a:hover { color: #B5ED18; }`,tests:[{desc:'Есть <header>',check:d=>!!d.querySelector('header')},{desc:'Есть <nav>',check:d=>!!d.querySelector('nav')},{desc:'В nav минимум 2 ссылки <a>',check:d=>d.querySelectorAll('nav a').length>=2}]},
+  {difficulty:'easy',name:'Header растянут на всю ширину',desc:'Шапка должна занимать всю ширину экрана.\n• <header> с тёмным фоном\n• CSS: width: 100% или margin: 0\n• Текст или логотип внутри',hint:'body { margin: 0; } header { background: #09080f; width: 100%; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Сайт</title></head>\n<body>\n  <header>\n    <span>⚡ МойСайт</span>\n  </header>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\nheader {\n  /* Добавь: background, color, padding */\n}`,tests:[{desc:'Есть <header>',check:d=>!!d.querySelector('header')},{desc:'header не пустой',check:d=>d.querySelector('header')?.textContent.trim().length>0}]},
+  {difficulty:'medium',name:'Header с навигацией',desc:'Создай шапку с логотипом и меню.\n• Тег <header>\n• Логотип (div/span)\n• Тег <nav> с 2 ссылками <a>',hint:'Внутри header: логотип, потом nav с двумя a href="#"',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Сайт</title></head>\n<body>\n  <header>\n    <!-- Логотип и nav -->\n  </header>\n</body>\n</html>`,starterCss:`body { margin: 0; font-family: Arial; }\nheader { background: #1a1636; color: white; padding: 16px 30px; display: flex; align-items: center; gap: 20px; }\nnav a { color: #ccc; text-decoration: none; margin-right: 16px; }`,tests:[{desc:'Есть <header>',check:d=>!!d.querySelector('header')},{desc:'Есть <nav>',check:d=>!!d.querySelector('nav')},{desc:'В nav минимум 2 ссылки',check:d=>d.querySelectorAll('nav a').length>=2}]},
+  {difficulty:'medium',name:'Header с кнопкой',desc:'Добавь в шапку CTA-кнопку.\n• <header> с логотипом и nav\n• Минимум 3 ссылки в nav\n• Кнопка <button> «Войти» или «Записаться»',hint:'После nav добавь: <button>Записаться</button>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Сайт</title></head>\n<body>\n  <header>\n    <span class="logo">⚡ Сайт</span>\n    <nav>\n      <a href="#">Главная</a>\n      <a href="#">О нас</a>\n      <a href="#">Блог</a>\n      <!-- Добавь кнопку -->\n    </nav>\n  </header>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\nheader { background: #09080f; padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }\n.logo { color: #B5ED18; font-size: 18px; font-weight: bold; }\nnav a { color: #ccc; text-decoration: none; margin-right: 20px; }\nbutton { background: #685BC7; color: white; border: none; padding: 10px 22px; border-radius: 8px; cursor: pointer; }`,tests:[{desc:'Есть <header>',check:d=>!!d.querySelector('header')},{desc:'Есть <nav>',check:d=>!!d.querySelector('nav')},{desc:'В nav минимум 3 ссылки',check:d=>d.querySelectorAll('nav a').length>=3},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'medium',name:'Тёмная шапка с иконками',desc:'Создай шапку в тёмной теме.\n• <header> с тёмным фоном (#09080f)\n• Логотип с эмодзи или символом\n• Nav с 3 ссылками\n• Кнопка с акцентным цветом (#685BC7)',hint:'Логотип: <span class="logo">🚀 AI-TREND</span>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Тёмный сайт</title></head>\n<body>\n\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; background: #09080f; }\nheader { background: #09080f; border-bottom: 1px solid #2a2040; padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }\n.logo { color: #B5ED18; font-size: 18px; font-weight: bold; }\nnav a { color: rgba(255,255,255,.7); text-decoration: none; margin-right: 20px; }\nnav a:hover { color: #B5ED18; }\nbutton { background: #685BC7; color: white; border: none; padding: 10px 22px; border-radius: 8px; cursor: pointer; }`,tests:[{desc:'Есть <header>',check:d=>!!d.querySelector('header')},{desc:'Есть <nav>',check:d=>!!d.querySelector('nav')},{desc:'В nav минимум 3 ссылки',check:d=>d.querySelectorAll('nav a').length>=3},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'hard',name:'Профессиональный Header',desc:'Создай полноценную шапку сайта.\n• <header> на всю ширину\n• Логотип (div/span)\n• <nav> с минимум 3 ссылками <a>\n• Кнопка <button>\n• Всё расставлено через flexbox',hint:'header { display: flex; align-items: center; justify-content: space-between; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Сайт</title></head>\n<body>\n\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\nheader { background: #09080f; padding: 16px 40px; }\n.logo { color: #B5ED18; font-size: 20px; font-weight: bold; }\nnav a { color: #ccc; text-decoration: none; margin-right: 20px; }\nbutton { background: #685BC7; color: white; border: none; padding: 10px 22px; border-radius: 8px; cursor: pointer; }`,tests:[{desc:'Есть <header>',check:d=>!!d.querySelector('header')},{desc:'Есть <nav>',check:d=>!!d.querySelector('nav')},{desc:'В nav минимум 3 ссылки',check:d=>d.querySelectorAll('nav a').length>=3},{desc:'Есть <button>',check:d=>!!d.querySelector('button')},{desc:'Есть логотип (.logo или span)',check:d=>!!(d.querySelector('.logo')||d.querySelector('header span'))}]},
+  {difficulty:'hard',name:'Шапка с мобильным меню',desc:'Добавь в шапку скрытое меню при узкой ширине.\n• <header> с логотипом, nav и кнопкой-бургером\n• Кнопка .burger с тремя полосками (☰)\n• nav скрывается/показывается по клику\n• onclick toggles класс open на nav',hint:'<button class="burger" onclick="this.nextElementSibling.classList.toggle(\'open\')">☰</button>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Мобильный Header</title></head>\n<body>\n  <header>\n    <span class="logo">⚡ МойСайт</span>\n    <!-- Добавь кнопку burger и nav с 4 ссылками -->\n  </header>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\nheader { background: #09080f; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }\n.logo { color: #B5ED18; font-size: 18px; font-weight: bold; }\n.burger { background: none; border: none; color: white; font-size: 22px; cursor: pointer; }\nnav { display: none; width: 100%; flex-direction: column; }\nnav.open { display: flex; }\nnav a { color: rgba(255,255,255,.8); text-decoration: none; padding: 10px 0; border-bottom: 1px solid #2a2040; }`,tests:[{desc:'Есть <header>',check:d=>!!d.querySelector('header')},{desc:'Есть .burger кнопка',check:d=>!!d.querySelector('.burger')},{desc:'Есть <nav>',check:d=>!!d.querySelector('nav')},{desc:'В nav минимум 4 ссылки',check:d=>d.querySelectorAll('nav a').length>=4}]},
+  {difficulty:'hard',name:'Header + Hero вместе',desc:'Создай связку шапки и главного экрана.\n• <header> с логотипом и nav\n• <section class="hero"> с заголовком и кнопкой\n• header прилипает вверху (position: fixed)\n• hero занимает весь экран (min-height: 100vh)',hint:'header { position: fixed; top: 0; width: 100%; } .hero { padding-top: 60px; min-height: 100vh; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Header + Hero</title></head>\n<body>\n  <!-- header (фиксированный) -->\n  <!-- section.hero с h1, p, button -->\n\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\nheader { background: rgba(9,8,15,.9); padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }\n.logo { color: #B5ED18; font-weight: bold; font-size: 18px; }\nnav a { color: rgba(255,255,255,.7); text-decoration: none; margin-left: 20px; }\n.hero { background: linear-gradient(135deg,#09080f,#1a1636); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; padding: 20px; }\n.hero h1 { font-size: 48px; color: #B5ED18; margin-bottom: 16px; }\n.hero p { font-size: 18px; opacity: .7; margin-bottom: 32px; }\n.hero button { background: #685BC7; color: white; border: none; padding: 14px 32px; border-radius: 12px; font-size: 16px; cursor: pointer; }`,tests:[{desc:'Есть <header>',check:d=>!!d.querySelector('header')},{desc:'Есть <nav> в header',check:d=>!!d.querySelector('header nav')},{desc:'Есть .hero секция',check:d=>!!d.querySelector('.hero')},{desc:'Есть <h1> в hero',check:d=>!!d.querySelector('.hero h1')},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
 ],
 },
 {
@@ -1038,45 +980,16 @@ nav a:hover{color:#B5ED18}
 .bs{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3);padding:16px 36px;border-radius:14px;font-size:16px;font-weight:bold;cursor:pointer;transition:all .2s}
 .bs:hover{border-color:#B5ED18;color:#B5ED18}`,
   practiceLevels:[
-  {
-    name:'Большой заголовок секции',
-    desc:'Создай тег <section> и добавь внутрь:\n• Большой заголовок <h1>\n• Абзац <p> с кратким описанием',
-    hint:'<section><h1>Заголовок</h1><p>Описание</p></section>',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero</title></head>\n<body>\n  <!-- Добавь section с h1 и p -->\n\n</body>\n</html>`,
-    starterCss:`body { margin: 0; font-family: Arial; background: #09080f; color: white; }\nsection { padding: 60px 40px; text-align: center; }\nh1 { font-size: 48px; color: #B5ED18; }\np { color: rgba(255,255,255,.7); font-size: 18px; }`,
-    tests:[
-      {desc:'Есть тег <section>',check:d=>!!d.querySelector('section')},
-      {desc:'Есть <h1> внутри section',check:d=>!!d.querySelector('section h1')},
-      {desc:'Есть <p> внутри section',check:d=>!!d.querySelector('section p')},
-    ]
-  },
-  {
-    name:'Hero с цветным фоном',
-    desc:'Создай Hero-секцию:\n• <section class="hero">\n• <h1> и <p> внутри\n• <button> — кнопка призыва\n• CSS: цветной фон (background)',
-    hint:'В CSS напиши: .hero { background: #685BC7; color: white; padding: 80px; text-align: center; }',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero</title></head>\n<body>\n  <section class="hero">\n    <!-- h1, p, button -->\n  </section>\n</body>\n</html>`,
-    starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\n.hero {\n  /* Добавь: background, color, padding, text-align */\n}`,
-    tests:[
-      {desc:'Есть <section>',check:d=>!!d.querySelector('section')},
-      {desc:'Есть <h1>',check:d=>!!d.querySelector('section h1')},
-      {desc:'Есть <button>',check:d=>!!d.querySelector('button')},
-      {desc:'Задан фон (background)',check:d=>{const s=d.querySelector('.hero')||d.querySelector('section');return s&&getComputedStyle(s).backgroundColor!=='rgba(0, 0, 0, 0)';}},
-    ]
-  },
-  {
-    name:'Профессиональный Hero',
-    desc:'Создай Hero на весь экран:\n• <section class="hero">\n• <h1>, <p>, <button>\n• CSS: min-height: 100vh\n• CSS: display flex + по центру\n• Градиентный фон linear-gradient()',
-    hint:'.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #09080f, #685BC7); }',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero</title></head>\n<body>\n  <section class="hero">\n\n  </section>\n</body>\n</html>`,
-    starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\n.hero {\n  text-align: center;\n  color: white;\n  padding: 40px;\n  /* Добавь min-height, display, background */\n}`,
-    tests:[
-      {desc:'Есть <h1>',check:d=>!!d.querySelector('section h1')},
-      {desc:'Есть <button>',check:d=>!!d.querySelector('button')},
-      {desc:'min-height задан',check:d=>{const s=d.querySelector('.hero')||d.querySelector('section');return s&&getComputedStyle(s).minHeight!=='0px';}},
-      {desc:'display: flex',check:d=>{const s=d.querySelector('.hero')||d.querySelector('section');return s&&getComputedStyle(s).display==='flex';}},
-      {desc:'Градиент в фоне',check:d=>{const s=d.querySelector('.hero')||d.querySelector('section');return s&&getComputedStyle(s).backgroundImage.includes('gradient');}},
-    ]
-  },
+  {difficulty:'easy',name:'Тег section с заголовком',desc:'Создай секцию с заголовком.\n• Тег <section>\n• Внутри <h1> с текстом',hint:'<section><h1>Заголовок</h1></section>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero</title></head>\n<body>\n  <!-- Добавь section с h1 -->\n\n</body>\n</html>`,starterCss:`body { margin: 0; font-family: Arial; background: #09080f; color: white; }\nsection { padding: 60px 40px; text-align: center; }\nh1 { font-size: 48px; color: #B5ED18; }`,tests:[{desc:'Есть тег <section>',check:d=>!!d.querySelector('section')},{desc:'Есть <h1> внутри section',check:d=>!!d.querySelector('section h1')},{desc:'<h1> не пустой',check:d=>d.querySelector('h1')?.textContent.trim().length>0}]},
+  {difficulty:'easy',name:'Section с заголовком и текстом',desc:'Создай секцию с заголовком и описанием.\n• Тег <section>\n• Заголовок <h1>\n• Абзац <p> с кратким описанием',hint:'<section><h1>Заголовок</h1><p>Описание</p></section>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero</title></head>\n<body>\n  <!-- Добавь section с h1 и p -->\n\n</body>\n</html>`,starterCss:`body { margin: 0; font-family: Arial; background: #09080f; color: white; }\nsection { padding: 60px 40px; text-align: center; }\nh1 { font-size: 48px; color: #B5ED18; }\np { color: rgba(255,255,255,.7); font-size: 18px; }`,tests:[{desc:'Есть тег <section>',check:d=>!!d.querySelector('section')},{desc:'Есть <h1> внутри section',check:d=>!!d.querySelector('section h1')},{desc:'Есть <p> внутри section',check:d=>!!d.querySelector('section p')}]},
+  {difficulty:'easy',name:'Hero с кнопкой',desc:'Добавь в секцию кнопку-призыв.\n• <section> с заголовком <h1>\n• Описание <p>\n• Кнопка <button> с текстом',hint:'<button>Начать учиться 🚀</button>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero</title></head>\n<body>\n  <section>\n    <h1>Добро пожаловать!</h1>\n    <p>Изучай веб-разработку вместе с нами</p>\n    <!-- Добавь button -->\n  </section>\n</body>\n</html>`,starterCss:`body { margin: 0; font-family: Arial; background: #09080f; color: white; }\nsection { padding: 80px 40px; text-align: center; }\nh1 { font-size: 42px; color: #B5ED18; margin-bottom: 16px; }\np { color: rgba(255,255,255,.7); font-size: 18px; margin-bottom: 32px; }\nbutton { background: #685BC7; color: white; border: none; padding: 14px 32px; border-radius: 12px; font-size: 16px; cursor: pointer; }`,tests:[{desc:'Есть <section>',check:d=>!!d.querySelector('section')},{desc:'Есть <h1>',check:d=>!!d.querySelector('section h1')},{desc:'Есть <p>',check:d=>!!d.querySelector('section p')},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'easy',name:'Section с цветным фоном',desc:'Задай секции цветной фон.\n• <section> с h1 и p\n• В CSS задай background цвет\n• Текст белого цвета',hint:'.hero { background: #685BC7; color: white; padding: 80px; text-align: center; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero</title></head>\n<body>\n  <section class="hero">\n    <h1>Привет!</h1>\n    <p>Добро пожаловать на мой сайт</p>\n  </section>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\n.hero {\n  /* Добавь: background, color, padding, text-align */\n}`,tests:[{desc:'Есть <section>',check:d=>!!d.querySelector('section')},{desc:'Есть <h1>',check:d=>!!d.querySelector('section h1')},{desc:'Есть <p>',check:d=>!!d.querySelector('section p')}]},
+  {difficulty:'medium',name:'Hero с цветным фоном',desc:'Создай Hero-секцию с кнопкой и фоном.\n• <section class="hero">\n• <h1> и <p> внутри\n• <button> — кнопка призыва\n• CSS: цветной фон',hint:'В CSS: .hero { background: #685BC7; color: white; padding: 80px; text-align: center; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero</title></head>\n<body>\n  <section class="hero">\n    <!-- h1, p, button -->\n  </section>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\n.hero {\n  /* background, color, padding, text-align */\n}`,tests:[{desc:'Есть <section>',check:d=>!!d.querySelector('section')},{desc:'Есть <h1>',check:d=>!!d.querySelector('section h1')},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'medium',name:'Hero с градиентом',desc:'Замени однотонный фон на градиент.\n• <section class="hero"> с h1, p, button\n• CSS: background: linear-gradient(...) с 2 цветами\n• Текст центрован',hint:'.hero { background: linear-gradient(135deg, #09080f, #685BC7); }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero Gradient</title></head>\n<body>\n  <section class="hero">\n    <h1>Привет, мир! 👋</h1>\n    <p>Изучай HTML и CSS вместе с нами</p>\n    <button>Начать 🚀</button>\n  </section>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\n.hero {\n  /* linear-gradient, color: white, padding, text-align */\n}\nh1 { font-size: 42px; margin-bottom: 16px; }\np { font-size: 18px; opacity: .75; margin-bottom: 28px; }\nbutton { background: white; color: #685BC7; border: none; padding: 14px 32px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; }`,tests:[{desc:'Есть <section class="hero">',check:d=>!!d.querySelector('section.hero')},{desc:'Есть <h1>',check:d=>!!d.querySelector('.hero h1')},{desc:'Есть <p>',check:d=>!!d.querySelector('.hero p')},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'medium',name:'Hero по центру экрана',desc:'Расположи содержимое Hero точно по центру.\n• <section class="hero">\n• Внутри: тег .tag (бэдж), h1, p, button\n• CSS: display flex + align-items center + justify-content center\n• flex-direction: column',hint:'.hero { display: flex; flex-direction: column; align-items: center; justify-content: center; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero Center</title></head>\n<body>\n  <section class="hero">\n    <div class="tag">🤖 AI School</div>\n    <h1>Создавай крутые сайты!</h1>\n    <p>Научись HTML, CSS и нейросетям за 3 месяца</p>\n    <button>Записаться</button>\n  </section>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\n.hero {\n  background: linear-gradient(135deg,#09080f,#1a1636);\n  color: white;\n  text-align: center;\n  padding: 40px;\n  /* display flex, flex-direction column, align-items center, justify-content center */\n}\n.tag { background: rgba(181,237,24,.15); border: 1px solid #B5ED18; color: #B5ED18; border-radius: 20px; padding: 6px 18px; font-size: 14px; margin-bottom: 20px; }\nh1 { font-size: 42px; margin-bottom: 16px; }\np { opacity: .7; font-size: 18px; margin-bottom: 32px; }\nbutton { background: #685BC7; color: white; border: none; padding: 14px 36px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; }`,tests:[{desc:'Есть <section class="hero">',check:d=>!!d.querySelector('section.hero')},{desc:'Есть .tag',check:d=>!!d.querySelector('.tag')},{desc:'Есть <h1>',check:d=>!!d.querySelector('h1')},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'hard',name:'Hero на весь экран',desc:'Hero должен занимать весь экран.\n• <section class="hero">\n• <h1>, <p>, <button>\n• CSS: min-height: 100vh\n• CSS: display flex + по центру\n• Градиентный фон linear-gradient()',hint:'.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #09080f, #685BC7); }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero Full</title></head>\n<body>\n  <section class="hero">\n\n  </section>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\n.hero {\n  text-align: center;\n  color: white;\n  padding: 40px;\n  /* Добавь min-height: 100vh, display: flex, background: gradient */\n}`,tests:[{desc:'Есть <h1>',check:d=>!!d.querySelector('.hero h1')},{desc:'Есть <p>',check:d=>!!d.querySelector('.hero p')},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'hard',name:'Hero с анимированной кнопкой',desc:'Создай профессиональный Hero с эффектами.\n• <section class="hero"> с тегом, h1, p, двумя кнопками\n• Первая кнопка .btn-primary, вторая .btn-secondary\n• CSS hover эффект на кнопках (transform: translateY)\n• Градиент и text-shadow на h1',hint:'.btn:hover { transform: translateY(-3px); }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hero Pro</title></head>\n<body>\n  <section class="hero">\n    <div class="tag">🚀 Новый сезон</div>\n    <h1>Твой первый сайт<br>начинается здесь</h1>\n    <p>Обучение для подростков 12–17 лет</p>\n    <div class="btns">\n      <button class="btn btn-primary">Записаться</button>\n      <button class="btn btn-secondary">Узнать больше</button>\n    </div>\n  </section>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\n.hero { min-height: 100vh; background: linear-gradient(135deg,#09080f,#1a1636 50%,#2d1a6e); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; padding: 40px; }\n.tag { background: rgba(181,237,24,.15); border: 1px solid rgba(181,237,24,.4); border-radius: 20px; padding: 7px 20px; font-size: 14px; color: #B5ED18; margin-bottom: 24px; }\nh1 { font-size: 52px; font-weight: 900; margin-bottom: 20px; line-height: 1.1; }\np { font-size: 18px; opacity: .7; margin-bottom: 36px; }\n.btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }\n.btn { border: none; padding: 15px 36px; border-radius: 14px; font-size: 16px; font-weight: bold; cursor: pointer; transition: transform .2s; }\n.btn:hover { transform: translateY(-3px); }\n.btn-primary { background: linear-gradient(135deg,#685BC7,#8075D9); color: white; }\n.btn-secondary { background: transparent; color: white; border: 2px solid rgba(255,255,255,.3); }`,tests:[{desc:'Есть <section class="hero">',check:d=>!!d.querySelector('section.hero')},{desc:'Есть .tag',check:d=>!!d.querySelector('.tag')},{desc:'Есть <h1>',check:d=>!!d.querySelector('h1')},{desc:'Есть .btn-primary',check:d=>!!d.querySelector('.btn-primary')},{desc:'Есть .btn-secondary',check:d=>!!d.querySelector('.btn-secondary')}]},
+  {difficulty:'hard',name:'Полный лендинг: Header + Hero',desc:'Создай полноценный лендинг.\n• <header> фиксированный (position:fixed) с логотипом и nav\n• <section class="hero"> на весь экран с h1, p, button\n• hero учитывает высоту header (padding-top)\n• Красивый градиент, все элементы стилизованы',hint:'header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Лендинг</title></head>\n<body>\n  <!-- header фиксированный с логотипом и nav -->\n  <!-- section.hero с h1, p, button -->\n\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\nheader { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(9,8,15,.85); backdrop-filter: blur(12px); padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }\n.logo { color: #B5ED18; font-size: 18px; font-weight: bold; }\nnav a { color: rgba(255,255,255,.7); text-decoration: none; margin-left: 24px; }\n.hero { min-height: 100vh; padding-top: 60px; background: linear-gradient(135deg,#09080f,#1a1636 60%,#2d1a6e); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; padding: 80px 40px 60px; }\n.hero h1 { font-size: 52px; font-weight: 900; color: #B5ED18; margin-bottom: 18px; }\n.hero p { font-size: 20px; opacity: .7; margin-bottom: 36px; }\n.hero button { background: linear-gradient(135deg,#685BC7,#8075D9); color: white; border: none; padding: 16px 40px; border-radius: 14px; font-size: 17px; font-weight: bold; cursor: pointer; }`,tests:[{desc:'Есть <header>',check:d=>!!d.querySelector('header')},{desc:'Есть <nav> в header',check:d=>!!d.querySelector('header nav')},{desc:'Есть .hero',check:d=>!!d.querySelector('.hero')},{desc:'Есть <h1> в hero',check:d=>!!d.querySelector('.hero h1')},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
 ],
 },
 {
@@ -1152,45 +1065,16 @@ h2{font-size:40px;color:#1a1636;margin:16px 0 10px}
 .card button{background:linear-gradient(135deg,#685BC7,#8075D9);color:#fff;border:none;padding:11px 26px;border-radius:10px;font-size:14px;font-weight:bold;cursor:pointer;transition:transform .2s}
 .card button:hover{transform:scale(1.05)}`,
   practiceLevels:[
-  {
-    name:'Первая карточка',
-    desc:'Создай одну карточку <div class="card"> с:\n• Заголовком <h3>\n• Текстом <p>',
-    hint:'<div class="card"><h3>Название</h3><p>Описание</p></div>',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Карточка</title></head>\n<body>\n  <!-- Добавь div.card с h3 и p -->\n\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\n.card { background: white; padding: 24px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,.08); max-width: 280px; }`,
-    tests:[
-      {desc:'Есть .card',check:d=>!!d.querySelector('.card')},
-      {desc:'Есть <h3> в карточке',check:d=>!!d.querySelector('.card h3')},
-      {desc:'Есть <p> в карточке',check:d=>!!d.querySelector('.card p')},
-    ]
-  },
-  {
-    name:'Две карточки рядом',
-    desc:'Создай контейнер <div class="cards"> с двумя карточками:\n• Каждая карточка — <article class="card">\n• В каждой: <h3> и <p>\n• CSS: расположи рядом (flex или grid)',
-    hint:'Для .cards: display: flex; gap: 20px;\nИли: display: grid; grid-template-columns: 1fr 1fr;',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Карточки</title></head>\n<body>\n  <div class="cards">\n    <article class="card">\n      <!-- h3 и p -->\n    </article>\n    <!-- Ещё одна карточка -->\n  </div>\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\n.cards { /* display */ gap: 20px; }\n.card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,.07); }`,
-    tests:[
-      {desc:'Минимум 2 карточки',check:d=>d.querySelectorAll('.card').length>=2},
-      {desc:'В каждой карточке <h3>',check:d=>d.querySelectorAll('.card h3').length>=2},
-      {desc:'В каждой карточке <p>',check:d=>d.querySelectorAll('.card p').length>=2},
-      {desc:'Карточки расположены рядом (flex/grid)',check:d=>{const c=d.querySelector('.cards');if(!c)return false;const d2=getComputedStyle(c).display;return d2==='flex'||d2==='grid';}},
-    ]
-  },
-  {
-    name:'Сетка из 3 карточек',
-    desc:'Создай сетку из 3 карточек:\n• Контейнер .cards с CSS Grid\n• 3 карточки <article class="card">\n• В каждой: иконка, <h3>, <p>, <button>\n• Hover-эффект (transform: translateY)\n• border-radius у карточек',
-    hint:'.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }\n.card:hover { transform: translateY(-6px); }',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Карточки</title></head>\n<body>\n  <div class="cards">\n\n  </div>\n</body>\n</html>`,
-    starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; padding: 40px; background: #f5f0ff; }\n.cards { /* grid */ }\n.card { background: white; padding: 28px; text-align: center; /* border-radius, box-shadow */ transition: transform .25s; }\n.card:hover { /* transform */ }`,
-    tests:[
-      {desc:'Минимум 3 карточки',check:d=>d.querySelectorAll('.card').length>=3},
-      {desc:'Есть <h3> в каждой',check:d=>d.querySelectorAll('.card h3').length>=3},
-      {desc:'CSS Grid задан',check:d=>{const c=d.querySelector('.cards');return c&&getComputedStyle(c).display==='grid';}},
-      {desc:'3 колонки в Grid',check:d=>{const c=d.querySelector('.cards');return c&&getComputedStyle(c).gridTemplateColumns.split(' ').length===3;}},
-      {desc:'border-radius у карточек',check:d=>{const c=d.querySelector('.card');return c&&getComputedStyle(c).borderRadius!=='0px';}},
-    ]
-  },
+  {difficulty:'easy',name:'Первая карточка',desc:'Создай одну карточку с заголовком и текстом.\n• Тег <div class="card">\n• Заголовок <h3>\n• Абзац <p>',hint:'<div class="card"><h3>Название</h3><p>Описание</p></div>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Карточка</title></head>\n<body>\n  <!-- Добавь div.card с h3 и p -->\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\n.card { background: white; padding: 24px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,.08); max-width: 280px; }`,tests:[{desc:'Есть .card',check:d=>!!d.querySelector('.card')},{desc:'Есть <h3> в карточке',check:d=>!!d.querySelector('.card h3')},{desc:'Есть <p> в карточке',check:d=>!!d.querySelector('.card p')}]},
+  {difficulty:'easy',name:'Карточка с иконкой',desc:'Добавь иконку (эмодзи) в карточку.\n• <div class="card">\n• Иконка эмодзи в <div class="icon"> или <span>\n• <h3> с названием\n• <p> с описанием',hint:'<div class="icon">🌐</div><h3>HTML</h3>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Карточка с иконкой</title></head>\n<body>\n  <div class="card">\n    <!-- icon, h3, p -->\n  </div>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\n.card { background: white; padding: 28px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,.08); max-width: 240px; text-align: center; }\n.icon { font-size: 40px; margin-bottom: 14px; }\nh3 { color: #1a1636; margin-bottom: 8px; }\np { color: #777; font-size: 14px; }`,tests:[{desc:'Есть .card',check:d=>!!d.querySelector('.card')},{desc:'Есть иконка (.icon или span)',check:d=>!!(d.querySelector('.icon')||d.querySelector('.card span'))},{desc:'Есть <h3>',check:d=>!!d.querySelector('.card h3')},{desc:'Есть <p>',check:d=>!!d.querySelector('.card p')}]},
+  {difficulty:'easy',name:'Карточка с кнопкой',desc:'Добавь кнопку действия в карточку.\n• <div class="card">\n• <h3> название\n• <p> описание\n• <button> «Начать» или «Подробнее»',hint:'<button>Начать →</button>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Карточка</title></head>\n<body>\n  <div class="card">\n    <h3>HTML & CSS</h3>\n    <p>Создавай красивые сайты с нуля!</p>\n    <!-- Добавь button -->\n  </div>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\n.card { background: white; padding: 28px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,.08); max-width: 280px; }\nh3 { color: #1a1636; margin-bottom: 8px; }\np { color: #777; font-size: 14px; margin-bottom: 18px; }\nbutton { background: #685BC7; color: white; border: none; padding: 10px 22px; border-radius: 10px; font-size: 14px; font-weight: bold; cursor: pointer; }`,tests:[{desc:'Есть .card',check:d=>!!d.querySelector('.card')},{desc:'Есть <h3>',check:d=>!!d.querySelector('.card h3')},{desc:'Есть <p>',check:d=>!!d.querySelector('.card p')},{desc:'Есть <button>',check:d=>!!d.querySelector('.card button')}]},
+  {difficulty:'easy',name:'Карточка с тенью и скруглением',desc:'Стилизуй карточку красиво.\n• <div class="card"> с h3 и p\n• CSS: border-radius (скругление углов)\n• CSS: box-shadow (тень)\n• CSS: padding (отступы внутри)',hint:'.card { border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.1); padding: 28px; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Стильная карточка</title></head>\n<body>\n  <div class="card">\n    <h3>Моя карточка</h3>\n    <p>Это красиво оформленная карточка с тенью и скруглёнными углами</p>\n  </div>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; }\n.card {\n  background: white;\n  max-width: 280px;\n  /* border-radius, box-shadow, padding */\n}`,tests:[{desc:'Есть .card',check:d=>!!d.querySelector('.card')},{desc:'Есть <h3>',check:d=>!!d.querySelector('.card h3')},{desc:'Есть <p>',check:d=>!!d.querySelector('.card p')}]},
+  {difficulty:'medium',name:'Две карточки рядом',desc:'Размести две карточки в ряд.\n• Контейнер <div class="cards">\n• 2 карточки <article class="card">\n• В каждой: <h3> и <p>\n• Расположи рядом через flex',hint:'Для .cards: display: flex; gap: 20px;',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Карточки</title></head>\n<body>\n  <div class="cards">\n    <article class="card">\n      <!-- h3 и p -->\n    </article>\n    <!-- Ещё одна карточка -->\n  </div>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\n.cards { display: flex; gap: 20px; }\n.card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,.07); flex: 1; }`,tests:[{desc:'Минимум 2 карточки',check:d=>d.querySelectorAll('.card').length>=2},{desc:'В каждой карточке <h3>',check:d=>d.querySelectorAll('.card h3').length>=2},{desc:'В каждой карточке <p>',check:d=>d.querySelectorAll('.card p').length>=2}]},
+  {difficulty:'medium',name:'Три карточки в сетке',desc:'Создай сетку из 3 карточек через Grid.\n• Контейнер .cards с display: grid\n• grid-template-columns: repeat(3, 1fr)\n• 3 карточки <article class="card">\n• В каждой: иконка, h3, p',hint:'.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>3 Карточки</title></head>\n<body>\n  <div class="cards">\n    <!-- 3 article.card с иконкой, h3, p -->\n  </div>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; padding: 40px; background: #f5f0ff; }\n.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }\n.card { background: white; padding: 28px; text-align: center; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,.07); }\n.icon { font-size: 42px; margin-bottom: 14px; }\nh3 { color: #1a1636; margin-bottom: 8px; }\np { color: #777; font-size: 14px; }`,tests:[{desc:'Минимум 3 карточки',check:d=>d.querySelectorAll('.card').length>=3},{desc:'Есть <h3> в каждой',check:d=>d.querySelectorAll('.card h3').length>=3},{desc:'Есть <p> в каждой',check:d=>d.querySelectorAll('.card p').length>=3}]},
+  {difficulty:'medium',name:'Карточки с hover эффектом',desc:'Добавь анимацию при наведении.\n• 2+ карточки .card\n• CSS: transition на .card\n• CSS: .card:hover { transform: translateY(-6px); }\n• box-shadow изменяется при hover',hint:'.card { transition: transform .25s, box-shadow .25s; }\n.card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.15); }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Hover карточки</title></head>\n<body>\n  <div class="cards">\n    <div class="card"><h3>🌐 HTML</h3><p>Изучай веб-разметку</p></div>\n    <div class="card"><h3>🎨 CSS</h3><p>Делай красивые страницы</p></div>\n    <div class="card"><h3>⚡ JS</h3><p>Добавляй интерактивность</p></div>\n  </div>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; }\n.cards { display: flex; gap: 20px; }\n.card {\n  background: white;\n  padding: 28px;\n  border-radius: 14px;\n  box-shadow: 0 4px 16px rgba(0,0,0,.07);\n  flex: 1;\n  cursor: pointer;\n  /* transition */\n}\n.card:hover {\n  /* transform: translateY(-6px); */\n}`,tests:[{desc:'Минимум 2 карточки .card',check:d=>d.querySelectorAll('.card').length>=2},{desc:'Есть <h3> в карточках',check:d=>d.querySelectorAll('.card h3').length>=2},{desc:'Есть <p> в карточках',check:d=>d.querySelectorAll('.card p').length>=2}]},
+  {difficulty:'hard',name:'Сетка из 3 карточек',desc:'Создай профессиональную сетку.\n• Контейнер .cards с CSS Grid (3 колонки)\n• 3 карточки с иконкой, <h3>, <p>, <button>\n• CSS: hover эффект (transform: translateY)\n• border-radius и box-shadow',hint:'.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }\n.card:hover { transform: translateY(-6px); }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Карточки</title></head>\n<body>\n  <div class="cards">\n\n  </div>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; padding: 40px; background: #f5f0ff; }\n.cards { /* grid 3 колонки */ }\n.card { background: white; padding: 28px; text-align: center; /* border-radius, box-shadow */ transition: transform .25s; }\n.card:hover { /* transform */ }`,tests:[{desc:'Минимум 3 карточки .card',check:d=>d.querySelectorAll('.card').length>=3},{desc:'Есть <h3> в каждой',check:d=>d.querySelectorAll('.card h3').length>=3},{desc:'Есть <button> в каждой',check:d=>d.querySelectorAll('.card button').length>=3}]},
+  {difficulty:'hard',name:'Секция с заголовком и карточками',desc:'Создай полноценный раздел сайта.\n• <section> с заголовком <h2> и подзаголовком <p>\n• Контейнер .cards внутри\n• Минимум 3 карточки с иконкой, h3, p, button\n• Красивый стиль всей секции',hint:'<section><div class="header-block"><h2>...</h2><p>...</p></div><div class="cards">...</div></section>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Секция с карточками</title></head>\n<body>\n  <section>\n    <!-- Заголовок секции и 3+ карточки -->\n  </section>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; background: #f5f0ff; }\nsection { padding: 70px 40px; max-width: 960px; margin: 0 auto; }\n.header-block { text-align: center; margin-bottom: 48px; }\nh2 { font-size: 36px; color: #1a1636; margin-bottom: 12px; }\n.header-block p { color: #888; font-size: 16px; }\n.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }\n.card { background: white; padding: 28px; text-align: center; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,.07); transition: transform .25s; }\n.card:hover { transform: translateY(-6px); }\n.icon { font-size: 44px; margin-bottom: 16px; }\n.card h3 { color: #1a1636; margin-bottom: 10px; }\n.card p { color: #777; font-size: 14px; margin-bottom: 20px; }\n.card button { background: #685BC7; color: white; border: none; padding: 10px 22px; border-radius: 10px; font-weight: bold; cursor: pointer; }`,tests:[{desc:'Есть <section>',check:d=>!!d.querySelector('section')},{desc:'Есть <h2>',check:d=>!!d.querySelector('h2')},{desc:'Минимум 3 карточки .card',check:d=>d.querySelectorAll('.card').length>=3},{desc:'Есть кнопки в карточках',check:d=>d.querySelectorAll('.card button').length>=3}]},
+  {difficulty:'hard',name:'Темные карточки',desc:'Создай карточки в тёмной теме.\n• Тёмный фон страницы (#09080f)\n• 3+ карточки с тёмным фоном (#120f20)\n• Цветные иконки и акценты (#B5ED18 или #685BC7)\n• Hover эффект с glow тенью',hint:'.card:hover { box-shadow: 0 12px 40px rgba(104,91,199,.3); transform: translateY(-6px); }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Тёмные карточки</title></head>\n<body>\n  <section>\n    <h2>🚀 Наши курсы</h2>\n    <div class="cards">\n      <!-- 3 карточки с иконкой, h3, p, button -->\n    </div>\n  </section>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; background: #09080f; padding: 40px; }\nsection { max-width: 900px; margin: 0 auto; }\nh2 { color: #B5ED18; font-size: 28px; text-align: center; margin-bottom: 32px; }\n.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }\n.card { background: #120f20; border: 1px solid #201d35; border-radius: 16px; padding: 28px; text-align: center; transition: transform .25s, box-shadow .25s; cursor: pointer; }\n.card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(104,91,199,.3); }\n.icon { font-size: 40px; margin-bottom: 14px; }\n.card h3 { color: #fff; margin-bottom: 8px; }\n.card p { color: rgba(255,255,255,.6); font-size: 13px; margin-bottom: 18px; }\n.card button { background: linear-gradient(135deg,#685BC7,#8075D9); color: white; border: none; padding: 9px 20px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }`,tests:[{desc:'Есть <section>',check:d=>!!d.querySelector('section')},{desc:'Минимум 3 карточки .card',check:d=>d.querySelectorAll('.card').length>=3},{desc:'Иконки в карточках',check:d=>d.querySelectorAll('.card .icon').length>=3||d.querySelectorAll('.card span').length>=3},{desc:'Кнопки в карточках',check:d=>d.querySelectorAll('.card button').length>=3}]},
 ],
 },
 {
@@ -1245,44 +1129,16 @@ td{padding:14px 20px;font-size:14px;color:#333;border-bottom:1px solid #f0ebff}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:#f8f5ff}`,
   practiceLevels:[
-  {
-    name:'Простая таблица',
-    desc:'Создай таблицу <table> с:\n• Одной строкой <tr>\n• Двумя ячейками <td>',
-    hint:'<table><tr><td>Ячейка 1</td><td>Ячейка 2</td></tr></table>',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Таблица</title></head>\n<body>\n  <!-- Добавь table с tr и td -->\n\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 30px; }\ntable { border-collapse: collapse; }\ntd { border: 1px solid #ccc; padding: 10px 16px; }`,
-    tests:[
-      {desc:'Есть <table>',check:d=>!!d.querySelector('table')},
-      {desc:'Есть строка <tr>',check:d=>!!d.querySelector('tr')},
-      {desc:'Есть ячейки <td>',check:d=>d.querySelectorAll('td').length>=2},
-    ]
-  },
-  {
-    name:'Таблица с шапкой',
-    desc:'Создай таблицу с:\n• Шапкой <thead> с заголовками <th>\n• Телом <tbody> с 2 строками\n• В каждой строке минимум 2 ячейки <td>',
-    hint:'Порядок: table → thead → tr → th\nпотом: tbody → tr → td',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Таблица</title></head>\n<body>\n  <table>\n    <thead>\n      <tr><th>Имя</th><th>Оценка</th></tr>\n    </thead>\n    <tbody>\n      <!-- Добавь 2 строки tr с td -->\n    </tbody>\n  </table>\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\ntable { border-collapse: collapse; width: 100%; max-width: 500px; }\nth { background: #685BC7; color: white; padding: 12px; text-align: left; }\ntd { padding: 10px 12px; border-bottom: 1px solid #eee; }`,
-    tests:[
-      {desc:'Есть <thead>',check:d=>!!d.querySelector('thead')},
-      {desc:'Есть <tbody>',check:d=>!!d.querySelector('tbody')},
-      {desc:'Заголовки <th> в шапке',check:d=>d.querySelectorAll('thead th').length>=2},
-      {desc:'Минимум 2 строки в tbody',check:d=>d.querySelectorAll('tbody tr').length>=2},
-    ]
-  },
-  {
-    name:'Красивая таблица расписания',
-    desc:'Создай полную таблицу:\n• thead с минимум 3 th\n• tbody с минимум 3 строками tr\n• В каждой строке 3+ ячейки td\n• border-collapse: collapse\n• Hover-эффект на строки',
-    hint:'table { border-collapse: collapse; }\ntr:hover td { background: #f5f0ff; }',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Расписание</title></head>\n<body>\n  <h2>📅 Расписание</h2>\n  <table>\n\n  </table>\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\ntable { width: 100%; /* border-collapse */ }\nth { background: linear-gradient(135deg,#685BC7,#8075D9); color: white; padding: 14px; text-align: left; }\ntd { padding: 12px; border-bottom: 1px solid #e8e0ff; }\ntr:hover td { /* hover */ }`,
-    tests:[
-      {desc:'Минимум 3 заголовка <th>',check:d=>d.querySelectorAll('thead th').length>=3},
-      {desc:'Минимум 3 строки в tbody',check:d=>d.querySelectorAll('tbody tr').length>=3},
-      {desc:'Минимум 3 ячейки в строке',check:d=>d.querySelectorAll('tbody tr:first-child td').length>=3},
-      {desc:'border-collapse: collapse',check:d=>{const t=d.querySelector('table');return t&&getComputedStyle(t).borderCollapse==='collapse';}},
-    ]
-  },
+  {difficulty:'easy',name:'Простая таблица',desc:'Создай таблицу с одной строкой.\n• Тег <table>\n• Строка <tr>\n• Минимум 2 ячейки <td>',hint:'<table><tr><td>Ячейка 1</td><td>Ячейка 2</td></tr></table>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Таблица</title></head>\n<body>\n  <!-- Добавь table с tr и td -->\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; }\ntable { border-collapse: collapse; }\ntd { border: 1px solid #ccc; padding: 10px 16px; }`,tests:[{desc:'Есть <table>',check:d=>!!d.querySelector('table')},{desc:'Есть строка <tr>',check:d=>!!d.querySelector('tr')},{desc:'Есть ячейки <td>',check:d=>d.querySelectorAll('td').length>=2}]},
+  {difficulty:'easy',name:'Таблица с двумя строками',desc:'Создай таблицу с двумя строками данных.\n• <table> с минимум 2 строками <tr>\n• В каждой строке 2 ячейки <td>',hint:'<table>\n  <tr><td>Имя</td><td>Оценка</td></tr>\n  <tr><td>Анна</td><td>5</td></tr>\n</table>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Таблица</title></head>\n<body>\n  <h2>Моя таблица</h2>\n  <table>\n    <!-- 2 строки tr с 2 ячейками td каждая -->\n  </table>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; }\ntable { border-collapse: collapse; }\ntd { border: 1px solid #ccc; padding: 10px 16px; }`,tests:[{desc:'Есть <table>',check:d=>!!d.querySelector('table')},{desc:'Минимум 2 строки <tr>',check:d=>d.querySelectorAll('tr').length>=2},{desc:'Минимум 4 ячейки <td>',check:d=>d.querySelectorAll('td').length>=4}]},
+  {difficulty:'easy',name:'Таблица с заголовками th',desc:'Добавь строку заголовков в таблицу.\n• <table> с первой строкой из <th>\n• Минимум 2 строки с данными (<td>)\n• <th> выделяются визуально (жирный)',hint:'<tr><th>Имя</th><th>Предмет</th></tr>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Таблица</title></head>\n<body>\n  <table>\n    <tr>\n      <!-- Добавь th заголовки -->\n    </tr>\n    <tr><td>Анна</td><td>HTML</td></tr>\n    <tr><td>Иван</td><td>CSS</td></tr>\n  </table>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; }\ntable { border-collapse: collapse; width: 100%; max-width: 500px; }\nth { background: #685BC7; color: white; padding: 12px 16px; text-align: left; }\ntd { padding: 10px 16px; border-bottom: 1px solid #eee; }`,tests:[{desc:'Есть <table>',check:d=>!!d.querySelector('table')},{desc:'Есть заголовки <th>',check:d=>d.querySelectorAll('th').length>=2},{desc:'Есть строки с данными <td>',check:d=>d.querySelectorAll('td').length>=4}]},
+  {difficulty:'easy',name:'Цветная шапка таблицы',desc:'Оформи таблицу с цветной шапкой.\n• <table> с заголовками <th>\n• Минимум 2 строки данных\n• CSS: цветной фон для th',hint:'th { background: #685BC7; color: white; padding: 12px; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Таблица</title></head>\n<body>\n  <table>\n    <tr>\n      <th>Курс</th>\n      <th>Длительность</th>\n      <th>Уровень</th>\n    </tr>\n    <tr><td>HTML & CSS</td><td>3 месяца</td><td>Начальный</td></tr>\n    <tr><td>JavaScript</td><td>4 месяца</td><td>Средний</td></tr>\n  </table>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\ntable { border-collapse: collapse; width: 100%; max-width: 560px; }\nth {\n  /* Добавь: background, color, padding */\n}\ntd { padding: 10px 16px; border-bottom: 1px solid #eee; }`,tests:[{desc:'Есть <th> заголовки',check:d=>d.querySelectorAll('th').length>=2},{desc:'Есть строки с данными',check:d=>d.querySelectorAll('td').length>=6}]},
+  {difficulty:'medium',name:'Таблица с шапкой thead и телом tbody',desc:'Раздели таблицу на структурные части.\n• <thead> с заголовками <th>\n• <tbody> с минимум 2 строками\n• В каждой строке минимум 2 ячейки <td>',hint:'Порядок: table → thead → tr → th\nпотом: tbody → tr → td',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Таблица</title></head>\n<body>\n  <table>\n    <thead>\n      <tr><th>Имя</th><th>Оценка</th></tr>\n    </thead>\n    <tbody>\n      <!-- Добавь 2 строки tr с td -->\n    </tbody>\n  </table>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\ntable { border-collapse: collapse; width: 100%; max-width: 500px; }\nth { background: #685BC7; color: white; padding: 12px; text-align: left; }\ntd { padding: 10px 12px; border-bottom: 1px solid #eee; }`,tests:[{desc:'Есть <thead>',check:d=>!!d.querySelector('thead')},{desc:'Есть <tbody>',check:d=>!!d.querySelector('tbody')},{desc:'Заголовки <th> в шапке',check:d=>d.querySelectorAll('thead th').length>=2},{desc:'Минимум 2 строки в tbody',check:d=>d.querySelectorAll('tbody tr').length>=2}]},
+  {difficulty:'medium',name:'Таблица с 4 колонками',desc:'Создай таблицу с 4 столбцами.\n• <thead> с 4 заголовками <th>\n• <tbody> с минимум 3 строками\n• Каждая строка — 4 ячейки <td>',hint:'<tr><th>День</th><th>Предмет</th><th>Время</th><th>Тема</th></tr>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Расписание</title></head>\n<body>\n  <h2>Расписание</h2>\n  <table>\n    <thead>\n      <!-- 4 th: День, Предмет, Время, Тема -->\n    </thead>\n    <tbody>\n      <!-- 3 строки по 4 td -->\n    </tbody>\n  </table>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\ntable { border-collapse: collapse; width: 100%; }\nth { background: #685BC7; color: white; padding: 13px 16px; text-align: left; }\ntd { padding: 11px 16px; border-bottom: 1px solid #e8e0ff; }`,tests:[{desc:'Есть <thead> и <tbody>',check:d=>!!d.querySelector('thead')&&!!d.querySelector('tbody')},{desc:'4 заголовка <th>',check:d=>d.querySelectorAll('thead th').length>=4},{desc:'Минимум 3 строки в tbody',check:d=>d.querySelectorAll('tbody tr').length>=3},{desc:'Минимум 4 ячейки в строке',check:d=>d.querySelectorAll('tbody tr:first-child td').length>=4}]},
+  {difficulty:'medium',name:'Таблица с чередующимися строками',desc:'Сделай таблицу с подсвеченными чётными строками.\n• <thead> с заголовками\n• <tbody> с минимум 4 строками\n• CSS: tr:nth-child(even) { background: #f5f0ff; }',hint:'tbody tr:nth-child(even) { background: #f5f0ff; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Таблица зебра</title></head>\n<body>\n  <h2>🏆 Результаты</h2>\n  <table>\n    <thead>\n      <tr><th>Место</th><th>Имя</th><th>Баллы</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>1</td><td>Анна</td><td>95</td></tr>\n      <tr><td>2</td><td>Иван</td><td>88</td></tr>\n      <tr><td>3</td><td>Маша</td><td>82</td></tr>\n      <tr><td>4</td><td>Петя</td><td>75</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f0f0f8; }\ntable { border-collapse: collapse; width: 100%; max-width: 500px; }\nth { background: #685BC7; color: white; padding: 13px 16px; text-align: left; }\ntd { padding: 11px 16px; }\n/* Добавь стиль для чётных строк */`,tests:[{desc:'Есть <thead>',check:d=>!!d.querySelector('thead')},{desc:'Минимум 4 строки в tbody',check:d=>d.querySelectorAll('tbody tr').length>=4},{desc:'Есть 3 столбца',check:d=>d.querySelectorAll('thead th').length>=3}]},
+  {difficulty:'hard',name:'Таблица расписания',desc:'Создай полноценную таблицу расписания.\n• <thead> с минимум 3 th\n• <tbody> с минимум 3 строками tr\n• В каждой строке 3+ ячейки td\n• Красивый стиль с цветной шапкой',hint:'table { border-collapse: collapse; width: 100%; }\nth { background: linear-gradient(135deg,#685BC7,#8075D9); color: white; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Расписание</title></head>\n<body>\n  <h2>📅 Расписание</h2>\n  <table>\n\n  </table>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\ntable { width: 100%; border-collapse: collapse; }\nth { background: linear-gradient(135deg,#685BC7,#8075D9); color: white; padding: 14px; text-align: left; }\ntd { padding: 12px; border-bottom: 1px solid #e8e0ff; }`,tests:[{desc:'Минимум 3 заголовка <th>',check:d=>d.querySelectorAll('thead th').length>=3},{desc:'Минимум 3 строки в tbody',check:d=>d.querySelectorAll('tbody tr').length>=3},{desc:'Минимум 3 ячейки в строке',check:d=>d.querySelectorAll('tbody tr:first-child td').length>=3}]},
+  {difficulty:'hard',name:'Таблица с итоговой строкой',desc:'Создай таблицу с суммарной строкой внизу.\n• <thead> с заголовками\n• <tbody> с минимум 4 строками данных\n• <tfoot> с итоговой строкой <tr>\n• CSS: tfoot выделен особым стилем',hint:'<tfoot><tr><td>Итого</td><td>Сумма</td></tr></tfoot>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Таблица с итогом</title></head>\n<body>\n  <h2>💰 Расходы за неделю</h2>\n  <table>\n    <thead>\n      <tr><th>День</th><th>Трата</th><th>Сумма</th></tr>\n    </thead>\n    <tbody>\n      <!-- 4 строки данных -->\n    </tbody>\n    <tfoot>\n      <!-- Итоговая строка -->\n    </tfoot>\n  </table>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; }\ntable { border-collapse: collapse; width: 100%; max-width: 560px; }\nth { background: #685BC7; color: white; padding: 13px 16px; text-align: left; }\ntd { padding: 11px 16px; border-bottom: 1px solid #e8e0ff; }\ntfoot td { background: #1a1636; color: white; font-weight: bold; }`,tests:[{desc:'Есть <thead>',check:d=>!!d.querySelector('thead')},{desc:'Есть <tbody>',check:d=>!!d.querySelector('tbody')},{desc:'Есть <tfoot>',check:d=>!!d.querySelector('tfoot')},{desc:'Минимум 4 строки в tbody',check:d=>d.querySelectorAll('tbody tr').length>=4}]},
+  {difficulty:'hard',name:'Сравнительная таблица',desc:'Создай таблицу сравнения тарифов.\n• <h2> заголовок\n• <thead> с 4+ th\n• <tbody> с минимум 5 строками\n• <tfoot> с итогом\n• Красивый полный стиль',hint:'Строки: Функция / Бесплатно / Базовый / Премиум',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Сравнение тарифов</title></head>\n<body>\n  <h2>📊 Сравнение тарифов</h2>\n  <table>\n    <thead>\n      <tr>\n        <th>Функция</th>\n        <th>🆓 Бесплатно</th>\n        <th>💼 Базовый</th>\n        <th>🏆 Премиум</th>\n      </tr>\n    </thead>\n    <tbody>\n      <!-- 5+ строк с td -->\n    </tbody>\n    <tfoot>\n      <tr><td>Цена</td><td>0 ₽</td><td>990 ₽/мес</td><td>2490 ₽/мес</td></tr>\n    </tfoot>\n  </table>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 30px; background: #f5f0ff; max-width: 700px; margin: 0 auto; }\nh2 { color: #1a1636; margin-bottom: 20px; }\ntable { border-collapse: collapse; width: 100%; }\nth { background: linear-gradient(135deg,#685BC7,#8075D9); color: white; padding: 14px 18px; text-align: left; }\ntd { padding: 12px 18px; border-bottom: 1px solid #e8e0ff; }\ntbody tr:hover td { background: #f8f4ff; }\ntfoot td { background: #1a1636; color: white; font-weight: bold; }`,tests:[{desc:'Есть <h2>',check:d=>!!d.querySelector('h2')},{desc:'Есть 4 столбца в thead',check:d=>d.querySelectorAll('thead th').length>=4},{desc:'Минимум 5 строк в tbody',check:d=>d.querySelectorAll('tbody tr').length>=5},{desc:'Есть <tfoot>',check:d=>!!d.querySelector('tfoot')}]},
 ],
 },
 {
@@ -1346,47 +1202,16 @@ textarea{min-height:100px;resize:vertical}
 button{width:100%;padding:15px;background:linear-gradient(135deg,#685BC7,#8075D9);color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 8px 24px rgba(104,91,199,.3);transition:transform .2s}
 button:hover{transform:translateY(-2px)}`,
   practiceLevels:[
-  {
-    name:'Первое поле ввода',
-    desc:'Создай форму <form> с:\n• Полем ввода <input type="text">\n• Кнопкой <button type="submit">',
-    hint:'<form>\n  <input type="text" placeholder="Введи текст">\n  <button type="submit">Отправить</button>\n</form>',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Форма</title></head>\n<body>\n  <!-- Добавь form с input и button -->\n\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; }\nform { display: flex; gap: 10px; }\ninput { padding: 10px 14px; border: 2px solid #685BC7; border-radius: 8px; font-size: 14px; outline: none; }\nbutton { padding: 10px 20px; background: #685BC7; color: white; border: none; border-radius: 8px; cursor: pointer; }`,
-    tests:[
-      {desc:'Есть <form>',check:d=>!!d.querySelector('form')},
-      {desc:'Есть <input>',check:d=>!!d.querySelector('input')},
-      {desc:'Есть кнопка <button>',check:d=>!!d.querySelector('button')},
-    ]
-  },
-  {
-    name:'Форма с именем и email',
-    desc:'Создай форму с:\n• Полем для имени <input type="text">\n• Полем для email <input type="email">\n• Кнопкой отправки\n• У полей атрибут placeholder',
-    hint:'<input type="email" placeholder="email@example.com">',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Форма</title></head>\n<body>\n  <form>\n    <!-- Добавь поля и кнопку -->\n\n  </form>\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; }\nform { background: white; padding: 28px; border-radius: 16px; max-width: 400px; }\ninput { display: block; width: 100%; padding: 11px; margin-bottom: 14px; border: 2px solid #eee; border-radius: 8px; font-size: 14px; outline: none; }\ninput:focus { border-color: #685BC7; }\nbutton { width: 100%; padding: 13px; background: #685BC7; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 15px; }`,
-    tests:[
-      {desc:'Есть <form>',check:d=>!!d.querySelector('form')},
-      {desc:'Поле type="text"',check:d=>!!d.querySelector('input[type="text"]')},
-      {desc:'Поле type="email"',check:d=>!!d.querySelector('input[type="email"]')},
-      {desc:'Есть placeholder у полей',check:d=>!!d.querySelector('[placeholder]')},
-      {desc:'Есть кнопка отправки',check:d=>!!d.querySelector('button')},
-    ]
-  },
-  {
-    name:'Полная форма записи',
-    desc:'Создай форму с:\n• input type="text" (имя)\n• input type="email"\n• <textarea> (сообщение)\n• <select> с минимум 2 <option>\n• <button type="submit">\n• Подписи <label> у каждого поля',
-    hint:'label { display: block; margin-bottom: 5px; font-size: 13px; color: #555; }',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Запись</title></head>\n<body>\n  <form>\n\n  </form>\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 40px; background: linear-gradient(135deg,#09080f,#2d1a6e); min-height: 100vh; }\nform { background: white; padding: 36px; border-radius: 20px; max-width: 460px; margin: 0 auto; }\nlabel { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 700; color: #555; }\ninput, textarea, select { width: 100%; padding: 11px; margin-bottom: 18px; border: 2px solid #eee; border-radius: 10px; font-family: inherit; font-size: 14px; outline: none; }\ntextarea { min-height: 90px; resize: vertical; }\nbutton { width: 100%; padding: 14px; background: linear-gradient(135deg,#685BC7,#8075D9); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; }`,
-    tests:[
-      {desc:'Есть <form>',check:d=>!!d.querySelector('form')},
-      {desc:'Поле для имени (type="text")',check:d=>!!d.querySelector('input[type="text"]')},
-      {desc:'Поле для email',check:d=>!!d.querySelector('input[type="email"]')},
-      {desc:'Есть <textarea>',check:d=>!!d.querySelector('textarea')},
-      {desc:'Есть <select> с вариантами',check:d=>d.querySelectorAll('select option').length>=2},
-      {desc:'Есть кнопка отправки',check:d=>!!d.querySelector('button[type="submit"]')},
-    ]
-  },
+  {difficulty:'easy',name:'Первое поле ввода',desc:'Создай простую форму с полем и кнопкой.\n• Тег <form>\n• Поле <input type="text">\n• Кнопка <button type="submit">',hint:'<form>\n  <input type="text" placeholder="Введи текст">\n  <button type="submit">Отправить</button>\n</form>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Форма</title></head>\n<body>\n  <!-- Добавь form с input и button -->\n\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; }\nform { display: flex; gap: 10px; }\ninput { padding: 10px 14px; border: 2px solid #685BC7; border-radius: 8px; font-size: 14px; outline: none; }\nbutton { padding: 10px 20px; background: #685BC7; color: white; border: none; border-radius: 8px; cursor: pointer; }`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Есть <input>',check:d=>!!d.querySelector('input')},{desc:'Есть кнопка <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'easy',name:'Input с placeholder',desc:'Добавь подсказку-заполнитель в поле.\n• <form> с <input>\n• Атрибут placeholder у input\n• Кнопка <button>',hint:'<input type="text" placeholder="Введи своё имя...">',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Input</title></head>\n<body>\n  <form>\n    <!-- input с placeholder и button -->\n  </form>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; }\ninput { width: 260px; padding: 11px 14px; border: 2px solid #685BC7; border-radius: 8px; font-size: 14px; outline: none; display: block; margin-bottom: 12px; }\nbutton { padding: 10px 20px; background: #685BC7; color: white; border: none; border-radius: 8px; cursor: pointer; }`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Есть <input> с placeholder',check:d=>!!d.querySelector('input[placeholder]')},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'easy',name:'Label + Input',desc:'Добавь подпись к полю через label.\n• <label> с текстом\n• <input> под ним\n• Кнопка <button>',hint:'<label>Твоё имя</label>\n<input type="text" placeholder="Анна">',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Label</title></head>\n<body>\n  <form>\n    <!-- label и input и button -->\n  </form>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; }\nlabel { display: block; font-size: 13px; font-weight: 700; color: #555; margin-bottom: 7px; }\ninput { width: 260px; padding: 11px 14px; border: 2px solid #eee; border-radius: 8px; font-size: 14px; outline: none; display: block; margin-bottom: 16px; }\nbutton { padding: 11px 24px; background: #685BC7; color: white; border: none; border-radius: 8px; cursor: pointer; }`,tests:[{desc:'Есть <label>',check:d=>!!d.querySelector('label')},{desc:'Есть <input>',check:d=>!!d.querySelector('input')},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'easy',name:'Input для email',desc:'Создай поле для ввода email-адреса.\n• <form> с <input type="email">\n• Атрибут placeholder\n• Кнопка отправки',hint:'<input type="email" placeholder="email@example.com">',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Email</title></head>\n<body>\n  <form>\n    <!-- input type="email" с placeholder и button -->\n  </form>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; }\nform { background: white; padding: 24px; border-radius: 12px; max-width: 360px; }\ninput { display: block; width: 100%; padding: 11px; margin-bottom: 14px; border: 2px solid #eee; border-radius: 8px; font-size: 14px; outline: none; }\nbutton { width: 100%; padding: 12px; background: #685BC7; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 15px; }`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Поле type="email"',check:d=>!!d.querySelector('input[type="email"]')},{desc:'Есть placeholder',check:d=>!!d.querySelector('[placeholder]')},{desc:'Есть кнопка',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'medium',name:'Форма с именем и email',desc:'Создай форму с двумя полями.\n• Поле для имени <input type="text">\n• Поле для email <input type="email">\n• Атрибут placeholder у полей\n• Кнопка отправки',hint:'<input type="email" placeholder="email@example.com">',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Форма</title></head>\n<body>\n  <form>\n    <!-- Добавь поля и кнопку -->\n\n  </form>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; }\nform { background: white; padding: 28px; border-radius: 16px; max-width: 400px; }\ninput { display: block; width: 100%; padding: 11px; margin-bottom: 14px; border: 2px solid #eee; border-radius: 8px; font-size: 14px; outline: none; }\nbutton { width: 100%; padding: 13px; background: #685BC7; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 15px; }`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Поле type="text"',check:d=>!!d.querySelector('input[type="text"]')},{desc:'Поле type="email"',check:d=>!!d.querySelector('input[type="email"]')},{desc:'Есть placeholder у полей',check:d=>!!d.querySelector('[placeholder]')},{desc:'Есть кнопка',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'medium',name:'Форма с textarea',desc:'Добавь большое текстовое поле.\n• <input type="text"> — имя\n• <textarea> — сообщение\n• <button type="submit">\n• label у каждого поля',hint:'<textarea placeholder="Твоё сообщение..."></textarea>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Форма сообщения</title></head>\n<body>\n  <form>\n    <!-- label + input, label + textarea, button -->\n  </form>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; }\nform { background: white; padding: 28px; border-radius: 16px; max-width: 400px; }\nlabel { display: block; font-size: 13px; font-weight: 700; color: #555; margin-bottom: 6px; }\ninput, textarea { display: block; width: 100%; padding: 11px; margin-bottom: 16px; border: 2px solid #eee; border-radius: 8px; font-size: 14px; outline: none; font-family: inherit; }\ntextarea { min-height: 100px; resize: vertical; }\nbutton { width: 100%; padding: 13px; background: #685BC7; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 15px; }`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Есть <input>',check:d=>!!d.querySelector('input')},{desc:'Есть <textarea>',check:d=>!!d.querySelector('textarea')},{desc:'Есть label',check:d=>d.querySelectorAll('label').length>=2},{desc:'Есть кнопка',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'medium',name:'Форма с выпадающим списком',desc:'Добавь выбор из списка вариантов.\n• <label> + <input type="text">\n• <label> + <select> с 3+ вариантами <option>\n• <button type="submit">',hint:'<select><option>Вариант 1</option><option>Вариант 2</option></select>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Форма с выбором</title></head>\n<body>\n  <form>\n    <label>Имя</label>\n    <input type="text" placeholder="Введи имя...">\n    <!-- Добавь label, select с 3 option, и button -->\n  </form>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: #f5f0ff; }\nform { background: white; padding: 28px; border-radius: 16px; max-width: 400px; }\nlabel { display: block; font-size: 13px; font-weight: 700; color: #555; margin-bottom: 6px; }\ninput, select { display: block; width: 100%; padding: 11px; margin-bottom: 16px; border: 2px solid #eee; border-radius: 8px; font-size: 14px; outline: none; }\nbutton { width: 100%; padding: 13px; background: #685BC7; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 15px; }`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Есть <input>',check:d=>!!d.querySelector('input')},{desc:'Есть <select>',check:d=>!!d.querySelector('select')},{desc:'В select минимум 3 option',check:d=>d.querySelectorAll('select option').length>=3},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'hard',name:'Полная форма записи',desc:'Создай полноценную форму регистрации.\n• input type="text" (имя)\n• input type="email"\n• <textarea> (сообщение)\n• <select> с минимум 2 <option>\n• <button type="submit">\n• <label> у каждого поля',hint:'label { display: block; margin-bottom: 5px; font-size: 13px; color: #555; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Запись</title></head>\n<body>\n  <form>\n\n  </form>\n</body>\n</html>`,starterCss:`body { font-family: Arial; padding: 40px; background: linear-gradient(135deg,#09080f,#2d1a6e); min-height: 100vh; }\nform { background: white; padding: 36px; border-radius: 20px; max-width: 460px; margin: 0 auto; }\nlabel { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 700; color: #555; }\ninput, textarea, select { width: 100%; padding: 11px; margin-bottom: 18px; border: 2px solid #eee; border-radius: 10px; font-family: inherit; font-size: 14px; outline: none; }\ntextarea { min-height: 90px; resize: vertical; }\nbutton { width: 100%; padding: 14px; background: linear-gradient(135deg,#685BC7,#8075D9); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; }`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Поле для имени (type="text")',check:d=>!!d.querySelector('input[type="text"]')},{desc:'Поле для email',check:d=>!!d.querySelector('input[type="email"]')},{desc:'Есть <textarea>',check:d=>!!d.querySelector('textarea')},{desc:'Есть <select> с вариантами',check:d=>d.querySelectorAll('select option').length>=2},{desc:'Есть кнопка отправки',check:d=>!!d.querySelector('button[type="submit"]')}]},
+  {difficulty:'hard',name:'Стильная карточка-форма',desc:'Оформи форму как красивую карточку.\n• Форма в белой карточке с тенью\n• Иконка или заголовок сверху\n• 3+ поля с label\n• Стильная кнопка submit',hint:'form { background: white; border-radius: 20px; padding: 36px; box-shadow: 0 16px 60px rgba(0,0,0,.3); }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Красивая форма</title></head>\n<body>\n  <div class="page">\n    <form>\n      <div class="icon">🤖</div>\n      <h2>Запись в AI-TREND</h2>\n      <!-- 3+ поля с label и кнопка -->\n    </form>\n  </div>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; background: linear-gradient(135deg,#09080f,#2d1a6e); min-height: 100vh; padding: 40px 20px; }\n.page { display: flex; justify-content: center; }\nform { background: white; border-radius: 24px; padding: 44px 40px; width: 100%; max-width: 460px; box-shadow: 0 24px 80px rgba(0,0,0,.4); }\n.icon { font-size: 44px; margin-bottom: 14px; }\nh2 { font-size: 22px; color: #1a1636; margin-bottom: 24px; }\nlabel { display: block; font-size: 13px; font-weight: 700; color: #555; margin-bottom: 7px; }\ninput, textarea, select { width: 100%; padding: 12px 16px; margin-bottom: 18px; border: 2px solid #eee; border-radius: 12px; font-size: 14px; font-family: inherit; outline: none; }\nbutton { width: 100%; padding: 15px; background: linear-gradient(135deg,#685BC7,#8075D9); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: bold; cursor: pointer; }`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Есть <h2> или заголовок',check:d=>!!(d.querySelector('h2')||d.querySelector('h1'))},{desc:'Есть .icon или иконка',check:d=>!!(d.querySelector('.icon')||d.querySelector('div[class]'))},{desc:'Минимум 3 поля input/textarea/select',check:d=>d.querySelectorAll('input, textarea, select').length>=3},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'hard',name:'Многошаговая форма',desc:'Создай форму с тремя блоками.\n• Блок 1: имя + возраст (number)\n• Блок 2: email + телефон (tel)\n• Блок 3: курс (select) + сообщение (textarea)\n• Кнопка submit + label у каждого поля',hint:'<input type="tel" placeholder="+7 (000) 000-00-00">',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Регистрация</title></head>\n<body>\n  <form>\n    <h2>Регистрация</h2>\n    <div class="section">\n      <h3>Шаг 1: О себе</h3>\n      <!-- label + text, label + number -->\n    </div>\n    <div class="section">\n      <h3>Шаг 2: Контакты</h3>\n      <!-- label + email, label + tel -->\n    </div>\n    <div class="section">\n      <h3>Шаг 3: Курс</h3>\n      <!-- label + select, label + textarea -->\n    </div>\n    <button type="submit">Записаться 🚀</button>\n  </form>\n</body>\n</html>`,starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; background: linear-gradient(135deg,#09080f,#2d1a6e); min-height: 100vh; padding: 40px 20px; }\nform { background: white; border-radius: 20px; padding: 36px; max-width: 480px; margin: 0 auto; }\nh2 { color: #1a1636; margin-bottom: 24px; }\n.section { border: 1px solid #f0ebff; border-radius: 12px; padding: 20px; margin-bottom: 20px; }\n.section h3 { color: #685BC7; font-size: 14px; margin-bottom: 16px; }\nlabel { display: block; font-size: 12px; font-weight: 700; color: #555; margin-bottom: 5px; }\ninput, select, textarea { width: 100%; padding: 10px; margin-bottom: 14px; border: 2px solid #eee; border-radius: 8px; font-size: 14px; font-family: inherit; outline: none; }\ntextarea { min-height: 80px; resize: vertical; }\nbutton { width: 100%; padding: 14px; background: linear-gradient(135deg,#685BC7,#8075D9); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; }`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Есть input[type="text"]',check:d=>!!d.querySelector('input[type="text"]')},{desc:'Есть input[type="email"]',check:d=>!!d.querySelector('input[type="email"]')},{desc:'Есть <select>',check:d=>!!d.querySelector('select')},{desc:'Есть <textarea>',check:d=>!!d.querySelector('textarea')},{desc:'Есть минимум 5 label',check:d=>d.querySelectorAll('label').length>=5}]},
 ],
 },
 {
@@ -1484,47 +1309,16 @@ input[type="radio"],input[type="checkbox"]{accent-color:#685BC7;width:16px;heigh
 .btn{width:100%;padding:14px;background:linear-gradient(135deg,#685BC7,#8075D9);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:bold;cursor:pointer;box-shadow:0 8px 24px rgba(104,91,199,.3);transition:transform .2s}
 .btn:hover{transform:translateY(-2px)}`,
   practiceLevels:[
-  {
-    name:'Первый чекбокс',
-    desc:'Создай форму с чекбоксами:\n• Тег <form>\n• Минимум 2 чекбокса <input type="checkbox">\n• Каждый внутри <label>\n• Кнопка <button type="submit">',
-    hint:'<label>\n  <input type="checkbox"> Вариант 1\n</label>',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Чекбоксы</title></head>\n<body>\n  <form>\n    <h2>Выбери интересы</h2>\n    <!-- label с input type="checkbox" -->\n\n    <button type="submit">Отправить</button>\n  </form>\n</body>\n</html>`,
-    starterCss:`body{font-family:Arial;padding:40px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\nlabel{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:14px;cursor:pointer}\ninput{accent-color:#685BC7;width:16px;height:16px}\nbutton{margin-top:16px;padding:10px 24px;background:#685BC7;color:white;border:none;border-radius:8px;cursor:pointer}`,
-    tests:[
-      {desc:'Есть <form>',check:d=>!!d.querySelector('form')},
-      {desc:'Минимум 2 чекбокса',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=2},
-      {desc:'Чекбоксы внутри label',check:d=>d.querySelectorAll('label input[type="checkbox"]').length>=2},
-      {desc:'Есть кнопка',check:d=>!!d.querySelector('button')},
-    ]
-  },
-  {
-    name:'Radio — выбор пола',
-    desc:'Добавь radio-кнопки в форму:\n• Минимум 2 radio с name="gender"\n• Каждый в <label>\n• Также минимум 1 чекбокс\n• Кнопка submit',
-    hint:'<label><input type="radio" name="gender" value="male"> Мужской</label>\n<label><input type="radio" name="gender" value="female"> Женский</label>',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Анкета</title></head>\n<body>\n  <form>\n    <h2>Анкета</h2>\n    <p><b>Пол:</b></p>\n    <!-- radio name="gender" -->\n\n    <p><b>Интересы:</b></p>\n    <!-- checkboxes -->\n\n    <button type="submit">Отправить</button>\n  </form>\n</body>\n</html>`,
-    starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\np{font-weight:bold;color:#555;margin:12px 0 8px}\nlabel{display:inline-flex;align-items:center;gap:6px;margin-right:14px;font-size:14px;cursor:pointer}\ninput{accent-color:#685BC7}\nbutton{display:block;margin-top:16px;padding:10px 24px;background:#685BC7;color:white;border:none;border-radius:8px;cursor:pointer}`,
-    tests:[
-      {desc:'Минимум 2 radio name="gender"',check:d=>d.querySelectorAll('input[type="radio"][name="gender"]').length>=2},
-      {desc:'Radio внутри label',check:d=>d.querySelectorAll('label input[type="radio"]').length>=2},
-      {desc:'Есть хотя бы 1 чекбокс',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=1},
-      {desc:'Есть кнопка submit',check:d=>!!d.querySelector('button[type="submit"]')},
-    ]
-  },
-  {
-    name:'Полная анкета',
-    desc:'Создай полную анкету:\n• input type="text" для имени\n• Radio name="gender" (2+ варианта)\n• Минимум 3 чекбокса интересов\n• Чекбокс согласия (required)\n• Кнопка submit\n• label-карточки с border-radius',
-    hint:'label{\n  padding:8px 14px;\n  border:1.5px solid #e0d8ff;\n  border-radius:20px;\n  cursor:pointer;\n}\nlabel:hover{border-color:#685BC7}',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Анкета</title></head>\n<body>\n  <form class="form">\n    <h2>Запись в AI-TREND</h2>\n    <!-- Имя -->\n\n    <!-- Пол (radio) -->\n\n    <!-- Интересы (checkbox 3+) -->\n\n    <!-- Согласие (checkbox required) -->\n\n    <button type="submit">Записаться 🚀</button>\n  </form>\n</body>\n</html>`,
-    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;background:linear-gradient(135deg,#09080f,#2d1a6e);min-height:100vh;padding:30px}\n.form{background:white;border-radius:20px;padding:32px;max-width:460px;margin:0 auto}\nh2{color:#1a1636;margin-bottom:24px}\ninput[type="text"]{width:100%;padding:11px;border:2px solid #eee;border-radius:10px;font-size:14px;outline:none;margin-bottom:20px}\ninput[type="radio"],input[type="checkbox"]{accent-color:#685BC7}\nlabel{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border:1.5px solid #eee;border-radius:20px;cursor:pointer;margin:4px;font-size:13px}\nlabel:hover{border-color:#685BC7}\nbutton{width:100%;padding:13px;background:linear-gradient(135deg,#685BC7,#8075D9);color:white;border:none;border-radius:12px;font-size:15px;font-weight:bold;cursor:pointer;margin-top:20px}`,
-    tests:[
-      {desc:'Поле для имени (type="text")',check:d=>!!d.querySelector('input[type="text"]')},
-      {desc:'Radio-кнопки пола (name="gender")',check:d=>d.querySelectorAll('input[type="radio"][name="gender"]').length>=2},
-      {desc:'Минимум 3 чекбокса',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=3},
-      {desc:'Чекбокс согласия (required)',check:d=>!!d.querySelector('input[type="checkbox"][required]')},
-      {desc:'Кнопка submit',check:d=>!!d.querySelector('button[type="submit"]')},
-      {desc:'label-карточки с border-radius',check:d=>{const lbl=d.querySelector('label');return lbl&&getComputedStyle(lbl).borderRadius!=='0px';}},
-    ]
-  },
+  {difficulty:'easy',name:'Первый чекбокс',desc:'Создай форму с чекбоксами.\n• Тег <form>\n• Минимум 2 чекбокса <input type="checkbox">\n• Каждый внутри <label>\n• Кнопка <button type="submit">',hint:'<label>\n  <input type="checkbox"> Вариант 1\n</label>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Чекбоксы</title></head>\n<body>\n  <form>\n    <h2>Выбери интересы</h2>\n    <!-- label с input type="checkbox" -->\n\n    <button type="submit">Отправить</button>\n  </form>\n</body>\n</html>`,starterCss:`body{font-family:Arial;padding:40px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\nlabel{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:14px;cursor:pointer}\ninput{accent-color:#685BC7;width:16px;height:16px}\nbutton{margin-top:16px;padding:10px 24px;background:#685BC7;color:white;border:none;border-radius:8px;cursor:pointer}`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Минимум 2 чекбокса',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=2},{desc:'Чекбоксы внутри label',check:d=>d.querySelectorAll('label input[type="checkbox"]').length>=2},{desc:'Есть кнопка',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'easy',name:'Один чекбокс в label',desc:'Создай чекбокс правильно обёрнутый в label.\n• Чекбокс <input type="checkbox"> в <label>\n• Текст рядом с чекбоксом\n• Клик по тексту тоже включает чекбокс',hint:'<label><input type="checkbox"> Принимаю условия</label>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Чекбокс</title></head>\n<body>\n  <form>\n    <h2>Согласие</h2>\n    <!-- label с чекбоксом внутри -->\n\n    <button type="submit">Продолжить</button>\n  </form>\n</body>\n</html>`,starterCss:`body{font-family:Arial;padding:40px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:20px}\nlabel{display:flex;align-items:center;gap:10px;font-size:15px;cursor:pointer;margin-bottom:20px}\ninput[type="checkbox"]{width:18px;height:18px;accent-color:#685BC7}\nbutton{padding:11px 28px;background:#685BC7;color:white;border:none;border-radius:8px;cursor:pointer}`,tests:[{desc:'Есть <label>',check:d=>!!d.querySelector('label')},{desc:'Чекбокс внутри label',check:d=>!!d.querySelector('label input[type="checkbox"]')},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'easy',name:'Три чекбокса интересов',desc:'Создай список интересов для выбора.\n• Минимум 3 чекбокса <input type="checkbox">\n• Каждый в <label>\n• Разные варианты: HTML, CSS, JavaScript',hint:'<label><input type="checkbox"> HTML & CSS</label>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Интересы</title></head>\n<body>\n  <form>\n    <h2>Что хочешь изучить?</h2>\n    <!-- 3+ label с checkbox -->\n\n    <button type="submit">Записаться</button>\n  </form>\n</body>\n</html>`,starterCss:`body{font-family:Arial;padding:40px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\nlabel{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:14px;cursor:pointer}\ninput[type="checkbox"]{accent-color:#685BC7;width:16px;height:16px}\nbutton{margin-top:16px;padding:10px 24px;background:#685BC7;color:white;border:none;border-radius:8px;cursor:pointer}`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Минимум 3 чекбокса',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=3},{desc:'Чекбоксы в label',check:d=>d.querySelectorAll('label input[type="checkbox"]').length>=3},{desc:'Есть кнопка',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'easy',name:'Radio — два варианта',desc:'Создай выбор из двух вариантов (radio).\n• Два <input type="radio"> с одинаковым name\n• Каждый в <label>\n• Атрибут value у каждого',hint:'<label><input type="radio" name="choice" value="yes"> Да</label>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Radio</title></head>\n<body>\n  <form>\n    <h2>Ты одобряешь?</h2>\n    <!-- 2 radio с name="choice" -->\n\n    <button type="submit">Ответить</button>\n  </form>\n</body>\n</html>`,starterCss:`body{font-family:Arial;padding:40px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\nlabel{display:inline-flex;align-items:center;gap:8px;margin-right:20px;font-size:15px;cursor:pointer}\ninput[type="radio"]{accent-color:#685BC7;width:16px;height:16px}\nbutton{display:block;margin-top:20px;padding:10px 24px;background:#685BC7;color:white;border:none;border-radius:8px;cursor:pointer}`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Минимум 2 radio',check:d=>d.querySelectorAll('input[type="radio"]').length>=2},{desc:'Radio с одинаковым name',check:d=>{const r=d.querySelectorAll('input[type="radio"]');const n=r[0]?.getAttribute('name');return r.length>=2&&n&&r[1]?.getAttribute('name')===n}},{desc:'Radio в label',check:d=>d.querySelectorAll('label input[type="radio"]').length>=2}]},
+  {difficulty:'medium',name:'Radio — выбор пола',desc:'Добавь группу radio-кнопок в форму.\n• Минимум 2 radio с name="gender"\n• Каждый в <label>\n• Также минимум 1 чекбокс\n• Кнопка submit',hint:'<label><input type="radio" name="gender" value="male"> Мужской</label>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Анкета</title></head>\n<body>\n  <form>\n    <h2>Анкета</h2>\n    <p><b>Пол:</b></p>\n    <!-- radio name="gender" -->\n\n    <p><b>Интересы:</b></p>\n    <!-- checkboxes -->\n\n    <button type="submit">Отправить</button>\n  </form>\n</body>\n</html>`,starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\np{font-weight:bold;color:#555;margin:12px 0 8px}\nlabel{display:inline-flex;align-items:center;gap:6px;margin-right:14px;font-size:14px;cursor:pointer}\ninput{accent-color:#685BC7}\nbutton{display:block;margin-top:16px;padding:10px 24px;background:#685BC7;color:white;border:none;border-radius:8px;cursor:pointer}`,tests:[{desc:'Минимум 2 radio name="gender"',check:d=>d.querySelectorAll('input[type="radio"][name="gender"]').length>=2},{desc:'Radio внутри label',check:d=>d.querySelectorAll('label input[type="radio"]').length>=2},{desc:'Есть хотя бы 1 чекбокс',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=1},{desc:'Есть кнопка submit',check:d=>!!d.querySelector('button[type="submit"]')}]},
+  {difficulty:'medium',name:'Стильные чекбоксы-таблетки',desc:'Сделай красивые чекбоксы в виде тегов/таблеток.\n• Минимум 4 чекбокса в label\n• label стилизован: padding, border, border-radius:20px\n• При hover — изменение border-color',hint:'label { padding:8px 16px; border:1.5px solid #e0d8ff; border-radius:20px; cursor:pointer; }\nlabel:hover { border-color:#685BC7; }',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Таблетки</title></head>\n<body>\n  <form>\n    <h2>Выбери курсы</h2>\n    <div class="tags">\n      <!-- 4+ label-таблетки с checkbox -->\n    </div>\n    <button type="submit">Готово</button>\n  </form>\n</body>\n</html>`,starterCss:`body{font-family:Arial;padding:40px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\n.tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}\nlabel{\n  display:inline-flex;align-items:center;gap:8px;\n  padding:8px 16px;\n  border:1.5px solid #e0d8ff;\n  border-radius:20px;\n  cursor:pointer;font-size:14px;\n  transition:all .2s;\n}\nlabel:hover{border-color:#685BC7;background:#f0ecff}\ninput[type="checkbox"]{accent-color:#685BC7}\nbutton{padding:10px 24px;background:#685BC7;color:white;border:none;border-radius:8px;cursor:pointer}`,tests:[{desc:'Есть <form>',check:d=>!!d.querySelector('form')},{desc:'Минимум 4 чекбокса',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=4},{desc:'Чекбоксы в label',check:d=>d.querySelectorAll('label input[type="checkbox"]').length>=4},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'medium',name:'Форма с radio и 3 чекбоксами',desc:'Создай форму с двумя типами выбора.\n• input type="text" — имя\n• Radio name="gender" (2+ варианта)\n• Минимум 3 чекбокса интересов\n• Кнопка submit',hint:'Сначала radio группа, потом checkbox группа',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Анкета</title></head>\n<body>\n  <form>\n    <h2>Запись</h2>\n    <!-- Имя -->\n    <!-- Пол (radio) -->\n    <!-- Интересы (3 checkbox) -->\n    <button type="submit">Отправить</button>\n  </form>\n</body>\n</html>`,starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:20px}\n.group{margin-bottom:18px}\n.group-label{font-weight:700;color:#555;font-size:13px;display:block;margin-bottom:8px}\ninput[type="text"]{width:100%;padding:10px;border:2px solid #eee;border-radius:8px;font-size:14px;outline:none;margin-bottom:4px}\nlabel{display:inline-flex;align-items:center;gap:7px;margin-right:14px;font-size:14px;cursor:pointer}\ninput[type="radio"],input[type="checkbox"]{accent-color:#685BC7}\nbutton{display:block;width:100%;margin-top:16px;padding:12px;background:#685BC7;color:white;border:none;border-radius:10px;font-size:15px;cursor:pointer}`,tests:[{desc:'Есть input[type="text"]',check:d=>!!d.querySelector('input[type="text"]')},{desc:'Минимум 2 radio name="gender"',check:d=>d.querySelectorAll('input[type="radio"][name="gender"]').length>=2},{desc:'Минимум 3 чекбокса',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=3},{desc:'Есть кнопка submit',check:d=>!!d.querySelector('button[type="submit"]')}]},
+  {difficulty:'hard',name:'Полная анкета',desc:'Создай полноценную анкету-форму.\n• input type="text" для имени\n• Radio name="gender" (2+ варианта)\n• Минимум 3 чекбокса интересов\n• Чекбокс согласия (required)\n• Кнопка submit\n• label-карточки с border-radius',hint:'label {\n  padding:8px 14px;\n  border:1.5px solid #e0d8ff;\n  border-radius:20px;\n  cursor:pointer;\n}',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Анкета</title></head>\n<body>\n  <form class="form">\n    <h2>Запись в AI-TREND</h2>\n    <!-- Имя -->\n    <!-- Пол (radio) -->\n    <!-- Интересы (checkbox 3+) -->\n    <!-- Согласие (checkbox required) -->\n    <button type="submit">Записаться 🚀</button>\n  </form>\n</body>\n</html>`,starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;background:linear-gradient(135deg,#09080f,#2d1a6e);min-height:100vh;padding:30px}\n.form{background:white;border-radius:20px;padding:32px;max-width:460px;margin:0 auto}\nh2{color:#1a1636;margin-bottom:24px}\ninput[type="text"]{width:100%;padding:11px;border:2px solid #eee;border-radius:10px;font-size:14px;outline:none;margin-bottom:20px}\ninput[type="radio"],input[type="checkbox"]{accent-color:#685BC7}\nlabel{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border:1.5px solid #eee;border-radius:20px;cursor:pointer;margin:4px;font-size:13px}\nlabel:hover{border-color:#685BC7}\nbutton{width:100%;padding:13px;background:linear-gradient(135deg,#685BC7,#8075D9);color:white;border:none;border-radius:12px;font-size:15px;font-weight:bold;cursor:pointer;margin-top:20px}`,tests:[{desc:'Поле для имени (type="text")',check:d=>!!d.querySelector('input[type="text"]')},{desc:'Radio-кнопки пола (name="gender")',check:d=>d.querySelectorAll('input[type="radio"][name="gender"]').length>=2},{desc:'Минимум 3 чекбокса',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=3},{desc:'Чекбокс согласия (required)',check:d=>!!d.querySelector('input[type="checkbox"][required]')},{desc:'Кнопка submit',check:d=>!!d.querySelector('button[type="submit"]')}]},
+  {difficulty:'hard',name:'Квиз из 3 вопросов',desc:'Создай мини-квиз с тремя вопросами.\n• Три группы radio (name="q1", "q2", "q3")\n• В каждой группе 3 варианта ответа\n• label для каждого radio\n• Кнопка «Проверить»',hint:'<fieldset><legend>Вопрос 1</legend>\n  <label><input type="radio" name="q1" value="a"> Ответ A</label>\n</fieldset>',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Квиз</title></head>\n<body>\n  <h2>🧠 Мини-квиз по HTML</h2>\n  <form>\n    <fieldset>\n      <legend>Вопрос 1: Что такое HTML?</legend>\n      <!-- 3 radio name="q1" -->\n    </fieldset>\n    <!-- fieldset для q2 и q3 -->\n    <button type="submit">Ответить</button>\n  </form>\n</body>\n</html>`,starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff;max-width:560px}\nh2{color:#685BC7;margin-bottom:20px}\nfieldset{border:1px solid #e0d8ff;border-radius:12px;padding:16px 20px;margin-bottom:16px}\nlegend{color:#685BC7;font-weight:bold;padding:0 6px}\nlabel{display:block;margin:8px 0;font-size:14px;cursor:pointer}\ninput[type="radio"]{accent-color:#685BC7;margin-right:8px}\nbutton{width:100%;padding:13px;background:#685BC7;color:white;border:none;border-radius:10px;font-size:15px;cursor:pointer;margin-top:8px}`,tests:[{desc:'Минимум 3 группы radio',check:d=>{const names=new Set([...d.querySelectorAll('input[type="radio"]')].map(r=>r.getAttribute('name')));return names.size>=3}},{desc:'Минимум 9 radio-кнопок',check:d=>d.querySelectorAll('input[type="radio"]').length>=9},{desc:'Есть fieldset',check:d=>d.querySelectorAll('fieldset').length>=3},{desc:'Есть <button>',check:d=>!!d.querySelector('button')}]},
+  {difficulty:'hard',name:'Полная красивая анкета',desc:'Создай профессиональную анкету с всеми типами.\n• input text (имя) + input number (возраст)\n• Radio gender с 3 вариантами\n• Минимум 4 чекбокса интересов\n• Чекбокс согласия required\n• Styled label-карточки\n• Кнопка submit с градиентом',hint:'Используй .opts контейнер для группировки label',starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Полная анкета</title></head>\n<body>\n  <div class="page">\n    <form class="card">\n      <div class="icon">📋</div>\n      <h2>Анкета ученика</h2>\n      <!-- Все поля: text, number, radio, 4 checkbox, согласие, button -->\n    </form>\n  </div>\n</body>\n</html>`,starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;background:linear-gradient(135deg,#09080f,#2d1a6e);min-height:100vh;padding:40px 20px}\n.page{display:flex;justify-content:center}\n.card{background:#fff;border-radius:24px;padding:40px 36px;width:100%;max-width:480px;box-shadow:0 24px 80px rgba(0,0,0,.4)}\n.icon{font-size:40px;margin-bottom:12px}\nh2{font-size:22px;color:#1a1636;margin-bottom:6px}\n.field{margin-bottom:20px}\n.field-label{display:block;font-size:13px;font-weight:700;color:#555;margin-bottom:9px}\ninput[type="text"],input[type="number"]{width:100%;padding:11px 14px;border:2px solid #eee;border-radius:10px;font-size:14px;outline:none}\n.opts{display:flex;flex-wrap:wrap;gap:8px}\n.opt{display:flex;align-items:center;gap:7px;font-size:13px;color:#444;cursor:pointer;padding:7px 14px;background:#f8f5ff;border:1.5px solid #e0d8ff;border-radius:20px;transition:all .2s}\n.opt:hover{border-color:#685BC7;background:#f0ecff}\ninput[type="radio"],input[type="checkbox"]{accent-color:#685BC7;width:16px;height:16px;cursor:pointer}\n.btn{width:100%;padding:14px;background:linear-gradient(135deg,#685BC7,#8075D9);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:bold;cursor:pointer;margin-top:20px}`,tests:[{desc:'Есть input[type="text"]',check:d=>!!d.querySelector('input[type="text"]')},{desc:'Radio gender 3+ варианта',check:d=>d.querySelectorAll('input[type="radio"][name="gender"]').length>=3},{desc:'Минимум 4 чекбокса интересов',check:d=>d.querySelectorAll('input[type="checkbox"]').length>=4},{desc:'Чекбокс согласия required',check:d=>!!d.querySelector('input[type="checkbox"][required]')},{desc:'Кнопка submit',check:d=>!!d.querySelector('button[type="submit"]')}]},
 ],
 },
 {
@@ -1582,8 +1376,9 @@ footer{background:#09080f;color:#fff;padding:60px 50px 30px}
 .fb{border-top:1px solid #1e1e3a;padding-top:24px;display:flex;justify-content:space-between;color:#444;font-size:12px}`,
   practiceLevels:[
   {
+    difficulty:'easy',
     name:'Простой подвал',
-    desc:'Создай тег <footer> с:\n• Любым текстом\n• Знаком копирайта ©',
+    desc:'Создай тег <footer> с:\n• Любым текстом внутри\n• Знаком копирайта ©',
     hint:'<footer><p>© 2025 МойСайт</p></footer>',
     starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer</title></head>\n<body>\n  <div class="stub">Контент страницы</div>\n  <!-- Добавь footer здесь -->\n\n</body>\n</html>`,
     starterCss:`body { margin: 0; font-family: Arial; }\n.stub { height: 50vh; display: flex; align-items: center; justify-content: center; background: #f5f0ff; color: #685BC7; font-size: 18px; }\nfooter { background: #09080f; color: #888; padding: 24px 40px; text-align: center; }`,
@@ -1594,31 +1389,134 @@ footer{background:#09080f;color:#fff;padding:60px 50px 30px}
     ]
   },
   {
-    name:'Footer с колонками',
-    desc:'Создай подвал с:\n• Тегом <footer>\n• Двумя колонками (.col) рядом\n• Ссылками <a> в колонках\n• Строкой копирайта © внизу',
-    hint:'.footer-grid { display: flex; gap: 40px; }\nИли: display: grid; grid-template-columns: 1fr 1fr;',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer</title></head>\n<body>\n  <footer>\n    <div class="footer-grid">\n      <div class="col">\n        <h4>Меню</h4>\n        <!-- Добавь ссылки -->\n      </div>\n      <div class="col">\n        <h4>Контакты</h4>\n        <!-- Добавь ссылки -->\n      </div>\n    </div>\n    <div class="copy">© 2025 AI-TREND</div>\n  </footer>\n</body>\n</html>`,
-    starterCss:`body { margin: 0; font-family: Arial; }\nfooter { background: #09080f; color: #fff; padding: 50px 40px 24px; }\n.footer-grid { /* flex или grid */ margin-bottom: 40px; }\n.col h4 { color: #B5ED18; margin-bottom: 12px; }\n.col a { display: block; color: #888; text-decoration: none; margin-bottom: 8px; }\n.col a:hover { color: #B5ED18; }\n.copy { border-top: 1px solid #1e1e3a; padding-top: 20px; color: #444; font-size: 13px; }`,
+    difficulty:'easy',
+    name:'Footer со ссылками',
+    desc:'Создай footer с навигацией:\n• Тег <footer>\n• Заголовок или логотип\n• Минимум 3 ссылки <a href="#">\n• Копирайт © внизу',
+    hint:'<footer>\n  <p><strong>AI-TREND</strong></p>\n  <a href="#">Главная</a>\n  <a href="#">Курсы</a>\n  <a href="#">Контакты</a>\n  <p>© 2025</p>\n</footer>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer</title></head>\n<body>\n  <footer>\n    <!-- Добавь название, ссылки и копирайт -->\n  </footer>\n</body>\n</html>`,
+    starterCss:`body{margin:0;font-family:Arial}\nfooter{background:#09080f;color:#888;padding:40px;text-align:center}\nfooter h4,footer strong{color:#B5ED18;font-size:20px;margin-bottom:16px;display:block}\nfooter a{color:#888;text-decoration:none;margin:0 12px;font-size:14px}\nfooter a:hover{color:#B5ED18}`,
     tests:[
       {desc:'Есть <footer>',check:d=>!!d.querySelector('footer')},
-      {desc:'Минимум 2 колонки',check:d=>d.querySelectorAll('footer .col').length>=2},
-      {desc:'Ссылки <a> в footer',check:d=>d.querySelectorAll('footer a').length>=2},
+      {desc:'Минимум 3 ссылки <a>',check:d=>d.querySelectorAll('footer a').length>=3},
       {desc:'Есть копирайт ©',check:d=>d.querySelector('footer')?.textContent.includes('©')},
     ]
   },
   {
-    name:'Профессиональный Footer',
-    desc:'Создай footer с Grid на 3 колонки:\n• <footer> с тёмным фоном\n• .fc с grid-template-columns: 2fr 1fr 1fr\n• В каждой колонке: заголовок и ссылки\n• Строка копирайта внизу\n• Ссылки с hover-эффектом',
-    hint:'.fc { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer</title></head>\n<body>\n  <footer>\n    <div class="fc">\n\n    </div>\n    <div class="fb">© 2025 AI-TREND</div>\n  </footer>\n</body>\n</html>`,
-    starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; }\nfooter { background: #09080f; color: #fff; padding: 60px 50px 30px; }\n.fc { /* grid 2fr 1fr 1fr */ margin-bottom: 48px; }\n.col h4 { font-size: 12px; font-weight: 800; text-transform: uppercase; color: #fff; margin-bottom: 16px; }\n.col a { display: block; color: #888; text-decoration: none; margin-bottom: 10px; transition: color .2s; }\n.col a:hover { color: #B5ED18; }\n.fb { border-top: 1px solid #1e1e3a; padding-top: 24px; color: #444; font-size: 12px; display: flex; justify-content: space-between; }`,
+    difficulty:'easy',
+    name:'Footer с соцсетями',
+    desc:'Создай footer с иконками соцсетей:\n• Тег <footer>\n• Блок .social с ссылками-иконками\n• Минимум 3 ссылки <a href="#">\n• Копирайт © внизу',
+    hint:'<div class="social">\n  <a href="#">📘</a>\n  <a href="#">📸</a>\n  <a href="#">🐦</a>\n</div>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer</title></head>\n<body>\n  <footer>\n    <p class="brand">AI-TREND</p>\n    <div class="social">\n      <!-- Добавь ссылки с иконками -->\n    </div>\n    <p class="copy">© 2025 AI-TREND</p>\n  </footer>\n</body>\n</html>`,
+    starterCss:`body{margin:0;font-family:Arial}\nfooter{background:#09080f;color:#888;padding:50px 40px;text-align:center}\n.brand{color:#B5ED18;font-size:24px;font-weight:bold;margin-bottom:20px}\n.social{display:flex;justify-content:center;gap:16px;margin-bottom:24px}\n.social a{font-size:24px;text-decoration:none;transition:transform .2s}\n.social a:hover{transform:scale(1.2)}\n.copy{font-size:13px;color:#444}`,
     tests:[
       {desc:'Есть <footer>',check:d=>!!d.querySelector('footer')},
-      {desc:'.fc использует CSS Grid',check:d=>{const fc=d.querySelector('.fc');return fc&&getComputedStyle(fc).display==='grid';}},
-      {desc:'3 колонки в Grid',check:d=>{const fc=d.querySelector('.fc');return fc&&getComputedStyle(fc).gridTemplateColumns.split(' ').length===3;}},
-      {desc:'Минимум 3 колонки с контентом',check:d=>d.querySelectorAll('.fc .col').length>=3},
-      {desc:'Ссылки <a> в footer',check:d=>d.querySelectorAll('footer a').length>=3},
-      {desc:'Тёмный фон footer',check:d=>{const f=d.querySelector('footer');if(!f)return false;const m=getComputedStyle(f).backgroundColor.match(/\d+/g);return m&&parseInt(m[0])<80;}},
+      {desc:'Минимум 3 ссылки соцсетей',check:d=>d.querySelectorAll('footer a').length>=3},
+      {desc:'Есть копирайт ©',check:d=>d.querySelector('footer')?.textContent.includes('©')},
+    ]
+  },
+  {
+    difficulty:'easy',
+    name:'Footer с логотипом',
+    desc:'Создай footer с логотипом и описанием:\n• Тег <footer>\n• Блок .brand с названием и описанием\n• Копирайт © снизу\n• Минимум 2 ссылки',
+    hint:'<footer>\n  <div class="brand">\n    <h4>🚀 AI-TREND</h4>\n    <p>Онлайн-школа будущего</p>\n  </div>\n</footer>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer</title></head>\n<body>\n  <footer>\n    <div class="brand">\n      <!-- Логотип и описание -->\n    </div>\n    <div class="links">\n      <!-- Ссылки -->\n    </div>\n    <div class="copy"><!-- Копирайт --></div>\n  </footer>\n</body>\n</html>`,
+    starterCss:`body{margin:0;font-family:Arial}\nfooter{background:#09080f;color:#888;padding:48px 40px 24px}\n.brand h4{color:#B5ED18;font-size:22px;margin-bottom:8px}\n.brand p{color:#555;font-size:14px;margin-bottom:32px}\n.links{display:flex;gap:24px;margin-bottom:32px}\n.links a{color:#888;text-decoration:none;font-size:14px}\n.links a:hover{color:#B5ED18}\n.copy{border-top:1px solid #1e1e3a;padding-top:20px;font-size:13px;color:#444}`,
+    tests:[
+      {desc:'Есть <footer>',check:d=>!!d.querySelector('footer')},
+      {desc:'Есть блок .brand',check:d=>!!d.querySelector('footer .brand')},
+      {desc:'Минимум 2 ссылки',check:d=>d.querySelectorAll('footer a').length>=2},
+      {desc:'Есть копирайт ©',check:d=>d.querySelector('footer')?.textContent.includes('©')},
+    ]
+  },
+  {
+    difficulty:'medium',
+    name:'Footer с двумя колонками',
+    desc:'Создай footer с 2 колонками:\n• Тег <footer>\n• .footer-grid с display:flex или grid\n• 2 блока .col с заголовком h4 и ссылками\n• Минимум 2 <a> в каждой колонке\n• Копирайт .copy внизу',
+    hint:'.footer-grid { display: flex; gap: 40px; margin-bottom: 40px; }\n.col h4 { color: #B5ED18; }\n.col a { display: block; color: #888; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer</title></head>\n<body>\n  <footer>\n    <div class="footer-grid">\n      <div class="col">\n        <h4>Меню</h4>\n        <!-- Ссылки -->\n      </div>\n      <div class="col">\n        <h4>Контакты</h4>\n        <!-- Ссылки -->\n      </div>\n    </div>\n    <div class="copy">© 2025 AI-TREND</div>\n  </footer>\n</body>\n</html>`,
+    starterCss:`body{margin:0;font-family:Arial}\nfooter{background:#09080f;color:#fff;padding:50px 40px 24px}\n.footer-grid{display:flex;gap:40px;margin-bottom:40px}\n.col h4{color:#B5ED18;margin-bottom:12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em}\n.col a{display:block;color:#888;text-decoration:none;margin-bottom:8px;font-size:14px}\n.col a:hover{color:#B5ED18}\n.copy{border-top:1px solid #1e1e3a;padding-top:20px;color:#444;font-size:13px}`,
+    tests:[
+      {desc:'Есть <footer>',check:d=>!!d.querySelector('footer')},
+      {desc:'Есть 2 колонки .col',check:d=>d.querySelectorAll('footer .col').length>=2},
+      {desc:'В каждой колонке есть h4',check:d=>d.querySelectorAll('footer .col h4').length>=2},
+      {desc:'Ссылки <a> в колонках',check:d=>d.querySelectorAll('footer .col a').length>=4},
+      {desc:'Есть копирайт ©',check:d=>d.querySelector('footer')?.textContent.includes('©')},
+    ]
+  },
+  {
+    difficulty:'medium',
+    name:'Footer с формой подписки',
+    desc:'Создай footer с формой email-подписки:\n• Тег <footer>\n• Заголовок и описание\n• <form> с <input type="email">\n• Кнопка <button> "Подписаться"\n• Копирайт снизу',
+    hint:'<form class="subscribe">\n  <input type="email" placeholder="Твой email">\n  <button type="submit">Подписаться</button>\n</form>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer</title></head>\n<body>\n  <footer>\n    <div class="sub-block">\n      <h3>Будь в курсе новинок!</h3>\n      <p>Подписывайся и получай новые уроки</p>\n      <form class="subscribe">\n        <!-- input email и button -->\n      </form>\n    </div>\n    <div class="copy">© 2025 AI-TREND</div>\n  </footer>\n</body>\n</html>`,
+    starterCss:`body{margin:0;font-family:Arial}\nfooter{background:#09080f;color:#fff;padding:60px 40px 30px;text-align:center}\n.sub-block h3{color:#B5ED18;font-size:24px;margin-bottom:8px}\n.sub-block p{color:#888;margin-bottom:24px}\n.subscribe{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}\n.subscribe input{padding:12px 20px;border-radius:30px;border:1px solid #333;background:#1a1040;color:#fff;font-size:14px;width:260px}\n.subscribe button{padding:12px 28px;border-radius:30px;background:#685BC7;color:#fff;border:none;cursor:pointer;font-size:14px}\n.copy{border-top:1px solid #1e1e3a;margin-top:40px;padding-top:20px;color:#444;font-size:13px}`,
+    tests:[
+      {desc:'Есть <footer>',check:d=>!!d.querySelector('footer')},
+      {desc:'Есть <form>',check:d=>!!d.querySelector('footer form')},
+      {desc:'Есть input[type=email]',check:d=>!!d.querySelector('footer input[type="email"]')},
+      {desc:'Есть кнопка <button>',check:d=>!!d.querySelector('footer button')},
+      {desc:'Есть копирайт ©',check:d=>d.querySelector('footer')?.textContent.includes('©')},
+    ]
+  },
+  {
+    difficulty:'medium',
+    name:'Footer с картой сайта',
+    desc:'Создай footer с 3 колонками-разделами:\n• <footer> с .fc\n• Логотип + описание в первой колонке\n• Ссылки по разделам в 2-3 колонках\n• Минимум 3 <a> в каждой навигации\n• Копирайт .fb внизу',
+    hint:'.fc { display: flex; gap: 40px; }\n/* Или grid: grid-template-columns: 2fr 1fr 1fr */',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer</title></head>\n<body>\n  <footer>\n    <div class="fc">\n      <div class="col brand-col">\n        <h4>🚀 AI-TREND</h4>\n        <p>Школа будущего</p>\n      </div>\n      <div class="col">\n        <h4>Курсы</h4>\n        <!-- 3+ ссылки -->\n      </div>\n      <div class="col">\n        <h4>Компания</h4>\n        <!-- 3+ ссылки -->\n      </div>\n    </div>\n    <div class="fb">\n      <span>© 2025 AI-TREND</span>\n      <span>Все права защищены</span>\n    </div>\n  </footer>\n</body>\n</html>`,
+    starterCss:`body{margin:0;font-family:Arial}\nfooter{background:#09080f;color:#fff;padding:60px 50px 30px}\n.fc{display:flex;gap:40px;margin-bottom:48px}\n.brand-col{flex:2}\n.col h4{color:#B5ED18;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}\n.col a{display:block;color:#888;text-decoration:none;margin-bottom:10px;font-size:14px;transition:color .2s}\n.col a:hover{color:#B5ED18}\n.fb{border-top:1px solid #1e1e3a;padding-top:24px;display:flex;justify-content:space-between;color:#444;font-size:12px}`,
+    tests:[
+      {desc:'Есть <footer>',check:d=>!!d.querySelector('footer')},
+      {desc:'Минимум 3 колонки .col',check:d=>d.querySelectorAll('footer .col').length>=3},
+      {desc:'Заголовки h4 в колонках',check:d=>d.querySelectorAll('footer .col h4').length>=2},
+      {desc:'Ссылки в навигации (6+)',check:d=>d.querySelectorAll('footer .col a').length>=6},
+      {desc:'Есть блок копирайта',check:d=>!!d.querySelector('footer .fb')},
+    ]
+  },
+  {
+    difficulty:'hard',
+    name:'Профессиональный 3-колонный Footer',
+    desc:'Создай профессиональный footer с Grid:\n• <footer> с тёмным фоном\n• .fc с grid-template-columns: 2fr 1fr 1fr\n• В 1-й колонке: лого, описание, соцсети\n• В 2-3 колонках: заголовки и ссылки (3+)\n• .fb с копирайтом',
+    hint:'.fc { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer Pro</title></head>\n<body>\n  <footer>\n    <div class="fc">\n      <div class="col">\n        <h4>🚀 AI-TREND</h4>\n        <p>Онлайн-школа программирования<br>для детей и подростков</p>\n        <div class="soc">\n          <a href="#">📘</a>\n          <a href="#">📸</a>\n          <a href="#">🐦</a>\n        </div>\n      </div>\n      <div class="col">\n        <h4>Курсы</h4>\n        <a href="#">HTML & CSS</a>\n        <a href="#">JavaScript</a>\n        <a href="#">Python</a>\n        <a href="#">ИИ и промпты</a>\n      </div>\n      <div class="col">\n        <h4>Компания</h4>\n        <a href="#">О нас</a>\n        <a href="#">Блог</a>\n        <a href="#">Контакты</a>\n        <a href="#">Карьера</a>\n      </div>\n    </div>\n    <div class="fb">\n      <span>© 2025 AI-TREND. Все права защищены.</span>\n      <div><a href="#">Политика</a> · <a href="#">Условия</a></div>\n    </div>\n  </footer>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial}\nfooter{background:#09080f;color:#fff;padding:60px 50px 30px}\n.fc{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:48px}\n.col h4{color:#B5ED18;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px}\n.col p{color:#555;font-size:13px;line-height:1.7;margin-bottom:16px}\n.col a{display:block;color:#888;text-decoration:none;font-size:14px;margin-bottom:11px;transition:color .2s}\n.col a:hover{color:#B5ED18}\n.soc{display:flex;gap:12px;margin-top:8px}\n.soc a{font-size:20px}\n.fb{border-top:1px solid #1e1e3a;padding-top:24px;display:flex;justify-content:space-between;align-items:center;color:#444;font-size:12px}\n.fb a{color:#555;text-decoration:none;margin-left:12px}`,
+    tests:[
+      {desc:'Есть <footer>',check:d=>!!d.querySelector('footer')},
+      {desc:'Есть .fc с 3 колонками',check:d=>d.querySelectorAll('.fc .col').length>=3},
+      {desc:'Соцсети .soc с ссылками',check:d=>d.querySelectorAll('.soc a').length>=3},
+      {desc:'Ссылки в навигации (6+)',check:d=>d.querySelectorAll('.col a').length>=6},
+      {desc:'Есть .fb с копирайтом',check:d=>!!d.querySelector('.fb')&&d.querySelector('.fb')?.textContent.includes('©')},
+    ]
+  },
+  {
+    difficulty:'hard',
+    name:'Footer с переключателем темы',
+    desc:'Создай footer с кнопкой смены темы:\n• <footer id="footer">\n• Кнопка <button id="themeBtn">\n• JavaScript: при клике меняй class="dark"\n• 2 темы: светлая и тёмная\n• Копирайт © и ссылки',
+    hint:'document.getElementById("themeBtn")\n  .addEventListener("click",()=>{\n    document.getElementById("footer")\n      .classList.toggle("dark");\n  });',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Footer Theme</title></head>\n<body>\n  <footer id="footer" class="dark">\n    <div class="fc">\n      <div class="col">\n        <h4>🚀 AI-TREND</h4>\n        <p>Школа будущего</p>\n      </div>\n      <div class="col">\n        <h4>Меню</h4>\n        <a href="#">Курсы</a>\n        <a href="#">О нас</a>\n        <a href="#">Контакты</a>\n      </div>\n    </div>\n    <div class="fb">\n      <span>© 2025 AI-TREND</span>\n      <button id="themeBtn">🌙 Тёмная тема</button>\n    </div>\n  </footer>\n  <script>\n    // Добавь переключение темы\n  </script>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial}\nfooter{padding:50px 40px 24px;transition:all .3s}\nfooter.dark{background:#09080f;color:#fff}\nfooter:not(.dark){background:#f0f0f0;color:#333}\n.col h4{color:#B5ED18;margin-bottom:12px;font-size:13px;text-transform:uppercase}\n.col a{display:block;color:#888;text-decoration:none;margin-bottom:8px}\n.fb{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #333;margin-top:32px;padding-top:20px}\n#themeBtn{padding:8px 16px;border-radius:20px;border:1px solid #685BC7;background:transparent;color:#B5ED18;cursor:pointer;font-size:13px}`,
+    tests:[
+      {desc:'Есть <footer id="footer">',check:d=>!!d.querySelector('footer#footer')},
+      {desc:'Есть кнопка #themeBtn',check:d=>!!d.querySelector('#themeBtn')},
+      {desc:'Есть <script> с JavaScript',check:d=>!!d.querySelector('script')},
+      {desc:'Ссылки в footer',check:d=>d.querySelectorAll('footer a').length>=2},
+      {desc:'Есть копирайт ©',check:d=>d.querySelector('footer')?.textContent.includes('©')},
+    ]
+  },
+  {
+    difficulty:'hard',
+    name:'Полный макет: Header + Main + Footer',
+    desc:'Создай полноценный макет страницы:\n• <header> с навигацией\n• <main> с h1 и текстом\n• <footer> с копирайтом и ссылками\n• Тёмная тема\n• body: display:flex, flex-direction:column',
+    hint:'body { display: flex; flex-direction: column; min-height: 100vh; }\nmain { flex: 1; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Полный макет</title></head>\n<body>\n  <header>\n    <nav>\n      <div class="logo">🚀 AI-TREND</div>\n      <ul class="menu">\n        <li><a href="#">Главная</a></li>\n        <li><a href="#">Курсы</a></li>\n        <li><a href="#">О нас</a></li>\n      </ul>\n    </nav>\n  </header>\n  <main>\n    <h1>Добро пожаловать!</h1>\n    <p>Это главная страница моего сайта.</p>\n  </main>\n  <footer>\n    <div class="fc">\n      <div class="col">\n        <h4>AI-TREND</h4>\n        <a href="#">Курсы</a>\n        <a href="#">Блог</a>\n      </div>\n      <div class="col">\n        <h4>Контакты</h4>\n        <a href="#">Email</a>\n        <a href="#">Telegram</a>\n      </div>\n    </div>\n    <div class="fb">© 2025 AI-TREND</div>\n  </footer>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;background:#09080f;color:#fff;display:flex;flex-direction:column;min-height:100vh}\nheader{background:#120f20;padding:16px 40px;border-bottom:1px solid #1e1e3a}\nnav{display:flex;justify-content:space-between;align-items:center}\n.logo{color:#B5ED18;font-weight:bold;font-size:20px}\n.menu{list-style:none;display:flex;gap:24px}\n.menu a{color:#888;text-decoration:none;font-size:14px;transition:color .2s}\n.menu a:hover{color:#B5ED18}\nmain{flex:1;padding:80px 40px;text-align:center}\nmain h1{color:#B5ED18;font-size:48px;margin-bottom:16px}\nmain p{color:#888;font-size:18px}\nfooter{background:#05040a;padding:50px 40px 24px}\n.fc{display:flex;gap:60px;margin-bottom:32px}\n.col h4{color:#B5ED18;font-size:12px;text-transform:uppercase;margin-bottom:14px}\n.col a{display:block;color:#666;text-decoration:none;margin-bottom:8px;font-size:13px}\n.fb{border-top:1px solid #1e1e3a;padding-top:20px;color:#444;font-size:12px}`,
+    tests:[
+      {desc:'Есть <header>',check:d=>!!d.querySelector('header')},
+      {desc:'Есть <main>',check:d=>!!d.querySelector('main')},
+      {desc:'Есть <footer>',check:d=>!!d.querySelector('footer')},
+      {desc:'Навигация с 3+ ссылками',check:d=>d.querySelectorAll('header a').length>=3},
+      {desc:'h1 в main',check:d=>!!d.querySelector('main h1')},
+      {desc:'Footer с копирайтом',check:d=>d.querySelector('footer')?.textContent.includes('©')},
     ]
   },
 ],
@@ -1697,6 +1595,7 @@ h2{font-size:15px;color:#8075D9;margin-bottom:14px;font-weight:800}
 .steps li::marker{color:#B5ED18;font-weight:bold}`,
   practiceLevels:[
   {
+    difficulty:'easy',
     name:'Первый список',
     desc:'Создай маркированный список:\n• Тег <ul> как контейнер\n• Минимум 3 элемента <li>\n• Любой текст в пунктах',
     hint:'<ul>\n  <li>Первый пункт</li>\n  <li>Второй пункт</li>\n  <li>Третий пункт</li>\n</ul>',
@@ -1709,32 +1608,129 @@ h2{font-size:15px;color:#8075D9;margin-bottom:14px;font-weight:800}
     ]
   },
   {
-    name:'Оба вида списков',
-    desc:'Создай два вида списков:\n• <ul> — маркированный (3+ пункта)\n• <ol> — нумерованный (3+ пункта)\n• Заголовок <h2> у каждого',
-    hint:'<ol>\n  <li>Шаг 1</li>\n  <li>Шаг 2</li>\n  <li>Шаг 3</li>\n</ol>',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Списки</title></head>\n<body>\n  <h1>Мои списки</h1>\n  <!-- ul маркированный -->\n\n  <!-- ol нумерованный -->\n\n</body>\n</html>`,
-    starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh1{color:#685BC7;margin-bottom:20px}\nh2{color:#8075D9;margin-bottom:10px}\nul,ol{padding-left:24px;margin-bottom:20px}\nli{padding:5px 0;color:#333}`,
+    difficulty:'easy',
+    name:'Нумерованный список',
+    desc:'Создай нумерованный список шагов:\n• Тег <ol> (ordered list)\n• Минимум 4 элемента <li>\n• Заголовок <h2> над списком',
+    hint:'<h2>Шаги</h2>\n<ol>\n  <li>Шаг 1</li>\n  <li>Шаг 2</li>\n  <li>Шаг 3</li>\n  <li>Шаг 4</li>\n</ol>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Список</title></head>\n<body>\n  <!-- Добавь h2 и ol с li -->\n\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:14px}\nol{padding-left:24px}\nli{padding:7px 0;color:#333;font-size:15px}\nli::marker{color:#685BC7;font-weight:bold}`,
+    tests:[
+      {desc:'Есть <ol>',check:d=>!!d.querySelector('ol')},
+      {desc:'Минимум 4 пункта <li>',check:d=>d.querySelectorAll('ol li').length>=4},
+      {desc:'Есть заголовок <h2>',check:d=>!!d.querySelector('h2')},
+    ]
+  },
+  {
+    difficulty:'easy',
+    name:'Список с заголовком',
+    desc:'Создай стильный список с заголовком:\n• Заголовок <h2>\n• Список <ul> с 4+ пунктами\n• Каждый пункт с эмодзи в начале\n• CSS: убери стандартные маркеры',
+    hint:'ul { list-style: none; padding: 0; }\nli { padding: 10px 14px; background: white; border-radius: 10px; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Список</title></head>\n<body>\n  <h2>🚀 Что я умею:</h2>\n  <ul class="skills">\n    <!-- 4+ пункта с эмодзи -->\n  </ul>\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;max-width:400px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\n.skills{list-style:none;padding:0}\n.skills li{padding:10px 14px;background:white;border-radius:10px;margin-bottom:8px;color:#333;font-size:14px;box-shadow:0 2px 6px rgba(0,0,0,.08)}`,
+    tests:[
+      {desc:'Есть <ul>',check:d=>!!d.querySelector('ul')},
+      {desc:'Минимум 4 пункта <li>',check:d=>d.querySelectorAll('ul li').length>=4},
+      {desc:'Есть заголовок',check:d=>!!(d.querySelector('h1')||d.querySelector('h2')||d.querySelector('h3'))},
+    ]
+  },
+  {
+    difficulty:'easy',
+    name:'Список со ссылками',
+    desc:'Создай список ссылок:\n• <ul> с 4+ элементами <li>\n• Внутри каждого <li> — ссылка <a href="#">\n• Заголовок <h3> над списком\n• CSS: убери маркеры, стилизуй ссылки',
+    hint:'<ul class="link-list">\n  <li><a href="#">Ссылка 1</a></li>\n  <li><a href="#">Ссылка 2</a></li>\n</ul>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Ссылки</title></head>\n<body>\n  <h3>Полезные ресурсы</h3>\n  <ul class="link-list">\n    <!-- 4+ li с a -->\n  </ul>\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh3{color:#685BC7;margin-bottom:14px}\n.link-list{list-style:none;padding:0}\n.link-list li{margin-bottom:10px}\n.link-list a{color:#685BC7;text-decoration:none;font-size:15px;padding:8px 14px;background:white;border-radius:8px;display:block;transition:background .2s}\n.link-list a:hover{background:#e0d8ff}`,
+    tests:[
+      {desc:'Есть <ul>',check:d=>!!d.querySelector('ul')},
+      {desc:'Минимум 4 <li>',check:d=>d.querySelectorAll('ul li').length>=4},
+      {desc:'Ссылки <a> в <li>',check:d=>d.querySelectorAll('ul li a').length>=4},
+    ]
+  },
+  {
+    difficulty:'medium',
+    name:'Два вида списков',
+    desc:'Создай страницу с обоими видами списков:\n• <ul> маркированный (3+ пункта)\n• <ol> нумерованный (3+ пункта)\n• Заголовок <h2> у каждого\n• Расположи их рядом (display:flex)',
+    hint:'.lists { display: flex; gap: 40px; }\n.list-block { flex: 1; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Списки</title></head>\n<body>\n  <h1>Мои списки</h1>\n  <div class="lists">\n    <div class="list-block">\n      <!-- ul маркированный -->\n    </div>\n    <div class="list-block">\n      <!-- ol нумерованный -->\n    </div>\n  </div>\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh1{color:#685BC7;margin-bottom:24px}\n.lists{display:flex;gap:32px}\n.list-block{flex:1;background:white;padding:20px;border-radius:14px}\nh2{color:#8075D9;font-size:16px;margin-bottom:12px}\nul,ol{padding-left:24px}\nli{padding:6px 0;color:#333;font-size:14px}`,
     tests:[
       {desc:'Есть <ul>',check:d=>!!d.querySelector('ul')},
       {desc:'Есть <ol>',check:d=>!!d.querySelector('ol')},
       {desc:'В ul минимум 3 li',check:d=>d.querySelectorAll('ul li').length>=3},
       {desc:'В ol минимум 3 li',check:d=>d.querySelectorAll('ol li').length>=3},
-      {desc:'Есть заголовки h2',check:d=>d.querySelectorAll('h2').length>=2},
+      {desc:'Заголовки h2 у списков',check:d=>d.querySelectorAll('h2').length>=2},
     ]
   },
   {
-    name:'Меню из списка',
-    desc:'Сделай навигацию из списка:\n• <nav> > <ul class="menu">\n• Минимум 4 <li> с <a> внутри\n• CSS: list-style:none, display:flex\n• Hover-эффект на ссылках',
-    hint:'.menu{list-style:none;display:flex;gap:24px;padding:0}\n.menu a{color:white;text-decoration:none}\n.menu a:hover{color:#B5ED18}',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Меню</title></head>\n<body>\n  <nav>\n    <ul class="menu">\n      <!-- 4+ li с a -->\n    </ul>\n  </nav>\n</body>\n</html>`,
-    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;background:#09080f}\nnav{background:#1a1040;padding:16px 32px}\n.menu{/* list-style:none; display:flex; gap:... */}\n.menu a{/* стиль ссылок */}`,
+    difficulty:'medium',
+    name:'Вложенный список',
+    desc:'Создай вложенный список (список внутри списка):\n• <ul> с 3+ пунктами верхнего уровня\n• В одном из пунктов — вложенный <ul>\n• Вложенный список: 3+ элемента\n• Стилизуй разные уровни по-разному',
+    hint:'<ul>\n  <li>Пункт 1\n    <ul>\n      <li>Подпункт 1.1</li>\n      <li>Подпункт 1.2</li>\n    </ul>\n  </li>\n</ul>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Вложенный список</title></head>\n<body>\n  <h2>Структура курса</h2>\n  <ul class="tree">\n    <li>HTML\n      <ul>\n        <!-- 3 подпункта -->\n      </ul>\n    </li>\n    <li>CSS</li>\n    <li>JavaScript</li>\n  </ul>\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\n.tree{padding-left:20px}\n.tree li{padding:7px 0;color:#333;font-size:15px}\n.tree ul{margin-top:6px}\n.tree ul li{font-size:13px;color:#685BC7;padding:4px 0}`,
+    tests:[
+      {desc:'Есть <ul>',check:d=>!!d.querySelector('ul')},
+      {desc:'Минимум 3 пункта первого уровня',check:d=>d.querySelectorAll('ul>li').length>=3},
+      {desc:'Есть вложенный <ul>',check:d=>!!d.querySelector('ul ul')},
+      {desc:'Во вложенном ul минимум 3 li',check:d=>d.querySelectorAll('ul ul li').length>=3},
+    ]
+  },
+  {
+    difficulty:'medium',
+    name:'Список с иконками',
+    desc:'Создай список с кастомными иконками:\n• <ul class="icon-list"> с 5+ пунктами\n• list-style: none\n• Каждый <li> с эмодзи или иконкой\n• Красивый hover-эффект\n• Стилизованные карточки',
+    hint:'.icon-list { list-style: none; padding: 0; }\n.icon-list li { display: flex; align-items: center; gap: 12px; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Иконки</title></head>\n<body>\n  <h2>Что я изучаю</h2>\n  <ul class="icon-list">\n    <li><span class="icon">🌐</span> HTML — структура</li>\n    <li><span class="icon">🎨</span> CSS — стиль</li>\n    <!-- ещё 3+ пункта -->\n  </ul>\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;max-width:400px;background:#09080f}\nh2{color:#B5ED18;margin-bottom:16px}\n.icon-list{list-style:none;padding:0}\n.icon-list li{display:flex;align-items:center;gap:14px;padding:14px 18px;background:#120f20;border-radius:12px;margin-bottom:10px;color:#e0d8ff;font-size:14px;cursor:default;transition:background .2s}\n.icon-list li:hover{background:#1a1040}\n.icon{font-size:20px}`,
+    tests:[
+      {desc:'Есть <ul>',check:d=>!!d.querySelector('ul')},
+      {desc:'Минимум 5 пунктов <li>',check:d=>d.querySelectorAll('ul li').length>=5},
+      {desc:'Есть эмодзи в пунктах',check:d=>{const txt=d.querySelector('ul')?.textContent||'';return /[\u{1F000}-\u{1FFFF}]|[☀-➿]/u.test(txt);}},
+    ]
+  },
+  {
+    difficulty:'hard',
+    name:'Навигационное меню',
+    desc:'Создай горизонтальное меню:\n• <nav> с <ul class="menu">\n• Минимум 4 <li> с <a> внутри\n• list-style: none, display: flex\n• Активный пункт: class="active"\n• Hover-эффект на ссылках',
+    hint:'.menu{list-style:none;display:flex;gap:0;padding:0}\n.menu li a{padding:16px 20px;display:block;color:#888;text-decoration:none}\n.menu li a:hover,.menu li a.active{color:#B5ED18}',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Меню</title></head>\n<body>\n  <header>\n    <div class="logo">🚀 AI-TREND</div>\n    <nav>\n      <ul class="menu">\n        <li><a href="#" class="active">Главная</a></li>\n        <li><a href="#">Курсы</a></li>\n        <!-- ещё 2+ пункта -->\n      </ul>\n    </nav>\n  </header>\n  <main>\n    <h1>Добро пожаловать!</h1>\n  </main>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;background:#09080f;color:#fff}\nheader{background:#120f20;padding:0 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e1e3a}\n.logo{color:#B5ED18;font-weight:bold;font-size:18px;padding:18px 0}\n.menu{list-style:none;display:flex}\n.menu a{display:block;padding:20px 20px;color:#888;text-decoration:none;font-size:14px;transition:color .2s}\n.menu a:hover,.menu a.active{color:#B5ED18}\nmain{padding:80px 40px;text-align:center}\nmain h1{color:#B5ED18;font-size:40px}`,
     tests:[
       {desc:'Есть <nav>',check:d=>!!d.querySelector('nav')},
-      {desc:'Есть <ul> внутри nav',check:d=>!!d.querySelector('nav ul')},
-      {desc:'Минимум 4 пункта li',check:d=>d.querySelectorAll('nav li').length>=4},
+      {desc:'<ul> внутри nav',check:d=>!!d.querySelector('nav ul')},
+      {desc:'Минимум 4 пункта',check:d=>d.querySelectorAll('nav li').length>=4},
       {desc:'Ссылки <a> в пунктах',check:d=>d.querySelectorAll('nav li a').length>=4},
-      {desc:'list-style: none',check:d=>{const ul=d.querySelector('nav ul');return ul&&getComputedStyle(ul).listStyleType==='none';}},
-      {desc:'Flex-раскладка меню',check:d=>{const ul=d.querySelector('nav ul');return ul&&getComputedStyle(ul).display==='flex';}},
+      {desc:'Активный пункт .active',check:d=>!!d.querySelector('nav a.active')},
+    ]
+  },
+  {
+    difficulty:'hard',
+    name:'Боковая панель с меню',
+    desc:'Создай страницу с боковой панелью:\n• <aside class="sidebar"> с меню\n• <main> с основным контентом\n• Расположение: display:flex\n• В sidebar: <ul> с 5+ пунктами\n• Активный пункт выделен',
+    hint:'body { display: flex; }\n.sidebar { width: 240px; min-height: 100vh; }\nmain { flex: 1; padding: 40px; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Боковое меню</title></head>\n<body>\n  <aside class="sidebar">\n    <div class="logo">🚀 AI-TREND</div>\n    <ul class="nav">\n      <li><a href="#" class="active">📚 Курсы</a></li>\n      <li><a href="#">🏆 Достижения</a></li>\n      <!-- ещё 3+ пункта -->\n    </ul>\n  </aside>\n  <main>\n    <h1>Мои курсы</h1>\n    <p>Выбери курс из меню слева</p>\n  </main>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;display:flex;min-height:100vh;background:#09080f}\n.sidebar{width:240px;background:#120f20;padding:24px 0;border-right:1px solid #1e1e3a;flex-shrink:0}\n.logo{color:#B5ED18;font-weight:bold;font-size:16px;padding:0 20px 24px;border-bottom:1px solid #1e1e3a;margin-bottom:12px}\n.nav{list-style:none}\n.nav a{display:block;padding:12px 20px;color:#888;text-decoration:none;font-size:14px;transition:all .2s}\n.nav a:hover{color:#fff;background:rgba(104,91,199,.15)}\n.nav a.active{color:#B5ED18;background:rgba(181,237,24,.08);border-left:3px solid #B5ED18}\nmain{flex:1;padding:50px 40px}\nmain h1{color:#B5ED18;font-size:32px;margin-bottom:12px}\nmain p{color:#888}`,
+    tests:[
+      {desc:'Есть <aside class="sidebar">',check:d=>!!d.querySelector('aside.sidebar')},
+      {desc:'Есть <main>',check:d=>!!d.querySelector('main')},
+      {desc:'<ul> в sidebar',check:d=>!!d.querySelector('aside ul')},
+      {desc:'Минимум 5 пунктов меню',check:d=>d.querySelectorAll('aside li').length>=5},
+      {desc:'Активный пункт .active',check:d=>!!d.querySelector('aside a.active')},
+    ]
+  },
+  {
+    difficulty:'hard',
+    name:'Аккордеон из списка',
+    desc:'Создай аккордеон (список с раскрытием):\n• 3+ блока .accordion-item\n• Каждый с .acc-header (кнопка)\n• И .acc-body (скрытый контент)\n• JavaScript: клик на .acc-header\n  добавляет/убирает class="open"',
+    hint:'.acc-body { display: none; }\n.accordion-item.open .acc-body { display: block; }\ndocument.querySelectorAll(".acc-header")\n  .forEach(h=>h.addEventListener("click",()=>{\n    h.parentElement.classList.toggle("open");\n  }));',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Аккордеон</title></head>\n<body>\n  <h2>Частые вопросы</h2>\n  <div class="accordion">\n    <div class="accordion-item">\n      <button class="acc-header">Что такое HTML? <span>+</span></button>\n      <div class="acc-body">\n        <p>HTML — язык разметки для создания структуры страниц.</p>\n      </div>\n    </div>\n    <!-- ещё 2+ элемента -->\n  </div>\n  <script>\n    // Добавь переключение аккордеона\n  </script>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;padding:40px;max-width:600px;margin:0 auto;background:#09080f}\nh2{color:#B5ED18;margin-bottom:24px}\n.accordion-item{border:1px solid #1e1e3a;border-radius:10px;margin-bottom:10px;overflow:hidden}\n.acc-header{width:100%;padding:16px 20px;background:#120f20;color:#fff;border:none;text-align:left;cursor:pointer;font-size:14px;display:flex;justify-content:space-between;transition:background .2s}\n.acc-header:hover{background:#1a1040}\n.accordion-item.open .acc-header{color:#B5ED18}\n.acc-body{display:none;padding:16px 20px;background:#0d0b18;color:#888;font-size:14px;line-height:1.6}\n.accordion-item.open .acc-body{display:block}`,
+    tests:[
+      {desc:'Минимум 3 блока .accordion-item',check:d=>d.querySelectorAll('.accordion-item').length>=3},
+      {desc:'Кнопки .acc-header',check:d=>d.querySelectorAll('.acc-header').length>=3},
+      {desc:'Содержимое .acc-body',check:d=>d.querySelectorAll('.acc-body').length>=3},
+      {desc:'Есть <script> с JavaScript',check:d=>!!d.querySelector('script')},
+      {desc:'Есть заголовок страницы',check:d=>!!(d.querySelector('h1')||d.querySelector('h2'))},
     ]
   },
 ],
@@ -1797,6 +1793,7 @@ h1{text-align:center;color:#B5ED18;margin-bottom:28px;font-size:28px}
 .info p{color:#685BC7;font-size:13px}`,
   practiceLevels:[
   {
+    difficulty:'easy',
     name:'Первая картинка',
     desc:'Добавь тег <img> с:\n• Атрибутом src (адрес картинки)\n• Атрибутом alt (описание)\n\nМожешь использовать:\nhttps://picsum.photos/300/200',
     hint:'<img src="https://picsum.photos/300/200" alt="фото">',
@@ -1809,31 +1806,131 @@ h1{text-align:center;color:#B5ED18;margin-bottom:28px;font-size:28px}
     ]
   },
   {
-    name:'Картинка-ссылка',
-    desc:'Создай кликабельную картинку:\n• Тег <a href="..."> с любой ссылкой\n• Внутри <a> — тег <img>\n• У img: src, alt\n• У a: target="_blank"\n• CSS: border-radius у картинки',
-    hint:'<a href="https://google.com" target="_blank">\n  <img src="https://picsum.photos/400/300" alt="фото">\n</a>',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Ссылка-картинка</title></head>\n<body>\n  <!-- Добавь a с img внутри -->\n\n</body>\n</html>`,
-    starterCss:`body { font-family: Arial; padding: 30px; display: flex; justify-content: center; }\na { display: block; border-radius: 14px; overflow: hidden; transition: transform .2s; }\na:hover { transform: scale(1.03); }\nimg { width: 300px; height: 200px; object-fit: cover; display: block; }`,
+    difficulty:'easy',
+    name:'Картинка с подписью',
+    desc:'Создай картинку с подписью:\n• <figure> как контейнер\n• <img> с src и alt\n• <figcaption> с описанием\n• CSS: скруглённые углы у img',
+    hint:'<figure>\n  <img src="https://picsum.photos/400/250" alt="пейзаж">\n  <figcaption>Красивый пейзаж</figcaption>\n</figure>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Картинка</title></head>\n<body>\n  <!-- Добавь figure > img + figcaption -->\n\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;text-align:center;background:#f5f0ff}\nfigure{display:inline-block;margin:0;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.1)}\nimg{width:400px;height:250px;object-fit:cover;display:block}\nfigcaption{padding:12px;background:white;color:#685BC7;font-size:14px}`,
     tests:[
-      {desc:'Есть <a href>',check:d=>!!d.querySelector('a[href]')},
-      {desc:'Картинка <img> внутри <a>',check:d=>!!d.querySelector('a img')},
-      {desc:'У img есть alt',check:d=>!!d.querySelector('img[alt]')},
-      {desc:'a открывается в новой вкладке',check:d=>d.querySelector('a')?.target==='_blank'},
+      {desc:'Есть <figure>',check:d=>!!d.querySelector('figure')},
+      {desc:'Есть <img> с src',check:d=>!!d.querySelector('img[src]')},
+      {desc:'Есть <figcaption>',check:d=>!!d.querySelector('figcaption')},
+      {desc:'figcaption с текстом',check:d=>d.querySelector('figcaption')?.textContent.trim().length>0},
     ]
   },
   {
-    name:'Фотогалерея',
-    desc:'Создай галерею из 3+ фотографий:\n• Контейнер .gallery с CSS Grid\n• 3 карточки — ссылки <a> с img внутри\n• У каждого img: src, alt, object-fit: cover\n• Hover-эффект на карточках',
-    hint:'.gallery { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }\n.gallery img { width: 100%; height: 200px; object-fit: cover; display: block; }',
-    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Галерея</title></head>\n<body>\n  <h1>Галерея</h1>\n  <div class="gallery">\n\n  </div>\n</body>\n</html>`,
-    starterCss:`* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Arial; background: #09080f; color: white; padding: 30px; }\nh1 { color: #B5ED18; margin-bottom: 20px; }\n.gallery { /* grid */ }\n.gallery a { display: block; border-radius: 12px; overflow: hidden; text-decoration: none; transition: transform .2s; }\n.gallery a:hover { transform: translateY(-6px); }\n.gallery img { /* width, height, object-fit */ }`,
+    difficulty:'easy',
+    name:'Три вида ссылок',
+    desc:'Создай 3 разных ссылки:\n• Обычная ссылка <a href="...">\n• Ссылка в новой вкладке: target="_blank"\n• Ссылка-якорь на блок той же страницы\n• Разные цвета/стили',
+    hint:'<a href="https://google.com" target="_blank">В новой вкладке</a>\n<a href="#section1">На блок ниже</a>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Ссылки</title></head>\n<body>\n  <h1>Примеры ссылок</h1>\n  <!-- 3 разных ссылки -->\n\n  <div id="section1" style="margin-top:100px">\n    <h2>Секция 1</h2>\n  </div>\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh1{color:#685BC7;margin-bottom:24px}\na{display:inline-block;margin-bottom:12px;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:15px}\n.ext-link{background:#685BC7;color:white}\n.anchor{background:#B5ED18;color:#333}`,
     tests:[
-      {desc:'Минимум 3 картинки <img>',check:d=>d.querySelectorAll('img').length>=3},
+      {desc:'Минимум 3 ссылки <a>',check:d=>d.querySelectorAll('a').length>=3},
+      {desc:'Есть ссылка с target="_blank"',check:d=>!!d.querySelector('a[target="_blank"]')},
+      {desc:'Есть ссылка-якорь (href="#...")',check:d=>{const links=d.querySelectorAll('a[href]');let ok=false;links.forEach(a=>{if((a.getAttribute('href')||'').startsWith('#'))ok=true;});return ok;}},
+    ]
+  },
+  {
+    difficulty:'easy',
+    name:'3 картинки в ряд',
+    desc:'Создай 3 картинки в ряд:\n• 3 тега <img> с разными src\n• У каждого: src, alt\n• Контейнер .row с display:flex\n• Одинаковый размер изображений\n• Скруглённые углы',
+    hint:'.row { display: flex; gap: 16px; }\n.row img { width: 200px; height: 150px; object-fit: cover; border-radius: 10px; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Картинки</title></head>\n<body>\n  <h2>Моя галерея</h2>\n  <div class="row">\n    <!-- 3 img -->\n  </div>\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:30px;background:#f5f0ff}\nh2{color:#685BC7;margin-bottom:16px}\n.row{display:flex;gap:16px}\n.row img{width:200px;height:150px;object-fit:cover;border-radius:12px}`,
+    tests:[
+      {desc:'Минимум 3 картинки',check:d=>d.querySelectorAll('img').length>=3},
       {desc:'У каждого img есть src',check:d=>d.querySelectorAll('img[src]').length>=3},
       {desc:'У каждого img есть alt',check:d=>d.querySelectorAll('img[alt]').length>=3},
-      {desc:'img обёрнуты в <a>',check:d=>d.querySelectorAll('a img').length>=3},
-      {desc:'object-fit: cover',check:d=>{const img=d.querySelector('img');return img&&getComputedStyle(img).objectFit==='cover';}},
-      {desc:'.gallery использует Grid',check:d=>{const g=d.querySelector('.gallery');return g&&getComputedStyle(g).display==='grid';}},
+      {desc:'Контейнер .row',check:d=>!!d.querySelector('.row')},
+    ]
+  },
+  {
+    difficulty:'medium',
+    name:'Кликабельная картинка',
+    desc:'Создай кликабельную картинку:\n• <a href="..."> с target="_blank"\n• Внутри <a> — тег <img>\n• У img: src, alt\n• Hover-эффект: scale или тень\n• Подпись под картинкой',
+    hint:'<a href="https://google.com" target="_blank">\n  <img src="https://picsum.photos/400/300" alt="фото">\n</a>',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Кликабельная картинка</title></head>\n<body>\n  <div class="card">\n    <!-- a > img -->\n    <p class="caption">Нажми на картинку</p>\n  </div>\n</body>\n</html>`,
+    starterCss:`body{font-family:Arial;padding:40px;display:flex;justify-content:center;background:#f5f0ff}\n.card{text-align:center}\n.card a{display:block;border-radius:16px;overflow:hidden;transition:transform .2s,box-shadow .2s}\n.card a:hover{transform:scale(1.04);box-shadow:0 12px 32px rgba(104,91,199,.25)}\n.card img{width:320px;height:220px;object-fit:cover;display:block}\n.caption{color:#685BC7;margin-top:10px;font-size:14px}`,
+    tests:[
+      {desc:'Есть <a> с href',check:d=>!!d.querySelector('a[href]')},
+      {desc:'Картинка <img> внутри <a>',check:d=>!!d.querySelector('a img')},
+      {desc:'У img есть alt',check:d=>!!d.querySelector('img[alt]')},
+      {desc:'target="_blank"',check:d=>d.querySelector('a')?.getAttribute('target')==='_blank'},
+    ]
+  },
+  {
+    difficulty:'medium',
+    name:'Карточка с картинкой и ссылкой',
+    desc:'Создай карточку товара/статьи:\n• .card с картинкой вверху\n• Заголовок <h3>\n• Описание <p>\n• Кнопка-ссылка <a class="btn">\n• Hover-эффект на карточке',
+    hint:'.card { border-radius: 16px; overflow: hidden; }\n.card img { width: 100%; height: 200px; object-fit: cover; }\n.card-body { padding: 20px; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Карточка</title></head>\n<body>\n  <div class="card">\n    <img src="https://picsum.photos/seed/tech/400/250" alt="технологии">\n    <div class="card-body">\n      <h3>Изучай HTML</h3>\n      <p>Начни своё путешествие в мир веб-разработки!</p>\n      <a href="#" class="btn">Начать →</a>\n    </div>\n  </div>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;padding:40px;display:flex;justify-content:center;background:#f5f0ff}\n.card{width:320px;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;background:white}\n.card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(104,91,199,.2)}\n.card img{width:100%;height:200px;object-fit:cover;display:block}\n.card-body{padding:20px}\n.card-body h3{color:#333;margin-bottom:8px}\n.card-body p{color:#888;font-size:14px;margin-bottom:16px;line-height:1.5}\n.btn{display:inline-block;padding:10px 22px;background:#685BC7;color:white;text-decoration:none;border-radius:20px;font-size:14px;transition:background .2s}\n.btn:hover{background:#8075D9}`,
+    tests:[
+      {desc:'Есть .card',check:d=>!!d.querySelector('.card')},
+      {desc:'Картинка <img> в карточке',check:d=>!!d.querySelector('.card img[src]')},
+      {desc:'Заголовок <h3>',check:d=>!!d.querySelector('h3')},
+      {desc:'Ссылка <a> в карточке',check:d=>!!d.querySelector('.card a[href]')},
+    ]
+  },
+  {
+    difficulty:'medium',
+    name:'Список статей с картинками',
+    desc:'Создай список из 3 статей:\n• Контейнер .articles\n• 3 блока .article\n• Каждый: картинка <img>, <h3>, <p>\n• Горизонтальное: img слева (150px), текст справа\n• CSS: display:flex для .article',
+    hint:'.article { display: flex; gap: 20px; align-items: flex-start; }\n.article img { width: 150px; height: 100px; object-fit: cover; flex-shrink: 0; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Статьи</title></head>\n<body>\n  <h1>Последние статьи</h1>\n  <div class="articles">\n    <div class="article">\n      <img src="https://picsum.photos/seed/html/300/200" alt="HTML">\n      <div>\n        <h3>Основы HTML</h3>\n        <p>Узнай как создавать структуру любого сайта!</p>\n      </div>\n    </div>\n    <!-- ещё 2 статьи -->\n  </div>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;padding:30px;max-width:700px;margin:0 auto;background:#f5f0ff}\nh1{color:#685BC7;margin-bottom:24px}\n.article{display:flex;gap:20px;align-items:flex-start;padding:20px;background:white;border-radius:14px;margin-bottom:16px}\n.article img{width:150px;height:100px;object-fit:cover;border-radius:10px;flex-shrink:0}\n.article h3{color:#333;margin-bottom:6px;font-size:16px}\n.article p{color:#888;font-size:13px;line-height:1.5}`,
+    tests:[
+      {desc:'Минимум 3 блока .article',check:d=>d.querySelectorAll('.article').length>=3},
+      {desc:'Картинки в каждой статье',check:d=>d.querySelectorAll('.article img').length>=3},
+      {desc:'Заголовки h3 статей',check:d=>d.querySelectorAll('.article h3').length>=3},
+      {desc:'У img есть alt',check:d=>d.querySelectorAll('img[alt]').length>=3},
+    ]
+  },
+  {
+    difficulty:'hard',
+    name:'Галерея 6 фотографий',
+    desc:'Создай фотогалерею:\n• .gallery с CSS Grid (3 колонки)\n• 6 карточек <a> с <img> внутри\n• Разные seed в URL picsum.photos\n• Hover: translateY и box-shadow\n• Заголовок страницы',
+    hint:'.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }\n.gallery a { border-radius: 14px; overflow: hidden; display: block; }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Галерея</title></head>\n<body>\n  <h1>🖼️ Моя галерея</h1>\n  <div class="gallery">\n    <a href="#" class="photo-card">\n      <img src="https://picsum.photos/seed/cat/400/300" alt="котик">\n      <div class="label">Котик</div>\n    </a>\n    <!-- ещё 5 карточек -->\n  </div>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;background:#09080f;color:white;padding:40px}\nh1{text-align:center;color:#B5ED18;margin-bottom:32px;font-size:32px}\n.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto}\n.photo-card{display:block;text-decoration:none;border-radius:16px;overflow:hidden;background:#120f20;border:1px solid #1e1e3a;transition:transform .2s,box-shadow .2s}\n.photo-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(104,91,199,.3)}\n.photo-card img{width:100%;height:200px;object-fit:cover;display:block}\n.label{padding:12px 16px;color:#888;font-size:13px}`,
+    tests:[
+      {desc:'Минимум 6 картинок',check:d=>d.querySelectorAll('img').length>=6},
+      {desc:'Все img с src',check:d=>d.querySelectorAll('img[src]').length>=6},
+      {desc:'Все img с alt',check:d=>d.querySelectorAll('img[alt]').length>=6},
+      {desc:'img обёрнуты в <a>',check:d=>d.querySelectorAll('a img').length>=6},
+      {desc:'Есть заголовок страницы',check:d=>!!(d.querySelector('h1')||d.querySelector('h2'))},
+    ]
+  },
+  {
+    difficulty:'hard',
+    name:'Галерея figure+figcaption',
+    desc:'Создай семантическую галерею:\n• .gallery с Grid (3 колонки)\n• 6 блоков <figure>\n• В каждом: <img> и <figcaption>\n• Overlay эффект: figcaption\n  появляется при hover\n• object-fit: cover',
+    hint:'figure { position: relative; overflow: hidden; }\nfigcaption { position: absolute; bottom: 0;\n  transform: translateY(100%);\n  transition: transform .3s; }\nfigure:hover figcaption { transform: translateY(0); }',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Галерея</title></head>\n<body>\n  <h1>Фотогалерея</h1>\n  <div class="gallery">\n    <figure>\n      <img src="https://picsum.photos/seed/city/400/300" alt="город">\n      <figcaption>🌆 Город</figcaption>\n    </figure>\n    <!-- ещё 5 figure -->\n  </div>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;background:#09080f;color:white;padding:40px}\nh1{text-align:center;color:#B5ED18;margin-bottom:32px}\n.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto}\nfigure{border-radius:14px;overflow:hidden;position:relative;cursor:pointer}\nfigure img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .3s}\nfigure:hover img{transform:scale(1.05)}\nfigcaption{position:absolute;bottom:0;left:0;right:0;background:rgba(104,91,199,.85);color:white;padding:14px;font-size:14px;transform:translateY(100%);transition:transform .3s}\nfigure:hover figcaption{transform:translateY(0)}`,
+    tests:[
+      {desc:'Минимум 6 тегов <figure>',check:d=>d.querySelectorAll('figure').length>=6},
+      {desc:'Картинки в figure',check:d=>d.querySelectorAll('figure img').length>=6},
+      {desc:'figcaption у каждого figure',check:d=>d.querySelectorAll('figure figcaption').length>=6},
+      {desc:'У img есть alt',check:d=>d.querySelectorAll('figure img[alt]').length>=6},
+      {desc:'Контейнер .gallery',check:d=>!!d.querySelector('.gallery')},
+    ]
+  },
+  {
+    difficulty:'hard',
+    name:'Страница портфолио',
+    desc:'Создай страницу-портфолио:\n• <header> с именем и навигацией\n• <section class="hero"> с фото и описанием\n• <section class="works"> с 4+ проектами\n  (карточки с img, h3, p, a)\n• <footer> с копирайтом',
+    hint:'Структура:\nheader > nav (logo + menu)\nhero > img.avatar + h1 + p\n.works > .work-card (img + h3 + p + a)\nfooter > p',
+    starterHtml:`<!DOCTYPE html>\n<html>\n<head><title>Портфолио</title></head>\n<body>\n  <header>\n    <nav>\n      <div class="logo">👨‍💻 Портфолио</div>\n      <ul class="menu">\n        <li><a href="#">Обо мне</a></li>\n        <li><a href="#">Работы</a></li>\n        <li><a href="#">Контакты</a></li>\n      </ul>\n    </nav>\n  </header>\n  <section class="hero">\n    <img class="avatar" src="https://picsum.photos/seed/person/200/200" alt="аватар">\n    <h1>Привет! Я — веб-разработчик</h1>\n    <p>Создаю красивые и быстрые сайты</p>\n  </section>\n  <section class="works">\n    <h2>Мои проекты</h2>\n    <div class="grid">\n      <div class="work-card">\n        <img src="https://picsum.photos/seed/proj1/400/250" alt="проект 1">\n        <h3>Проект 1</h3>\n        <p>Описание проекта</p>\n        <a href="#" target="_blank">Посмотреть →</a>\n      </div>\n      <!-- ещё 3 проекта -->\n    </div>\n  </section>\n  <footer><p>© 2025 Портфолио</p></footer>\n</body>\n</html>`,
+    starterCss:`*{margin:0;padding:0;box-sizing:border-box}\nbody{font-family:Arial;background:#09080f;color:#fff}\nheader{background:#120f20;padding:16px 40px;border-bottom:1px solid #1e1e3a}\nnav{display:flex;justify-content:space-between;align-items:center}\n.logo{color:#B5ED18;font-weight:bold;font-size:18px}\n.menu{list-style:none;display:flex;gap:24px}\n.menu a{color:#888;text-decoration:none;font-size:14px;transition:color .2s}\n.menu a:hover{color:#B5ED18}\n.hero{text-align:center;padding:80px 40px;background:linear-gradient(135deg,#09080f,#1a1040)}\n.avatar{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid #685BC7;margin-bottom:24px}\n.hero h1{font-size:36px;color:#fff;margin-bottom:12px}\n.hero p{color:#888;font-size:18px}\n.works{padding:60px 40px;max-width:1000px;margin:0 auto}\n.works h2{color:#B5ED18;margin-bottom:32px;font-size:28px}\n.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}\n.work-card{background:#120f20;border-radius:16px;overflow:hidden;border:1px solid #1e1e3a;transition:transform .2s}\n.work-card:hover{transform:translateY(-6px)}\n.work-card img{width:100%;height:180px;object-fit:cover;display:block}\n.work-card h3{padding:16px 20px 4px;font-size:16px}\n.work-card p{padding:0 20px 12px;color:#888;font-size:13px}\n.work-card a{display:block;padding:0 20px 20px;color:#685BC7;text-decoration:none;font-size:14px}\n.work-card a:hover{color:#B5ED18}\nfooter{text-align:center;padding:30px;background:#05040a;color:#444;font-size:13px}`,
+    tests:[
+      {desc:'Есть <header> с nav',check:d=>!!d.querySelector('header nav')},
+      {desc:'Есть .hero с изображением',check:d=>!!d.querySelector('.hero img')},
+      {desc:'Минимум 4 проекта .work-card',check:d=>d.querySelectorAll('.work-card').length>=4},
+      {desc:'Ссылки в проектах',check:d=>d.querySelectorAll('.work-card a').length>=4},
+      {desc:'Есть <footer> с ©',check:d=>d.querySelector('footer')?.textContent.includes('©')},
     ]
   },
 ],
@@ -1904,6 +2001,7 @@ h1{text-align:center;color:#B5ED18;margin-bottom:28px;font-size:28px}
 ✅ Указывай формат`,
   practiceLevels:[
   {
+    difficulty:'easy',
     name:'Первый промпт',
     desc:'Напиши простой промпт для ИИ.\nОн должен содержать:\n• Кто ты (роль): "Ты — ..."\n• Что сделать (задача)',
     hint:'Пример: "Ты — учитель математики. Объясни что такое дроби простыми словами."',
@@ -1915,23 +2013,93 @@ h1{text-align:center;color:#B5ED18;margin-bottom:28px;font-size:28px}
     ]
   },
   {
-    name:'Промпт с контекстом',
-    desc:'Напиши промпт с:\n• Ролью (Ты — ...)\n• Задачей (Создай / Напиши / Объясни ...)\n• Контекстом (для кого, стиль)',
-    hint:'"Ты — веб-разработчик. Создай кнопку на HTML+CSS. Стиль: фиолетовый, с hover-эффектом."',
-    starterHtml:`Ты — [роль]\n\nЗадача: [что нужно]\n\nКонтекст: [для кого / в каком стиле]`,
+    difficulty:'easy',
+    name:'Промпт с примером',
+    desc:'Напиши промпт, который включает:\n• Роль ("Ты — ...")\n• Задачу\n• Пример того, что хочешь получить\n\nПример подскажет ИИ нужный стиль ответа',
+    hint:'"Ты — учитель. Объясни деление простыми словами.\nПример ответа: Представь что у тебя 10 конфет и 2 друга..."',
+    starterHtml:`Ты — [роль]\n\nЗадача: [что нужно]\n\nПример ответа:\n[опиши как должен выглядеть ответ]`,
     starterCss:``,
     tests:[
-      {desc:'Указана роль ("Ты —")',check:d=>{const t=d.body?.textContent||'';return t.toLowerCase().includes('ты ');}},
+      {desc:'Указана роль',check:d=>{const t=d.body?.textContent||'';return t.toLowerCase().includes('ты ');}},
       {desc:'Есть задача',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('задача')||t.includes('создай')||t.includes('напиши')||t.includes('объясни');}},
-      {desc:'Есть контекст',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('контекст')||t.includes('стиль')||t.includes('для ');}},
-      {desc:'Промпт достаточно длинный',check:d=>(d.body?.textContent||'').trim().split(/\s+/).length>=10},
+      {desc:'Есть пример',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('пример');}},
+      {desc:'Промпт достаточно длинный',check:d=>(d.body?.textContent||'').trim().split(/\s+/).length>=8},
     ]
   },
   {
+    difficulty:'easy',
+    name:'Промпт с аудиторией',
+    desc:'Напиши промпт с указанием аудитории:\n• Роль ИИ ("Ты — ...")\n• Задача\n• Для кого: возраст, уровень знаний\n\nПример: "для ребёнка 12 лет" или\n"для начинающего программиста"',
+    hint:'"Ты — учитель. Объясни HTML. Аудитория: дети 12 лет, без опыта программирования."',
+    starterHtml:`Ты — [роль]\n\n[задача]\n\nАудитория:\n- Возраст: [укажи]\n- Уровень: [новичок / средний / продвинутый]`,
+    starterCss:``,
+    tests:[
+      {desc:'Указана роль',check:d=>{const t=d.body?.textContent||'';return t.toLowerCase().includes('ты ');}},
+      {desc:'Указана аудитория',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('аудитория')||t.includes('лет')||t.includes('возраст')||t.includes('уровень')||t.includes('новичок');}},
+      {desc:'Промпт достаточно длинный',check:d=>(d.body?.textContent||'').trim().split(/\s+/).length>=8},
+    ]
+  },
+  {
+    difficulty:'easy',
+    name:'Промпт с тоном',
+    desc:'Напиши промпт с указанием тона общения:\n• Роль ИИ\n• Задача\n• Тон: дружелюбный / строгий / простой\n\nПримеры:\n"Отвечай дружелюбно"\n"Используй простые слова"\n"Без сложных терминов"',
+    hint:'"Ты — наставник. Объясни CSS. Тон: дружелюбный, с юмором. Без сложных терминов."',
+    starterHtml:`Ты — [роль]\n\n[задача]\n\nТон и стиль:\n- [дружелюбный / строгий / простой]\n- [с примерами / без терминов / краткий]`,
+    starterCss:``,
+    tests:[
+      {desc:'Указана роль',check:d=>{const t=d.body?.textContent||'';return t.toLowerCase().includes('ты ');}},
+      {desc:'Указан тон или стиль',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('тон')||t.includes('стиль')||t.includes('дружелюб')||t.includes('просто')||t.includes('терминов');}},
+      {desc:'Промпт достаточно длинный',check:d=>(d.body?.textContent||'').trim().split(/\s+/).length>=8},
+    ]
+  },
+  {
+    difficulty:'medium',
+    name:'Промпт с контекстом',
+    desc:'Напиши промпт с полным контекстом:\n• Роль ("Ты — ...")\n• Задача\n• Контекст: кто спрашивает,\n  какой у него опыт и цель\n• Ограничения (что НЕ делать)',
+    hint:'"Ты — ментор. Помоги разобраться с CSS Grid.\nКонтекст: я учусь 2 недели, знаю базовый HTML.\nЦель: понять разницу Grid и Flex.\nНЕ используй сложные термины без объяснения."',
+    starterHtml:`Ты — [роль]\n\nЗадача: [что нужно]\n\nКонтекст:\n- Кто спрашивает: [ты сам]\n- Опыт: [насколько знаешь тему]\n- Цель: [что хочешь понять]\n\nНЕ нужно: [ограничения]`,
+    starterCss:``,
+    tests:[
+      {desc:'Указана роль',check:d=>{const t=d.body?.textContent||'';return t.toLowerCase().includes('ты ');}},
+      {desc:'Есть задача',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('задача')||t.includes('создай')||t.includes('напиши')||t.includes('объясни')||t.includes('помоги');}},
+      {desc:'Есть контекст',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('контекст')||t.includes('опыт')||t.includes('цель')||t.includes('кто');}},
+      {desc:'Промпт достаточно длинный',check:d=>(d.body?.textContent||'').trim().split(/\s+/).length>=15},
+    ]
+  },
+  {
+    difficulty:'medium',
+    name:'Промпт с форматом',
+    desc:'Напиши промпт с указанием формата ответа:\n• Роль + задача\n• Контекст\n• Формат: список / таблица / пошагово\n• Длина ответа (кратко/подробно)\n\nФормат помогает получить удобный ответ!',
+    hint:'"...Формат ответа:\n- Пронумерованный список шагов\n- Максимум 5 пунктов\n- Каждый шаг: 1-2 предложения"',
+    starterHtml:`Ты — [роль]\n\nЗадача: [что нужно]\n\nКонтекст: [для кого]\n\nФормат ответа:\n- [список / таблица / пошагово]\n- Длина: [кратко / подробно]\n- [другие требования к формату]`,
+    starterCss:``,
+    tests:[
+      {desc:'Указана роль',check:d=>{const t=d.body?.textContent||'';return t.toLowerCase().includes('ты ');}},
+      {desc:'Есть задача',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('задача')||t.includes('создай')||t.includes('напиши')||t.includes('объясни');}},
+      {desc:'Указан формат',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('формат')||t.includes('список')||t.includes('таблица')||t.includes('пошагово')||t.includes('шаг');}},
+      {desc:'Промпт достаточно длинный',check:d=>(d.body?.textContent||'').trim().split(/\s+/).length>=12},
+    ]
+  },
+  {
+    difficulty:'medium',
+    name:'Промпт с ограничениями',
+    desc:'Напиши промпт с явными ограничениями:\n• Роль + задача + контекст\n• Что включить (✅)\n• Что НЕ включать (❌)\n• Ограничения помогают избежать\n  лишней информации в ответе',
+    hint:'"...✅ Включить: примеры кода, объяснения\n❌ Не включать: теорию без примеров,\nсложные академические термины"',
+    starterHtml:`Ты — [роль]\n\nЗадача: [что нужно]\n\nКонтекст: [для кого]\n\n✅ Обязательно включи:\n- [что должно быть в ответе]\n\n❌ НЕ включай:\n- [что не нужно]`,
+    starterCss:``,
+    tests:[
+      {desc:'Указана роль',check:d=>{const t=d.body?.textContent||'';return t.toLowerCase().includes('ты ');}},
+      {desc:'Есть задача',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('задача')||t.includes('создай')||t.includes('напиши')||t.includes('объясни');}},
+      {desc:'Есть ограничения',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('не ')||t.includes('без ')||t.includes('нельзя')||t.includes('❌');}},
+      {desc:'Промпт достаточно длинный',check:d=>(d.body?.textContent||'').trim().split(/\s+/).length>=12},
+    ]
+  },
+  {
+    difficulty:'hard',
     name:'Профессиональный промпт',
-    desc:'Напиши полный промпт по формуле:\n• РОЛЬ — кто ты (Ты — ...)\n• ЗАДАЧА — что сделать\n• КОНТЕКСТ — для кого, стиль\n• ФОРМАТ — как оформить ответ\n\nМинимум 5 строк!',
+    desc:'Напиши полный промпт по формуле:\n• РОЛЬ — кто ты (Ты — ...)\n• ЗАДАЧА — что сделать подробно\n• КОНТЕКСТ — для кого, стиль, опыт\n• ФОРМАТ — как оформить ответ\n• ОГРАНИЧЕНИЯ — что не нужно\n\nМинимум 5 строк, минимум 20 слов!',
     hint:'"Ты — опытный веб-дизайнер. Создай лендинг для онлайн-школы. Аудитория: дети 12-17 лет. Стиль: тёмная тема, фиолетовый #685BC7, зелёный #B5ED18. Формат: чистый HTML+CSS с комментариями."',
-    starterHtml:`Ты — [роль]\n\nЗадача: [подробно что нужно]\n\nКонтекст:\n- [для кого]\n- [стиль / ограничения]\n\nФормат: [код / список / таблица / текст]`,
+    starterHtml:`Ты — [роль]\n\nЗадача: [подробно что нужно]\n\nКонтекст:\n- [для кого]\n- [стиль / ограничения]\n\nФормат: [код / список / таблица / текст]\n\nНЕ нужно: [ограничения]`,
     starterCss:``,
     tests:[
       {desc:'Указана роль ("Ты —")',check:d=>{const t=d.body?.textContent||'';return t.toLowerCase().includes('ты ');}},
@@ -1939,6 +2107,34 @@ h1{text-align:center;color:#B5ED18;margin-bottom:28px;font-size:28px}
       {desc:'Есть контекст',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('контекст')||t.includes('стиль')||t.includes('для ');}},
       {desc:'Указан формат',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('формат')||t.includes('код')||t.includes('список')||t.includes('таблица');}},
       {desc:'Минимум 5 строк',check:d=>(d.body?.textContent||'').split('\n').filter(l=>l.trim()).length>=5},
+    ]
+  },
+  {
+    difficulty:'hard',
+    name:'Промпт для кода',
+    desc:'Напиши промпт для генерации кода:\n• Роль: разработчик/программист\n• Задача: создать конкретный код\n• Язык: HTML, CSS, JS или Python\n• Требования к коду (что должно быть)\n• Формат: с комментариями\n\nМинимум 6 строк!',
+    hint:'"Ты — опытный веб-разработчик.\nНапиши HTML+CSS для карточки товара.\nТребования:\n- Тёмная тема\n- Анимация при hover\n- Кнопка покупки\nФормат: полный код с комментариями"',
+    starterHtml:`Ты — [опытный разработчик]\n\nЗадача: [создай код для...]\n\nЯзык / технология: [HTML+CSS / JS / Python]\n\nТребования к коду:\n- [требование 1]\n- [требование 2]\n- [требование 3]\n\nФормат: [с комментариями / без лишних объяснений]`,
+    starterCss:``,
+    tests:[
+      {desc:'Указана роль разработчика',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('разработчик')||t.includes('программист')||t.includes('ты ');}},
+      {desc:'Указан язык программирования',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('html')||t.includes('css')||t.includes('javascript')||t.includes('python')||t.includes('js');}},
+      {desc:'Есть требования к коду',check:d=>{const t=(d.body?.textContent||'').toLowerCase();return t.includes('требован')||t.includes('должен')||t.includes('нужно')||t.includes('- ');}},
+      {desc:'Минимум 6 строк',check:d=>(d.body?.textContent||'').split('\n').filter(l=>l.trim()).length>=6},
+    ]
+  },
+  {
+    difficulty:'hard',
+    name:'Цепочка промптов',
+    desc:'Создай цепочку из 3 промптов:\n• Промпт 1: постановка задачи\n• Промпт 2: уточнение/доработка\n• Промпт 3: финальный результат\n\nКаждый промпт развивает предыдущий!\nОбозначь каждый: "Промпт 1:", "Промпт 2:", "Промпт 3:"',
+    hint:'"Промпт 1: Придумай 5 идей для..."\n"Промпт 2: Возьми идею №3, раскрой подробнее..."\n"Промпт 3: Теперь создай готовый план для..."',
+    starterHtml:`Промпт 1: Начало\n[Первый запрос к ИИ]\n\nПромпт 2: Уточнение\n[Продолжение на основе ответа ИИ]\n\nПромпт 3: Финал\n[Финальный запрос для получения результата]`,
+    starterCss:``,
+    tests:[
+      {desc:'Есть "Промпт 1"',check:d=>{const t=d.body?.textContent||'';return t.includes('Промпт 1')||t.includes('промпт 1')||t.includes('ПРОМПТ 1');}},
+      {desc:'Есть "Промпт 2"',check:d=>{const t=d.body?.textContent||'';return t.includes('Промпт 2')||t.includes('промпт 2')||t.includes('ПРОМПТ 2');}},
+      {desc:'Есть "Промпт 3"',check:d=>{const t=d.body?.textContent||'';return t.includes('Промпт 3')||t.includes('промпт 3')||t.includes('ПРОМПТ 3');}},
+      {desc:'Цепочка достаточно длинная',check:d=>(d.body?.textContent||'').trim().split(/\s+/).length>=20},
     ]
   },
 ],
@@ -2928,6 +3124,10 @@ function openPractice(){
   pmActiveLevel=0;
   document.getElementById('pmTitle').textContent='Практика: '+l.title;
   document.getElementById('pmTag').textContent=l.tag;
+  const de={easy:'🟢',medium:'🟡',hard:'🔴'};
+  const lvlCont=document.getElementById('pmLevels');
+  lvlCont.innerHTML='<span class="pm-levels-label">Задание:</span>'+
+    l.practiceLevels.map((pt,i)=>{const d=pt.difficulty||'easy';return `<button class="pm-lvl diff-${d}${i===0?' on':''}" data-lv="${i}" onclick="pmSetLevel(${i})">${de[d]} ${i+1}</button>`;}).join('');
   pmLoadLevel(0);
   document.getElementById('pmOverlay').classList.add('open');
 }
@@ -3101,8 +3301,8 @@ function runPracticeCheck(){
   const failed=pt.tests.length-passed;
   const msg=pct===100?'🏆 Всё верно! Отлично, '+studentName+'!':pct>=60?`👍 Почти! Осталось исправить: ${failed} ${failed===1?'пункт':'пункта'}`:`💪 Продолжай! Красные пункты покажут что доделать`;
   document.getElementById('pmScoreTxt').textContent=`${passed} из ${pt.tests.length} — ${pct}% · ${msg}`;
-  if(pct===100&&pmActiveLevel<2){
-    setTimeout(()=>{if(confirm('🎉 Уровень пройден! Перейти к следующему?'))pmSetLevel(pmActiveLevel+1);},400);
+  if(pct===100&&pmActiveLevel<LESSONS[activeLsn].practiceLevels.length-1){
+    setTimeout(()=>{if(confirm('🎉 Задание пройдено! Перейти к следующему?'))pmSetLevel(pmActiveLevel+1);},400);
   }
 }
 
